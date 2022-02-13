@@ -25,4 +25,38 @@ public class StringFunctionHelpers {
         String s = new String(buf, com.google.common.base.Charsets.UTF_8);
         return s;
     }
+
+    /**
+     * Converts a hexadecimal string to a byte array.
+     * The hexadecimal digit symbols are case-insensitive.
+     *
+     * @param hex a string containing hex digits
+     * @return an array of bytes with the value of the hex string
+     */
+    public static byte[] hexToBytes(String hex)
+    {
+        int byteLen = hex.length() / 2;
+        byte[] bytes = new byte[byteLen];
+
+        for (int i = 0; i < hex.length() / 2; i++) {
+            int i2 = 2 * i;
+            if (i2 + 1 > hex.length())
+                throw new IllegalArgumentException("Hex string has odd length");
+
+            int nib1 = hexToInt(hex.charAt(i2));
+            int nib0 = hexToInt(hex.charAt(i2 + 1));
+            byte b = (byte) ((nib1 << 4) + (byte) nib0);
+            bytes[i] = b;
+        }
+        return bytes;
+    }
+
+    private static int hexToInt(char hex)
+    {
+        int nib = Character.digit(hex, 16);
+        if (nib < 0)
+            throw new IllegalArgumentException("Invalid hex digit: '" + hex + "'");
+        return nib;
+    }
 }
+

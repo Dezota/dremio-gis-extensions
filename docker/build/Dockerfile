@@ -1,16 +1,8 @@
-FROM dremio/dremio-oss:19.1.0
+FROM dezota/dremio-oss-with-ext:20.1.0
 
 # who's your boss?
 MAINTAINER "Brian Holman" <bholman@dezota.com>
 
-# Switching to root to install the required packages
-USER root
-RUN apt update
-RUN apt -y dist-upgrade
-RUN usermod -d /opt/dremio dremio
-COPY ./dremio-gis-extensions-19.1.0-202111160130570172-0ee0045.jar /opt/dremio/jars
-COPY ./startup.sh /opt/dremio/bin/startup.sh
-RUN chmod 755 /opt/dremio/bin/startup.sh
-RUN chown -R dremio:dremio /opt/dremio
-USER dremio
-ENTRYPOINT ["/opt/dremio/bin/startup.sh"]
+COPY ./dremio-gis-extensions-20.1.0-202202061055110045-36733c65.jar /opt/dremio/jars
+
+

@@ -3,12 +3,12 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.dremio.gis</groupId>
   <artifactId>dremio-gis-extensions</artifactId>
-  <version>19.1.0-202111160130570172-0ee0045</version>
+  <version>20.1.0-202202061055110045-36733c65</version>
   <dependencies>
     <dependency>
       <groupId>com.dremio.sabot</groupId>
       <artifactId>dremio-sabot-kernel</artifactId>
-      <version>19.1.0-202111160130570172-0ee00450</version>
+      <version>20.1.0-202202061055110045-36733c65</version>
       <type>jar</type>
     </dependency>
     <dependency>
