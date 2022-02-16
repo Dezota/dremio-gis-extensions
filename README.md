@@ -11,6 +11,13 @@ The Dremio GIS Extensions allows Dremio to perform standard GIS functions within
 1. *ST_GeomFromEWKB* - Converts from the raw geometry returned from PostGIS/PostgreSQL known as EWKB
 2. *ST_GeomFromWKB* - Converts from the standard WKB format with an optional SRID specified
 3. *ST_AsGeoJSON* - Converts from the GIS extensions native format to GeoJSON
+4. *ST_Area* - Returns the area of polygon or multipolygon
+5. *ST_Generalize* - Simplifies geometries using the Douglas-Peucker algorithm
+6. *ST_GeoSize* - Returns the size of geometry in bytes.
+7. *ST_Intersection* - Returns the intersection geometry from two geometries
+8. *ST_IsSimple* - Returns true if the geometry is simple
+9. *ST_Simplify* - Returns a simplified geometry
+10. *ST_STRID* - Returns the Spatial Reference ID of the geometry
 
 ## Usage and Available Functions
 

@@ -25,7 +25,7 @@ import javax.inject.Inject;
 
 /*
  *
- * @summary Convert the raw geometry string from Postgres/PostGIS
+ * @summary Convert the raw geometry string from Postgres/PostGIS that comes to Dremio as a Hex encoded string
  *
  * @usage SELECT ST_AsText(ST_GeomFromEWKB(the_geom)) FROM "cartodb".acs."acs_2019_5yr_place_49_utah"
  *
@@ -55,7 +55,7 @@ public class STGeomFromEWKB implements SimpleFunction {
         String ewkbText = com.dremio.gis.StringFunctionHelpers.toStringFromUTF8(input.start, input.end,
                 input.buffer);
 
-        // Remove the SSRID representation to create a wkbText representation
+        // Remove the SRID representation to create a wkbText representation
         StringBuffer sb = new StringBuffer(ewkbText);
         String wkbText = sb.delete(8,16).toString();
 
@@ -65,7 +65,7 @@ public class STGeomFromEWKB implements SimpleFunction {
         byte[] wkbByteArr=com.dremio.gis.StringFunctionHelpers.hexToBytes(wkbText);
         java.nio.ByteBuffer wkbBB = java.nio.ByteBuffer.wrap(wkbByteArr);
 
-        // Determine the byte order of the EWKB
+        // Determine the byte order of the EWKB from the first byte
         byte byteOrderWKB = ewkbBB.get();
         // Always set byte order, since it may change from geometry to geometry
         if(byteOrderWKB == com.dremio.gis.WKBConstants.wkbNDR)
@@ -83,7 +83,7 @@ public class STGeomFromEWKB implements SimpleFunction {
             throw new IllegalArgumentException("Unknown geometry byte order (not NDR or XDR): " + byteOrderWKB);
         }
 
-        // Determine the geomType and if an SSRID exists from the next int
+        // Determine the geomType and if an SRID exists from the next int
         int typeInt = ewkbBB.getInt();
         int geomType = (typeInt & 0xffff) % 1000; // MultiPolygon, etc.
         boolean hasSRID = (typeInt & 0x20000000) != 0;
