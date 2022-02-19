@@ -24,6 +24,17 @@ import com.dremio.exec.expr.annotations.Param;
 
 import javax.inject.Inject;
 
+/**
+ *
+ *  @name			ST_GeomFromWKB
+ *  @args			([binary] {wkbValue}, [number] {SRID})
+ *  @returnType		binary
+ *  @description	Takes a well-known binary (WKB) representation and a spatial reference ID and returns a geometry object.
+ *
+ *  @author			Brian Holman <bholman@dezota.com>
+ *
+ */
+
 @FunctionTemplate(name = "st_geomfromwkb", scope = FunctionTemplate.FunctionScope.SIMPLE,
   nulls = FunctionTemplate.NullHandling.NULL_IF_NULL)
 public class STGeomFromWKBSrid implements SimpleFunction {

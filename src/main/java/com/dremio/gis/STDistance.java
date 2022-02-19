@@ -6,9 +6,9 @@
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -24,33 +24,45 @@ import com.dremio.exec.expr.annotations.FunctionTemplate;
 import com.dremio.exec.expr.annotations.Output;
 import com.dremio.exec.expr.annotations.Param;
 
+/**
+ *
+ *  @name			ST_Distance
+ *  @args			([binary] {geometry1}, [binary] {geometry2})
+ *  @returnType		number
+ *  @description	Returns the distance between two geometry objects.
+ *  @example		ST_Distance(ST_Point(0.0,0.0), ST_Point(3.0,4.0)) -> 5.0
+ *
+ *  @author			Brian Holman <bholman@dezota.com>
+ *
+ */
+
 @FunctionTemplate(name = "st_distance", scope = FunctionTemplate.FunctionScope.SIMPLE,
-  nulls = FunctionTemplate.NullHandling.NULL_IF_NULL)
+        nulls = FunctionTemplate.NullHandling.NULL_IF_NULL)
 public class STDistance implements SimpleFunction {
-  @Param
-  org.apache.arrow.vector.holders.VarBinaryHolder geom1Param;
+    @Param
+    org.apache.arrow.vector.holders.VarBinaryHolder geom1Param;
 
-  @Param
-  org.apache.arrow.vector.holders.VarBinaryHolder geom2Param;
+    @Param
+    org.apache.arrow.vector.holders.VarBinaryHolder geom2Param;
 
-  @Output
-  org.apache.arrow.vector.holders.Float8Holder out;
+    @Output
+    org.apache.arrow.vector.holders.Float8Holder out;
 
-  @Inject
-  org.apache.arrow.memory.ArrowBuf buffer;
+    @Inject
+    org.apache.arrow.memory.ArrowBuf buffer;
 
-  public void setup() {
-  }
+    public void setup() {
+    }
 
-  public void eval() {
-    com.esri.core.geometry.ogc.OGCGeometry geom1;
-    com.esri.core.geometry.ogc.OGCGeometry geom2;
+    public void eval() {
+        com.esri.core.geometry.ogc.OGCGeometry geom1;
+        com.esri.core.geometry.ogc.OGCGeometry geom2;
 
-    geom1 = com.esri.core.geometry.ogc.OGCGeometry
-        .fromBinary(geom1Param.buffer.nioBuffer(geom1Param.start, geom1Param.end - geom1Param.start));
-    geom2 = com.esri.core.geometry.ogc.OGCGeometry
-        .fromBinary(geom2Param.buffer.nioBuffer(geom2Param.start, geom2Param.end - geom2Param.start));
+        geom1 = com.esri.core.geometry.ogc.OGCGeometry
+                .fromBinary(geom1Param.buffer.nioBuffer(geom1Param.start, geom1Param.end - geom1Param.start));
+        geom2 = com.esri.core.geometry.ogc.OGCGeometry
+                .fromBinary(geom2Param.buffer.nioBuffer(geom2Param.start, geom2Param.end - geom2Param.start));
 
-    out.value = geom1.distance(geom2);
-  }
+        out.value = geom1.distance(geom2);
+    }
 }

@@ -24,6 +24,19 @@ import com.dremio.exec.expr.annotations.FunctionTemplate;
 import com.dremio.exec.expr.annotations.Output;
 import com.dremio.exec.expr.annotations.Param;
 
+/**
+ *
+ *  @name			ST_Overlaps
+ *  @args			([binary] {geometry1}, [binary] {geometry2})
+ *  @returnType		boolean
+ *  @description	Returns true if {{geometry1}} overlaps {{geometry2}}.
+ *  @example		ST_Overlaps(ST_GeomFromText('POLYGON ((2 0, 2 3, 3 0))'), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))')) -> true
+ *  				ST_Overlaps(ST_GeomFromText('POLYGON ((2 0, 2 1, 3 1))'), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))')) -> false
+ *
+ *  @author			Brian Holman <bholman@dezota.com>
+ *
+ */
+
 @FunctionTemplate(name = "st_overlaps", scope = FunctionTemplate.FunctionScope.SIMPLE,
   nulls = FunctionTemplate.NullHandling.NULL_IF_NULL)
 public class STOverlaps implements SimpleFunction {

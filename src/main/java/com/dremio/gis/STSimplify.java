@@ -24,13 +24,14 @@ import com.dremio.exec.expr.annotations.FunctionTemplate;
 import com.dremio.exec.expr.annotations.Output;
 import com.dremio.exec.expr.annotations.Param;
 
-/*
+/**
  *
- * @summary Simplifies the geometry or determines if the geometry is simple.
+ *  @name			ST_Simplify
+ *  @args			([binary] {geometry})
+ *  @returnType		binary
+ *  @description	Simplifies the geometry or determines if the geometry is simple. The goal is to produce a geometry that is valid to store without additional processing.
  *
- * @usage SELECT ST_Simplify(geometry)
- *
- * @author Brian Holman <bholman@dezota.com>
+ *  @author			Brian Holman <bholman@dezota.com>
  *
  */
 
@@ -39,7 +40,6 @@ import com.dremio.exec.expr.annotations.Param;
 public class STSimplify implements SimpleFunction {
     @Param
     org.apache.arrow.vector.holders.VarBinaryHolder geom1Param;
-
 
     @Output
     org.apache.arrow.vector.holders.VarBinaryHolder out;

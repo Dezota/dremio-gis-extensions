@@ -6,9 +6,9 @@
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,31 +25,43 @@ import com.dremio.exec.expr.annotations.FunctionTemplate;
 import com.dremio.exec.expr.annotations.Output;
 import com.dremio.exec.expr.annotations.Param;
 
+/**
+ *
+ *  @name			ST_AsText
+ *  @args			([binary] {geometry})
+ *  @returnType		string
+ *  @description	Returns the Well-Known Text (WKT) representation of {{geometry}}.
+ *  @example		ST_AsText(ST_Point(1, 2)) -> 'POINT (1 2)'
+ *
+ *  @author			Brian Holman <bholman@dezota.com>
+ *
+ */
+
 @FunctionTemplate(name = "st_astext", scope = FunctionTemplate.FunctionScope.SIMPLE,
-  nulls = FunctionTemplate.NullHandling.NULL_IF_NULL)
+        nulls = FunctionTemplate.NullHandling.NULL_IF_NULL)
 public class STAsText implements SimpleFunction {
-  @Param
-  org.apache.arrow.vector.holders.VarBinaryHolder geom1Param;
+    @Param
+    org.apache.arrow.vector.holders.VarBinaryHolder geom1Param;
 
-  @Output
-  org.apache.arrow.vector.holders.VarCharHolder out;
+    @Output
+    org.apache.arrow.vector.holders.VarCharHolder out;
 
-  @Inject
-  org.apache.arrow.memory.ArrowBuf buffer;
+    @Inject
+    org.apache.arrow.memory.ArrowBuf buffer;
 
-  public void setup() {
-  }
+    public void setup() {
+    }
 
-  public void eval() {
-    com.esri.core.geometry.ogc.OGCGeometry geom1 = com.esri.core.geometry.ogc.OGCGeometry
-        .fromBinary(geom1Param.buffer.nioBuffer(geom1Param.start, geom1Param.end - geom1Param.start));
+    public void eval() {
+        com.esri.core.geometry.ogc.OGCGeometry geom1 = com.esri.core.geometry.ogc.OGCGeometry
+                .fromBinary(geom1Param.buffer.nioBuffer(geom1Param.start, geom1Param.end - geom1Param.start));
 
-    String geomWKT = geom1.asText();
+        String geomWKT = geom1.asText();
 
-    int outputSize = geomWKT.getBytes().length;
-    buffer = out.buffer = buffer.reallocIfNeeded(outputSize);
-    out.start = 0;
-    out.end = outputSize;
-    buffer.setBytes(0, geomWKT.getBytes());
-  }
+        int outputSize = geomWKT.getBytes().length;
+        buffer = out.buffer = buffer.reallocIfNeeded(outputSize);
+        out.start = 0;
+        out.end = outputSize;
+        buffer.setBytes(0, geomWKT.getBytes());
+    }
 }

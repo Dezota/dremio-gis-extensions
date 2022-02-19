@@ -24,6 +24,21 @@ import com.dremio.exec.expr.annotations.FunctionTemplate;
 import com.dremio.exec.expr.annotations.Output;
 import com.dremio.exec.expr.annotations.Param;
 
+/**
+ *
+ *  @name			ST_Relate
+ *  @args			([binary] {geometry1}, [binary] {geometry2}, [string] {relation})
+ *  @returnType		binary
+ *  @description	Compares the two geometries and returns true if the geometries meet the conditions specified by the DE-9IM pattern matrix string, otherwise, false is returned.
+ *  @example		ST_Relate(ST_GeomFromText('POLYGON ((2 0, 2 1, 3 1))'), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))'), '****T****') -> true
+ *  				ST_Relate(ST_GeomFromText('POLYGON ((2 0, 2 1, 3 1))'), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))'), 'T********') -> false
+ *  				ST_Relate(ST_GeomFromText('LINESTRING (0 0, 3 3)'), ST_GeomFromText('LINESTRING (1 1, 4 4)'), 'T********') -> true
+ *  				ST_Relate(ST_GeomFromText('LINESTRING (0 0, 3 3)'), ST_GeomFromText('LINESTRING (1 1, 4 4)'), '****T****') -> false
+ *
+ *  @author			Brian Holman <bholman@dezota.com>
+ *
+ */
+
 @FunctionTemplate(name = "st_relate", scope = FunctionTemplate.FunctionScope.SIMPLE,
   nulls = FunctionTemplate.NullHandling.NULL_IF_NULL)
 public class STRelate implements SimpleFunction {
@@ -48,7 +63,7 @@ public class STRelate implements SimpleFunction {
   public void eval() {
     com.esri.core.geometry.ogc.OGCGeometry geom1;
     com.esri.core.geometry.ogc.OGCGeometry geom2;
-    String matrix = com.dremio.gis.StringFunctionHelpers.toStringFromUTF8(matrixParam.start,
+    String matrix = com.dremio.gis.FunctionHelpers.toStringFromUTF8(matrixParam.start,
         matrixParam.end, matrixParam.buffer);
 
     geom1 = com.esri.core.geometry.ogc.OGCGeometry

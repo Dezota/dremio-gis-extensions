@@ -6,9 +6,9 @@
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -24,33 +24,39 @@ import com.dremio.exec.expr.annotations.FunctionTemplate;
 import com.dremio.exec.expr.annotations.Output;
 import com.dremio.exec.expr.annotations.Param;
 
-@FunctionTemplate(name = "st_ymax", scope = FunctionTemplate.FunctionScope.SIMPLE,
-  nulls = FunctionTemplate.NullHandling.NULL_IF_NULL)
-public class STYMax implements SimpleFunction {
-  @Param
-  org.apache.arrow.vector.holders.VarBinaryHolder geom1Param;
+/**
+ *
+ *  @name			ST_CoordDim
+ *  @args			([binary] {geometry})
+ *  @returnType		number
+ *  @description	Returns count of coordinate components.
+ *  @example		ST_CoordDim(ST_Point(1.5, 2.5)) -> 2
+ *  				ST_CoordDim(ST_GeomFromText('POINTZ (1.5 2.5 3)')) -> 3
+ *
+ *  @author			Brian Holman <bholman@dezota.com>
+ *
+ */
 
-  @Output
-  org.apache.arrow.vector.holders.Float8Holder out;
+@FunctionTemplate(name = "st_coorddim", scope = FunctionTemplate.FunctionScope.SIMPLE,
+        nulls = FunctionTemplate.NullHandling.NULL_IF_NULL)
+public class STCoordDim implements SimpleFunction {
+    @Param
+    org.apache.arrow.vector.holders.VarBinaryHolder geom1Param;
 
-  @Inject
-  org.apache.arrow.memory.ArrowBuf buffer;
+    @Output
+    org.apache.arrow.vector.holders.IntHolder out;
 
-  public void setup() {
-  }
+    @Inject
+    org.apache.arrow.memory.ArrowBuf buffer;
 
-  public void eval() {
-    com.esri.core.geometry.ogc.OGCGeometry geom1;
-    geom1 = com.esri.core.geometry.ogc.OGCGeometry
-        .fromBinary(geom1Param.buffer.nioBuffer(geom1Param.start, geom1Param.end - geom1Param.start));
-
-    if(geom1.geometryType().equals("Point")){
-      out.value = ((com.esri.core.geometry.ogc.OGCPoint) geom1).Y();
+    public void setup() {
     }
-    else{
-      com.esri.core.geometry.Envelope envelope = new com.esri.core.geometry.Envelope();
-      geom1.getEsriGeometry().queryEnvelope(envelope);
-      out.value = envelope.getYMax();
+
+    public void eval() {
+        com.esri.core.geometry.ogc.OGCGeometry geom1;
+        geom1 = com.esri.core.geometry.ogc.OGCGeometry
+                .fromBinary(geom1Param.buffer.nioBuffer(geom1Param.start, geom1Param.end - geom1Param.start));
+
+        out.value = geom1.coordinateDimension();
     }
-  }
 }

@@ -6,9 +6,9 @@
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -34,6 +34,18 @@ import com.dremio.exec.expr.SimpleFunction;
 import com.dremio.exec.expr.annotations.FunctionTemplate;
 import com.dremio.exec.expr.annotations.Output;
 import com.dremio.exec.expr.annotations.Param;
+
+/**
+ *
+ *  @name			ST_AsGeoJSON
+ *  @args			([binary] {geometry})
+ *  @returnType		string
+ *  @description	Returns the GeoJSON representation of {{geometry}}.
+ *  @example		ST_AsGeoJSON(ST_Point(1, 2)) -> '{"type":"Point","coordinates":[1,2],"crs":{"type":"name","properties":{"name":"EPSG:4326"}}}'
+ *
+ *  @author			Brian Holman <bholman@dezota.com>
+ *
+ */
 
 @FunctionTemplate(name = "st_asgeojson", scope = FunctionTemplate.FunctionScope.SIMPLE,
         nulls = FunctionTemplate.NullHandling.NULL_IF_NULL)

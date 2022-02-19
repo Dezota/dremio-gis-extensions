@@ -15,26 +15,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.dremio.gis;
 
-import javax.inject.Inject;
+package com.dremio.gis;
 
 import com.dremio.exec.expr.SimpleFunction;
 import com.dremio.exec.expr.annotations.FunctionTemplate;
 import com.dremio.exec.expr.annotations.Output;
 import com.dremio.exec.expr.annotations.Param;
 
-@FunctionTemplate(name = "st_point", scope = FunctionTemplate.FunctionScope.SIMPLE,
-  nulls = FunctionTemplate.NullHandling.NULL_IF_NULL)
-public class STPointFunc implements SimpleFunction {
-  @Param
-  org.apache.arrow.vector.holders.Float8Holder lonParam;
+import javax.inject.Inject;
 
+/**
+ *
+ *  @name			ST_Z
+ *  @args			([binary] {geometry})
+ *  @returnType		number
+ *  @description	Takes a Point as an input parameter and returns its elevation (z) coordinate.
+ *  @example		ST_Z(ST_GeomFromText('POINT Z (5 7 9)')) -> 9.0
+ *
+ *  @author			Brian Holman <bholman@dezota.com>
+ *
+ */
+
+@FunctionTemplate(name = "st_z", scope = FunctionTemplate.FunctionScope.SIMPLE,
+  nulls = FunctionTemplate.NullHandling.NULL_IF_NULL)
+public class STZ implements SimpleFunction {
   @Param
-  org.apache.arrow.vector.holders.Float8Holder latParam;
+  org.apache.arrow.vector.holders.VarBinaryHolder geomParam;
 
   @Output
-  org.apache.arrow.vector.holders.VarBinaryHolder out;
+  org.apache.arrow.vector.holders.Float8Holder out;
 
   @Inject
   org.apache.arrow.memory.ArrowBuf buffer;
@@ -44,16 +54,15 @@ public class STPointFunc implements SimpleFunction {
 
   public void eval() {
 
-    double lon = lonParam.value;
-    double lat = latParam.value;
+    com.esri.core.geometry.ogc.OGCGeometry geom;
 
-    com.esri.core.geometry.ogc.OGCPoint point = new com.esri.core.geometry.ogc.OGCPoint(
-        new com.esri.core.geometry.Point(lon, lat), com.esri.core.geometry.SpatialReference.create(4326));
+    geom = com.esri.core.geometry.ogc.OGCGeometry
+        .fromBinary(geomParam.buffer.nioBuffer(geomParam.start, geomParam.end - geomParam.start));
 
-    java.nio.ByteBuffer pointBytes = point.asBinary();
-    out.buffer = buffer;
-    out.start = 0;
-    out.end = pointBytes.remaining();
-    buffer.setBytes(0, pointBytes);
+    if(geom != null && geom.geometryType().equals("Point")){
+      out.value = ((com.esri.core.geometry.ogc.OGCPoint) geom).Z();
+    } else {
+      out.value = Double.NaN;
+    }
   }
 }

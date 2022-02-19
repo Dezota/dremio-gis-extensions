@@ -24,13 +24,14 @@ import com.dremio.exec.expr.annotations.FunctionTemplate;
 import com.dremio.exec.expr.annotations.Output;
 import com.dremio.exec.expr.annotations.Param;
 
-/*
+/**
  *
- * @summary  ST_GeoSize takes an ST_Geometry object and returns its size in bytes.
+ *  @name			ST_GeoSize
+ *  @args			([binary] {geometry})
+ *  @returnType		number
+ *  @description	Takes a geometry object and returns its size in bytes.
  *
- * @usage SELECT ST_GeoSize (geometry)
- *
- * @author Brian Holman <bholman@dezota.com>
+ *  @author			Brian Holman <bholman@dezota.com>
  *
  */
 

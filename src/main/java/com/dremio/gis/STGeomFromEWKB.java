@@ -21,15 +21,19 @@ import com.dremio.exec.expr.SimpleFunction;
 import com.dremio.exec.expr.annotations.FunctionTemplate;
 import com.dremio.exec.expr.annotations.Output;
 import com.dremio.exec.expr.annotations.Param;
+
 import javax.inject.Inject;
 
-/*
+/**
  *
- * @summary Convert the raw geometry string from Postgres/PostGIS that comes to Dremio as a Hex encoded string
+ *  @name			ST_GeomFromEWKB
+ *  @args			([string] {hexEncodedGeometry})
+ *  @returnType		binary
+ *  @description	Converts a Hex encoded binary string from Postgres/PostGIS geometry to native geometry including embedded SRID.
+ *  @example		SELECT ST_AsText(ST_GeomFromEWKB(the_geom)) FROM table("postgis".external_query('SELECT ST_GeomFromText(''POINT(-71.064544 42.28787)'',4326) AS the_geom'))
+ *                  -> 'POINT (-71.064544 42.28787)'
  *
- * @usage SELECT ST_AsText(ST_GeomFromEWKB(the_geom)) FROM "cartodb".acs."acs_2019_5yr_place_49_utah"
- *
- * @author Brian Holman <bholman@dezota.com>
+ *  @author			Brian Holman <bholman@dezota.com>
  *
  */
 
@@ -52,34 +56,29 @@ public class STGeomFromEWKB implements SimpleFunction {
 
     public void eval() {
         // Convert the UTF-8 representation of a Postgres EWKB binary field to a String
-        String ewkbText = com.dremio.gis.StringFunctionHelpers.toStringFromUTF8(input.start, input.end,
+        String ewkbText = com.dremio.gis.FunctionHelpers.toStringFromUTF8(input.start, input.end,
                 input.buffer);
 
         // Remove the SRID representation to create a wkbText representation
         StringBuffer sb = new StringBuffer(ewkbText);
-        String wkbText = sb.delete(8,16).toString();
+        String wkbText = sb.delete(8, 16).toString();
 
         // Convert the HEX String Representation to Binary and wrap in a Byte Buffer
-        byte[] ewkbByteArr=com.dremio.gis.StringFunctionHelpers.hexToBytes(ewkbText);
+        byte[] ewkbByteArr = com.dremio.gis.FunctionHelpers.hexToBytes(ewkbText);
         java.nio.ByteBuffer ewkbBB = java.nio.ByteBuffer.wrap(ewkbByteArr);
-        byte[] wkbByteArr=com.dremio.gis.StringFunctionHelpers.hexToBytes(wkbText);
+        byte[] wkbByteArr = com.dremio.gis.FunctionHelpers.hexToBytes(wkbText);
         java.nio.ByteBuffer wkbBB = java.nio.ByteBuffer.wrap(wkbByteArr);
 
         // Determine the byte order of the EWKB from the first byte
         byte byteOrderWKB = ewkbBB.get();
         // Always set byte order, since it may change from geometry to geometry
-        if(byteOrderWKB == com.dremio.gis.WKBConstants.wkbNDR)
-        {
+        if (byteOrderWKB == com.dremio.gis.WKBConstants.wkbNDR) {
             ewkbBB.order(java.nio.ByteOrder.LITTLE_ENDIAN);
             wkbBB.order(java.nio.ByteOrder.LITTLE_ENDIAN);
-        }
-        else if(byteOrderWKB == com.dremio.gis.WKBConstants.wkbXDR)
-        {
+        } else if (byteOrderWKB == com.dremio.gis.WKBConstants.wkbXDR) {
             ewkbBB.order(java.nio.ByteOrder.BIG_ENDIAN);
             wkbBB.order(java.nio.ByteOrder.BIG_ENDIAN);
-        }
-        else
-        {
+        } else {
             throw new IllegalArgumentException("Unknown geometry byte order (not NDR or XDR): " + byteOrderWKB);
         }
 
@@ -101,9 +100,8 @@ public class STGeomFromEWKB implements SimpleFunction {
                 buffer.setBytes(0, geomBytes);
             } else
                 throw new IllegalArgumentException("Missing expected SRID from EWKB data");
-        }
-        else
-            throw new IllegalArgumentException("Invalid geomType: "+geomType);
+        } else
+            throw new IllegalArgumentException("Invalid geomType: " + geomType);
 
     }
 }

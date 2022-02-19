@@ -7,6 +7,7 @@ public interface WKBConstants {
     int wkbXDR = 0;
     int wkbNDR = 1;
 
+    int wkbUnknown = 0;
     int wkbPoint = 1;
     int wkbLineString = 2;
     int wkbPolygon = 3;

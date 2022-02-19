@@ -24,6 +24,17 @@ import com.dremio.exec.expr.annotations.FunctionTemplate;
 import com.dremio.exec.expr.annotations.Output;
 import com.dremio.exec.expr.annotations.Param;
 
+/**
+ *
+ *  @name			ST_GeomFromText
+ *  @args			([string] {wktString}, [number] {SRID})
+ *  @returnType		binary
+ *  @description	Takes a well-known text representation and a spatial reference ID and returns a geometry object.
+ *
+ *  @author			Brian Holman <bholman@dezota.com>
+ *
+ */
+
 @FunctionTemplate(name = "st_geomfromtext", scope = FunctionTemplate.FunctionScope.SIMPLE,
   nulls = FunctionTemplate.NullHandling.NULL_IF_NULL)
 public class STGeomFromTextSrid implements SimpleFunction {
@@ -44,7 +55,7 @@ public class STGeomFromTextSrid implements SimpleFunction {
 
   public void eval() {
     int srid = sridParam.value;
-    String wktText = com.dremio.gis.StringFunctionHelpers.toStringFromUTF8(input.start, input.end,
+    String wktText = com.dremio.gis.FunctionHelpers.toStringFromUTF8(input.start, input.end,
         input.buffer);
 
     com.esri.core.geometry.ogc.OGCGeometry geom;

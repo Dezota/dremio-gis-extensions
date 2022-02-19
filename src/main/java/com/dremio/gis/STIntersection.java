@@ -24,13 +24,17 @@ import com.dremio.exec.expr.annotations.FunctionTemplate;
 import com.dremio.exec.expr.annotations.Output;
 import com.dremio.exec.expr.annotations.Param;
 
-/*
+/**
  *
- * @summary  intersection of ST_Geometry1 & ST_Geometry2
+ *  @name			ST_Intersection
+ *  @args			([binary] {geometry1}, [binary] {geometry2})
+ *  @returnType		binary
+ *  @description	Returns a geometry object that is the geometric intersection of the source objects.
+ *  @example		ST_AsText(ST_Intersection(ST_Point(1,1), ST_Point(1,1))) -> 'POINT (1 1)'
+ *  				ST_AsText(ST_Intersection(ST_GeomFromText('LINESTRING(0 2, 0 0, 2 0)'), ST_GeomFromText('LINESTRING(0 3, 0 1, 1 0, 3 0)'))) -> 'MULTILINESTRING ((1 0, 2 0), (0 2, 0 1))'
+ *  				ST_AsText(ST_Intersection(ST_GeomFromText('POLYGON ((2 0, 2 3, 3 0))'), ST_GeomFromText('POLYGON ((1 1, 4 1, 4 4, 1 4))'))) -> 'POLYGON ((2 1, 2.666666666666667 1, 2 3, 2 1))'
  *
- * @usage SELECT ST_Intersection(geometry1, geometry2)
- *
- * @author Brian Holman <bholman@dezota.com>
+ *  @author			Brian Holman <bholman@dezota.com>
  *
  */
 

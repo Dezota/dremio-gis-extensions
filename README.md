@@ -4,24 +4,13 @@
 |------------------------|-----------------------------------|
 | 19.1.0 to 20.1.0       | Brian Holman <bholman@dezota.com> |
 
-The Dremio GIS Extensions allows Dremio to perform standard GIS functions within Dremio SQL.
+The **Dremio GIS Extensions** allows Dremio to perform standard GIS functions within Dremio SQL with 66 industry-standard GIS functions. These extensions use the [*Esri Java Geometry Library*](https://github.com/Esri/geometry-api-java/wiki/) for the underlying implementation of the core geometry functions. The author made heavy use of Esri's [*Spatial Framework for Hadoop*](https://github.com/Esri/spatial-framework-for-hadoop) as a reference for a similar implementation that also relies on the same library.
 
-## Recent Updates
-
-1. *ST_GeomFromEWKB* - Converts from the raw geometry returned from PostGIS/PostgreSQL known as EWKB
-2. *ST_GeomFromWKB* - Converts from the standard WKB format with an optional SRID specified
-3. *ST_AsGeoJSON* - Converts from the GIS extensions native format to GeoJSON
-4. *ST_Area* - Returns the area of polygon or multipolygon
-5. *ST_Generalize* - Simplifies geometries using the Douglas-Peucker algorithm
-6. *ST_GeoSize* - Returns the size of geometry in bytes.
-7. *ST_Intersection* - Returns the intersection geometry from two geometries
-8. *ST_IsSimple* - Returns true if the geometry is simple
-9. *ST_Simplify* - Returns a simplified geometry
-10. *ST_STRID* - Returns the Spatial Reference ID of the geometry
+There were two significant gaps in the Geometry Library supplied by Esri that limited transforming geometries from `EPSG: 4326` to other coordinate systems and performing geodesic rather than 2D area and length calculations. Geodesic area function helpers backing the `ST_GeodesicAreaWGS84` function are copied almost exactly from the [*Trino Geospatial Library*](https://github.com/trinodb/trino/tree/master/plugin/trino-geospatial) as found in our `FunctionHelpers.stSphericalArea()` and `FunctionHelpers.computeSphericalExcess()`. Conversion to other coordinate systems in the `ST_Transform` function leverages the [Proj4J Library](https://trac.osgeo.org/proj4j/). All of the referenced works are also published under the *Apache 2.0 License*.
 
 ## Usage and Available Functions
 
-Look at the [Implementation Status of Proposed GIS Functions](./functions.md)
+Look at the [SQL Function Reference](./docs/sqlFunctions.md) for definitions, syntax, and examples of the 66 functions implemented.
 
 ## Building and Installation
 
@@ -37,15 +26,21 @@ Look at the [Implementation Status of Proposed GIS Functions](./functions.md)
    extensions.
 3. Run `docker-compose up` to start the new image.
 
-## Testing
-
-Look at the [tests](./tests/TESTS.md)
+## Docker Image (on Docker Hub or build yourself)
+See [Dremio Docker Build with Dezota Extensions](https://github.com/Dezota/dremio-docker-with-extensions) for a complete solution that includes patches to Dremio to support Varchar and VarBinary fields large enough to accomodate GIS data.
 
 ## Inspiration
 
 * https://github.com/christyharagan/dremio-gis
 * https://github.com/k255/drill-gis
 * https://github.com/Esri/spatial-framework-for-hadoop
+* https://github.com/geographiclib/geographiclib/tree/main/java
+* https://github.com/Esri/geometry-api-java
+* [Algorithms for geodesics by Charles F. F. Karney](https://arxiv.org/pdf/1109.4448.pdf)
+* [Trino Geospatial Toolkit](https://github.com/trinodb/trino/tree/master/plugin/trino-geospatial)
+* [Geodesic intersection: proposed algorithm and error assessment of current software](https://cartosig.webs.upv.es/2021/07/27/geodesic-intersection-proposed-algorithm-and-error-assessment-of-current-software/)
+  * [Geodesic Spatial Operators on the ellipsoid](https://github.com/jomarlla/geodesicSpatialOperators)
+  * [Research Paper PDF](https://www.mdpi.com/2076-3417/11/11/5129/pdf)
 
 ## Dependencies
 

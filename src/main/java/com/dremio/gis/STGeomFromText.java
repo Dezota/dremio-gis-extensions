@@ -6,9 +6,9 @@
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -24,35 +24,46 @@ import com.dremio.exec.expr.annotations.FunctionTemplate;
 import com.dremio.exec.expr.annotations.Output;
 import com.dremio.exec.expr.annotations.Param;
 
+/**
+ *
+ *  @name			ST_GeomFromText
+ *  @args			([string] {wktString})
+ *  @returnType		binary
+ *  @description	Takes a well-known text representation and returns a geometry object.
+ *
+ *  @author			Brian Holman <bholman@dezota.com>
+ *
+ */
+
 @FunctionTemplate(name = "st_geomfromtext", scope = FunctionTemplate.FunctionScope.SIMPLE,
-  nulls = FunctionTemplate.NullHandling.NULL_IF_NULL)
+        nulls = FunctionTemplate.NullHandling.NULL_IF_NULL)
 public class STGeomFromText implements SimpleFunction {
-  @Param
-  org.apache.arrow.vector.holders.VarCharHolder input;
+    @Param
+    org.apache.arrow.vector.holders.VarCharHolder input;
 
-  @Output
-  org.apache.arrow.vector.holders.VarBinaryHolder out;
+    @Output
+    org.apache.arrow.vector.holders.VarBinaryHolder out;
 
-  @Inject
-  org.apache.arrow.memory.ArrowBuf buffer;
+    @Inject
+    org.apache.arrow.memory.ArrowBuf buffer;
 
-  public void setup() {
-  }
+    public void setup() {
+    }
 
-  public void eval() {
-    String wktText = com.dremio.gis.StringFunctionHelpers.toStringFromUTF8(input.start, input.end,
-        input.buffer);
+    public void eval() {
+        String wktText = com.dremio.gis.FunctionHelpers.toStringFromUTF8(input.start, input.end,
+                input.buffer);
 
-    com.esri.core.geometry.ogc.OGCGeometry geom;
+        com.esri.core.geometry.ogc.OGCGeometry geom;
 
-    geom = com.esri.core.geometry.ogc.OGCGeometry.fromText(wktText);
+        geom = com.esri.core.geometry.ogc.OGCGeometry.fromText(wktText);
 
-    java.nio.ByteBuffer pointBytes = geom.asBinary();
-    
-    int outputSize = pointBytes.remaining();
-    buffer = out.buffer = buffer.reallocIfNeeded(outputSize);
-    out.start = 0;
-    out.end = outputSize;
-    buffer.setBytes(0, pointBytes);
-  }
+        java.nio.ByteBuffer pointBytes = geom.asBinary();
+
+        int outputSize = pointBytes.remaining();
+        buffer = out.buffer = buffer.reallocIfNeeded(outputSize);
+        out.start = 0;
+        out.end = outputSize;
+        buffer.setBytes(0, pointBytes);
+    }
 }

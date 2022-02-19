@@ -6,9 +6,9 @@
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -24,40 +24,52 @@ import com.dremio.exec.expr.annotations.FunctionTemplate;
 import com.dremio.exec.expr.annotations.Output;
 import com.dremio.exec.expr.annotations.Param;
 
+/**
+ *
+ *  @name			ST_Envelope
+ *  @args			([binary] {geometry})
+ *  @returnType		binary
+ *  @description	Returns the minimum bounding box of the geometry object as a polygon
+ *  @example		ST_AsText(ST_Envelope(ST_GeomFromText('LINESTRING (0 0, 2 2))'))) -> 'POLYGON ((0 0, 2 0, 2 2, 0 2, 0 0))'
+ *  				ST_AsText(ST_Envelope(ST_GeomFromText('POLYGON ((2 0, 2 3, 3 0))'))) -> 'POLYGON ((2 0, 3 0, 3 3, 2 3, 2 0))'
+ *
+ *  @author			Brian Holman <bholman@dezota.com>
+ *
+ */
+
 @FunctionTemplate(name = "st_envelope", scope = FunctionTemplate.FunctionScope.SIMPLE,
-  nulls = FunctionTemplate.NullHandling.NULL_IF_NULL)
+        nulls = FunctionTemplate.NullHandling.NULL_IF_NULL)
 public class STEnvelope implements SimpleFunction {
-  @Param
-  org.apache.arrow.vector.holders.VarBinaryHolder geom1Param;
+    @Param
+    org.apache.arrow.vector.holders.VarBinaryHolder geom1Param;
 
-  @Output
-  org.apache.arrow.vector.holders.VarBinaryHolder out;
+    @Output
+    org.apache.arrow.vector.holders.VarBinaryHolder out;
 
-  @Inject
-  org.apache.arrow.memory.ArrowBuf buffer;
+    @Inject
+    org.apache.arrow.memory.ArrowBuf buffer;
 
-  public void setup() {
-  }
-
-  public void eval() {
-    com.esri.core.geometry.ogc.OGCGeometry geom1;
-    geom1 = com.esri.core.geometry.ogc.OGCGeometry
-        .fromBinary(geom1Param.buffer.nioBuffer(geom1Param.start, geom1Param.end - geom1Param.start));
-
-    com.esri.core.geometry.ogc.OGCGeometry envelopeGeom;
-    if(geom1.geometryType().equals("Point")){
-      envelopeGeom = geom1;
-    }
-    else{
-      envelopeGeom = geom1.envelope();
+    public void setup() {
     }
 
-    java.nio.ByteBuffer envelopeGeomBytes = envelopeGeom.asBinary();
+    public void eval() {
+        com.esri.core.geometry.ogc.OGCGeometry geom1;
+        geom1 = com.esri.core.geometry.ogc.OGCGeometry
+                .fromBinary(geom1Param.buffer.nioBuffer(geom1Param.start, geom1Param.end - geom1Param.start));
 
-    int outputSize = envelopeGeomBytes.remaining();
-    buffer = out.buffer = buffer.reallocIfNeeded(outputSize);
-    out.start = 0;
-    out.end = outputSize;
-    buffer.setBytes(0, envelopeGeomBytes);
-  }
+        com.esri.core.geometry.ogc.OGCGeometry envelopeGeom;
+        if (geom1.geometryType().equals("Point")) {
+            envelopeGeom = geom1;
+        } else {
+            envelopeGeom = geom1.envelope();
+        }
+
+        java.nio.ByteBuffer envelopeGeomBytes = envelopeGeom.asBinary();
+
+        int outputSize = envelopeGeomBytes.remaining();
+        buffer = out.buffer = buffer.reallocIfNeeded(outputSize);
+        out.start = 0;
+        out.end = outputSize;
+        buffer.setBytes(0, envelopeGeomBytes);
+    }
 }

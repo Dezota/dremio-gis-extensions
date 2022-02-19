@@ -24,14 +24,28 @@ import com.dremio.exec.expr.annotations.FunctionTemplate;
 import com.dremio.exec.expr.annotations.Output;
 import com.dremio.exec.expr.annotations.Param;
 
-@FunctionTemplate(name = "st_xmin", scope = FunctionTemplate.FunctionScope.SIMPLE,
+/**
+ *
+ *  @name			ST_Point
+ *  @args			[number] {lon}, [number] {lat}
+ *  @returnType		binary
+ *  @description	Returns a 2D point geometry from the provided lon (x) and lat (y) values.
+ *
+ *  @author			Brian Holman <bholman@dezota.com>
+ *
+ */
+
+@FunctionTemplate(name = "st_point", scope = FunctionTemplate.FunctionScope.SIMPLE,
   nulls = FunctionTemplate.NullHandling.NULL_IF_NULL)
-public class STXMin implements SimpleFunction {
+public class STPoint implements SimpleFunction {
   @Param
-  org.apache.arrow.vector.holders.VarBinaryHolder geom1Param;
+  org.apache.arrow.vector.holders.Float8Holder lonParam;
+
+  @Param
+  org.apache.arrow.vector.holders.Float8Holder latParam;
 
   @Output
-  org.apache.arrow.vector.holders.Float8Holder out;
+  org.apache.arrow.vector.holders.VarBinaryHolder out;
 
   @Inject
   org.apache.arrow.memory.ArrowBuf buffer;
@@ -40,17 +54,17 @@ public class STXMin implements SimpleFunction {
   }
 
   public void eval() {
-    com.esri.core.geometry.ogc.OGCGeometry geom1;
-    geom1 = com.esri.core.geometry.ogc.OGCGeometry
-        .fromBinary(geom1Param.buffer.nioBuffer(geom1Param.start, geom1Param.end - geom1Param.start));
 
-    if(geom1.geometryType().equals("Point")){
-      out.value = ((com.esri.core.geometry.ogc.OGCPoint) geom1).X();
-    }
-    else{
-      com.esri.core.geometry.Envelope envelope = new com.esri.core.geometry.Envelope();
-      geom1.getEsriGeometry().queryEnvelope(envelope);
-      out.value = envelope.getXMin();
-    }
+    double lon = lonParam.value;
+    double lat = latParam.value;
+
+    com.esri.core.geometry.ogc.OGCPoint point = new com.esri.core.geometry.ogc.OGCPoint(
+        new com.esri.core.geometry.Point(lon, lat), com.esri.core.geometry.SpatialReference.create(4326));
+
+    java.nio.ByteBuffer pointBytes = point.asBinary();
+    out.buffer = buffer;
+    out.start = 0;
+    out.end = pointBytes.remaining();
+    buffer.setBytes(0, pointBytes);
   }
 }

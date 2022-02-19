@@ -24,15 +24,14 @@ import com.dremio.exec.expr.annotations.Param;
 
 import javax.inject.Inject;
 
-/*
+/**
  *
- * @summary Convert geometry from WKB
+ *  @name			ST_GeomFromWKB
+ *  @args			([binary] {wkbValue})
+ *  @returnType		binary
+ *  @description	Takes a well-known binary (WKB) representation and returns a geometry object.
  *
- * @usage SELECT ST_AsText(ST_GeomFromWKB(the_geom_wkb))
- *        FROM table("cartodb".external_query(
- *        'SELECT *, ST_AsBinary(the_geom) as the_geom_wkb FROM acs.acs_2019_5yr_place_49_utah'))
- *
- * @author Brian Holman <bholman@dezota.com>
+ *  @author			Brian Holman <bholman@dezota.com>
  *
  */
 

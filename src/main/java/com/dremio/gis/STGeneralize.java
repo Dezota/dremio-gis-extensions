@@ -24,16 +24,16 @@ import com.dremio.exec.expr.annotations.Param;
 
 import javax.inject.Inject;
 
-/*
+/**
  *
- * @summary Simplifies geometries using the Douglas-Peucker algorithm
+ *  @name			ST_Generalize
+ *  @args			([binary] {geometry}, [number] {maxDeviation}, [boolean] {removeDegenerateParts})
+ *  @returnType		binary
+ *  @description	Simplifies geometries using the Douglas-Peucker algorithm. {maxDeviation} is the maximum allowed deviation from the generalized geometry to the original geometry.
+ *                  When {removeDegenerateParts} is true, the degenerate parts of the geometry will be removed from the output.
+ *  @example		ST_AsText(ST_Generalize(ST_GeomFromText('POLYGON ((0 0, 1 1, 2 0, 3 2, 4 1, 5 0, 5 10, 0 10))'), 2, true)) -> 'POLYGON ((0 0, 5 0, 5 10, 0 10, 0 0))'
  *
- * @usage SELECT ST_Generalize(geometry ST_Geometry, maxDeviation FLOAT, removeDegenerateParts BOOLEAN)
- *
- *        SELECT ST_GeoSize(ST_Generalize(ST_GeomFromEWKB(the_geom), 0.000001, true)) AS Gen
- *        FROM "clickhouse"."acs_gis".counties WHERE name = 'Millard'
- *
- * @author Brian Holman <bholman@dezota.com>
+ *  @author			Brian Holman <bholman@dezota.com>
  *
  */
 

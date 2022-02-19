@@ -17,21 +17,38 @@
  */
 package com.dremio.gis;
 
-import javax.inject.Inject;
-
 import com.dremio.exec.expr.SimpleFunction;
 import com.dremio.exec.expr.annotations.FunctionTemplate;
 import com.dremio.exec.expr.annotations.Output;
 import com.dremio.exec.expr.annotations.Param;
 
-@FunctionTemplate(name = "st_xmax", scope = FunctionTemplate.FunctionScope.SIMPLE,
+import javax.inject.Inject;
+
+/**
+ *
+ *  @name			ST_PointZ
+ *  @args			[number] {lon}, [number] {lat}, [number] {elev}
+ *  @returnType		binary
+ *  @description	Returns a 3D point geometry from the provided lon (x), lat (y), and elev (z) values.
+ *
+ *  @author			Brian Holman <bholman@dezota.com>
+ *
+ */
+
+@FunctionTemplate(name = "st_pointz", scope = FunctionTemplate.FunctionScope.SIMPLE,
   nulls = FunctionTemplate.NullHandling.NULL_IF_NULL)
-public class STXMax implements SimpleFunction {
+public class STPointZ implements SimpleFunction {
   @Param
-  org.apache.arrow.vector.holders.VarBinaryHolder geom1Param;
+  org.apache.arrow.vector.holders.Float8Holder longitudeParam;
+
+  @Param
+  org.apache.arrow.vector.holders.Float8Holder latitudeParam;
+
+  @Param
+  org.apache.arrow.vector.holders.Float8Holder elevationParam;
 
   @Output
-  org.apache.arrow.vector.holders.Float8Holder out;
+  org.apache.arrow.vector.holders.VarBinaryHolder out;
 
   @Inject
   org.apache.arrow.memory.ArrowBuf buffer;
@@ -40,17 +57,18 @@ public class STXMax implements SimpleFunction {
   }
 
   public void eval() {
-    com.esri.core.geometry.ogc.OGCGeometry geom1;
-    geom1 = com.esri.core.geometry.ogc.OGCGeometry
-        .fromBinary(geom1Param.buffer.nioBuffer(geom1Param.start, geom1Param.end - geom1Param.start));
 
-    if(geom1.geometryType().equals("Point")){
-      out.value = ((com.esri.core.geometry.ogc.OGCPoint) geom1).X();
-    }
-    else{
-      com.esri.core.geometry.Envelope envelope = new com.esri.core.geometry.Envelope();
-      geom1.getEsriGeometry().queryEnvelope(envelope);
-      out.value = envelope.getXMax();
-    }
+    double lon = longitudeParam.value;
+    double lat = latitudeParam.value;
+    double elev = elevationParam.value;
+
+    com.esri.core.geometry.ogc.OGCPoint point = new com.esri.core.geometry.ogc.OGCPoint(
+        new com.esri.core.geometry.Point(lon, lat, elev), com.esri.core.geometry.SpatialReference.create(4326));
+
+    java.nio.ByteBuffer pointBytes = point.asBinary();
+    out.buffer = buffer;
+    out.start = 0;
+    out.end = pointBytes.remaining();
+    buffer.setBytes(0, pointBytes);
   }
 }
