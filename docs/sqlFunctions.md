@@ -270,7 +270,7 @@ Returns the exterior ring of a polygon as a linestring.
 ## (17) ST_Generalize
 
 ### Definition
-Simplifies geometries using the Douglas-Peucker algorithm. {maxDeviation} is the maximum allowed deviation from the generalized geometry to the original geometry.  When {removeDegenerateParts} is true, the degenerate parts of the geometry will be removed from the output.
+Simplifies geometries using the Douglas-Peucker algorithm. *maxDeviation* is the maximum allowed deviation from the generalized geometry to the original geometry.  When *removeDegenerateParts* is true, the degenerate parts of the geometry will be removed from the output.
 
 ### Syntax
 <code>ST_Generalize(binary <em>geometry</em>, number <em>maxDeviation</em>, boolean <em>removeDegenerateParts</em>)</code>
