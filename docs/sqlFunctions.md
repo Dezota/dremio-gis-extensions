@@ -645,7 +645,7 @@ Returns distance along line on WGS84 spheroid, in meters, for geographic coordin
 ### Examples
 | Query      | Result |
 | ----------- | ----------- |
-| `SELECT SELECT ST_GeodesicLengthWGS84(ST_GeomFromText('MultiLineString((0.0 80.0, 0.3 80.4))', 4326))` | `45026.96274781222` |
+| `SELECT ST_GeodesicLengthWGS84(ST_GeomFromText('MultiLineString((0.0 80.0, 0.3 80.4))', 4326))` | `45026.96274781222` |
 ## (20) ST_GeometryN
 
 ### Definition
@@ -693,7 +693,7 @@ Converts a Hex encoded binary string from Postgres/PostGIS geometry to native ge
 ### Examples
 | Query      | Result |
 | ----------- | ----------- |
-| `SELECT SELECT ST_AsText(ST_GeomFromEWKB(the_geom)) FROM table("postgis".external_query('SELECT ST_GeomFromText(''POINT(-71.064544 42.28787)'',4326) AS the_geom'))` | `'POINT (-71.064544 42.28787)'` |
+| `SELECT ST_AsText(ST_GeomFromEWKB(the_geom)) FROM table("postgis".external_query('SELECT ST_GeomFromText(''POINT(-71.064544 42.28787)'',4326) AS the_geom'))` | `'POINT (-71.064544 42.28787)'` |
 ## (23) ST_GeomFromGeoJSON
 
 ### Definition
@@ -937,23 +937,24 @@ Extract a portion of *jsonData* as a string by following the specified path in t
 ### Examples
 | Query      | Result |
 | ----------- | ----------- |
-| `SELECT SELECT ST_JSONPath('/coordinates[Array][0]',ST_AsGeoJSON(ST_Envelope(the_geom))) FROM utah_county_taxparcels` | `undefined` |
-| `SELECT SELECT ST_JSONPath('/crs[Object]/properties[Object]/name',ST_AsGeoJSON(ST_Envelope(the_geom))) FROM utah_county_taxparcels` | `undefined` |
-| `SELECT Example JSON Paths (similar to XPath for XML):` | `undefined` |
-| `SELECT '/data[Array]'` | `undefined` |
-| `SELECT '/data[Array][1]/id[String]'` | `undefined` |
-| `SELECT '/data[Array][1]/likes[Object]'` | `undefined` |
-| `SELECT '/data[Array][1]/likes[Object]/summary[Object]/total_count[String]'` | `undefined` |
-| `SELECT '/data[Array][3]'` | `undefined` |
-| `SELECT '/data[Array][id=131272076894593_1420960724592382]/likes[Object]/summary[Object]/total_count'` | `undefined` |
-| `SELECT '/fbids[String]'` | `undefined` |
-| `SELECT '/quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/enterpriseValue[Object]/fmt[String]'` | `undefined` |
-| `SELECT '/quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/forwardPE[Object]/raw[Double]'` | `undefined` |
-| `SELECT 'quoteSummary[6]/result[4][0]/defaultKeyStatistics[6]/sharesOutstanding[6]/raw[1]'` | `undefined` |
-| `SELECT 'quoteSummary[6]/result[Array]'` | `undefined` |
-| `SELECT 'quoteSummary[6]/result[Array][0]'` | `undefined` |
-| `SELECT 'quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/lastSplitDate[Object]/raw1[Long]'` | `undefined` |
-| `SELECT 'quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/sharesOutstanding[Object]/raw[Integer]'` | `undefined` |
+| `SELECT ST_JSONPath('/coordinates[Array][0]',ST_AsGeoJSON(ST_Envelope(the_geom))) FROM utah_county_taxparcels` |  |
+| `SELECT ST_JSONPath('/crs[Object]/properties[Object]/name',ST_AsGeoJSON(ST_Envelope(the_geom))) FROM utah_county_taxparcels` |  |
+|  |  |
+| **Example JSON Path Syntax (similar to XPath for XML):** |  |
+| '/data[Array]' |  |
+| '/data[Array][1]/id[String]' |  |
+| '/data[Array][1]/likes[Object]' |  |
+| '/data[Array][1]/likes[Object]/summary[Object]/total_count[String]' |  |
+| '/data[Array][3]' |  |
+| '/data[Array][id=131272076894593_1420960724592382]/likes[Object]/summary[Object]/total_count' |  |
+| '/fbids[String]' |  |
+| '/quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/enterpriseValue[Object]/fmt[String]' |  |
+| '/quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/forwardPE[Object]/raw[Double]' |  |
+| 'quoteSummary[6]/result[4][0]/defaultKeyStatistics[6]/sharesOutstanding[6]/raw[1]' |  |
+| 'quoteSummary[6]/result[Array]' |  |
+| 'quoteSummary[6]/result[Array][0]' |  |
+| 'quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/lastSplitDate[Object]/raw1[Long]' |  |
+| 'quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/sharesOutstanding[Object]/raw[Integer]' |  |
 ## (39) ST_Length
 
 ### Definition
@@ -1293,7 +1294,7 @@ Returns a geometry object that is the symmetric difference of the source objects
 | Query      | Result |
 | ----------- | ----------- |
 | `SELECT ST_AsText(ST_SymmetricDiff(ST_GeomFromText('LINESTRING (0 2, 2 2)'), ST_GeomFromText('LINESTRING (1 2, 3 2)')))` | `'MULTILINESTRING ((0 2, 1 2), (2 2, 3 2))'` |
-| `SELECT ST_AsText(ST_SymmetricDiff(ST_GeomFromText('POLYGON ((0 0, 2 0, 2 2, 0 2, 0 0))'), ST_GeomFromText('POLYGON ((1 1, 3 1, 3 3, 1 3, 1 1))'))) --> 'MULTIPOLYGON (((0 0, 2 0, 2 1, 1 1, 1 2, 0 2, 0 0)), ((2 1, 3 1, 3 3, 1 3, 1 2, 2 2, 2 1)))' ` | `undefined` |
+| `SELECT ST_AsText(ST_SymmetricDiff(ST_GeomFromText('POLYGON ((0 0, 2 0, 2 2, 0 2, 0 0))'), ST_GeomFromText('POLYGON ((1 1, 3 1, 3 3, 1 3, 1 1))'))) --> 'MULTIPOLYGON (((0 0, 2 0, 2 1, 1 1, 1 2, 0 2, 0 0)), ((2 1, 3 1, 3 3, 1 3, 1 2, 2 2, 2 1)))' ` |  |
 ## (61) ST_Touches
 
 ### Definition

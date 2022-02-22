@@ -950,7 +950,7 @@
     "tags": [
       "gis"
     ],
-    "example": "SELECT ST_GeodesicLengthWGS84(ST_GeomFromText('MultiLineString((0.0 80.0, 0.3 80.4))', 4326)) -> 45026.96274781222"
+    "example": "ST_GeodesicLengthWGS84(ST_GeomFromText('MultiLineString((0.0 80.0, 0.3 80.4))', 4326)) -> 45026.96274781222"
   },
   {
     "name": "ST_GeometryN",
@@ -980,7 +980,7 @@
     "tags": [
       "gis"
     ],
-    "example": "SELECT ST_AsText(ST_GeomFromEWKB(the_geom)) FROM table(\"postgis\".external_query('SELECT ST_GeomFromText(''POINT(-71.064544 42.28787)'',4326) AS the_geom')) -> 'POINT (-71.064544 42.28787)'"
+    "example": "ST_AsText(ST_GeomFromEWKB(the_geom)) FROM table(\"postgis\".external_query('SELECT ST_GeomFromText(''POINT(-71.064544 42.28787)'',4326) AS the_geom')) -> 'POINT (-71.064544 42.28787)'"
   },
   {
     "name": "ST_GeomFromGeoJSON",
@@ -1135,7 +1135,7 @@
     "tags": [
       "gis"
     ],
-    "example": "SELECT ST_JSONPath('/coordinates[Array][0]',ST_AsGeoJSON(ST_Envelope(the_geom))) FROM utah_county_taxparcels\nSELECT ST_JSONPath('/crs[Object]/properties[Object]/name',ST_AsGeoJSON(ST_Envelope(the_geom))) FROM utah_county_taxparcels\nExample JSON Paths (similar to XPath for XML):\n'/data[Array]'\n'/data[Array][1]/id[String]'\n'/data[Array][1]/likes[Object]'\n'/data[Array][1]/likes[Object]/summary[Object]/total_count[String]'\n'/data[Array][3]'\n'/data[Array][id=131272076894593_1420960724592382]/likes[Object]/summary[Object]/total_count'\n'/fbids[String]'\n'/quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/enterpriseValue[Object]/fmt[String]'\n'/quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/forwardPE[Object]/raw[Double]'\n'quoteSummary[6]/result[4][0]/defaultKeyStatistics[6]/sharesOutstanding[6]/raw[1]'\n'quoteSummary[6]/result[Array]'\n'quoteSummary[6]/result[Array][0]'\n'quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/lastSplitDate[Object]/raw1[Long]'\n'quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/sharesOutstanding[Object]/raw[Integer]'"
+    "example": "ST_JSONPath('/coordinates[Array][0]',ST_AsGeoJSON(ST_Envelope(the_geom))) FROM utah_county_taxparcels\nST_JSONPath('/crs[Object]/properties[Object]/name',ST_AsGeoJSON(ST_Envelope(the_geom))) FROM utah_county_taxparcels\n\n**Example JSON Path Syntax (similar to XPath for XML):**\n'/data[Array]'\n'/data[Array][1]/id[String]'\n'/data[Array][1]/likes[Object]'\n'/data[Array][1]/likes[Object]/summary[Object]/total_count[String]'\n'/data[Array][3]'\n'/data[Array][id=131272076894593_1420960724592382]/likes[Object]/summary[Object]/total_count'\n'/fbids[String]'\n'/quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/enterpriseValue[Object]/fmt[String]'\n'/quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/forwardPE[Object]/raw[Double]'\n'quoteSummary[6]/result[4][0]/defaultKeyStatistics[6]/sharesOutstanding[6]/raw[1]'\n'quoteSummary[6]/result[Array]'\n'quoteSummary[6]/result[Array][0]'\n'quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/lastSplitDate[Object]/raw1[Long]'\n'quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/sharesOutstanding[Object]/raw[Integer]'"
   },
   {
     "name": "ST_Length",

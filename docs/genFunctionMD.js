@@ -40,7 +40,7 @@ function function1(currentValue, index) {
             console.log("| ----------- | ----------- |");
             for (var i = 0; i < exampleLines.length; i++) {
                 queryResults = exampleLines[i].split(" -> ");
-                console.log("| `SELECT "+queryResults[0]+"` | `"+queryResults[1]+ "` |")
+                console.log("| "+ (queryResults[0].startsWith("ST_") ? ("`SELECT "+queryResults[0]+"`") : queryResults[0])+" | "+(queryResults[1] ? "`"+queryResults[1]+"`" : "" )+ " |")
             }
         }
         else
