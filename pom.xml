@@ -26,6 +26,11 @@
       <artifactId>arrow-memory</artifactId>
       <version>0.15.0-20200308131102-f6b34ee198-dremio</version>
     </dependency>
+    <dependency>
+      <groupId>org.codehaus.jettison</groupId>
+      <artifactId>jettison</artifactId>
+      <version>1.4.1</version>
+    </dependency>
   </dependencies>
   <build>
     <resources>
@@ -112,11 +117,18 @@
                     <exclude>META-INF/MANIFEST.MF</exclude>
                   </excludes>
                 </filter>
-              </filters>
+                <filter>
+                  <artifact>org.codehaus.jettison:jettison</artifact>
+                  <excludes>
+                    <exclude>META-INF/MANIFEST.MF</exclude>
+                  </excludes>
+                </filter>
+               </filters>
               <artifactSet>
                 <includes>
                   <include>com.esri.geometry</include>
                   <include>org.osgeo</include>
+                  <include>org.codehaus.jettison</include>
                 </includes>
               </artifactSet>
             </configuration>

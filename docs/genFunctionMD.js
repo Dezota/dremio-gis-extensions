@@ -7,7 +7,7 @@ fs.readFile("./sqlFunctions.json", "utf8", (err, response) => {
         return;
     }
     console.log("# GIS Extensions for Dremio - SQL Function Reference\n" +
-        "## Authored by Brian Holman <bholman@dezota.com>\n\n" +
+        "## Authored by Brian Holman\n\n" +
         "*This independent project is not affiliated with, sponsored, or endorsed by Dremio Corporation. Dremio is a registered trademark of Dremio Corporation and they retain all trademark and other intellectual property rights.  \"Dremio\" is used here by reference to integrating with their published [User-Defined Functions Specification](https://www.dremio.com/hub-additional/) for advanced users to develop their own custom functions for use in SQL queries.*\n\n"+
         "![DAC with GIS extensions](./dremio_dac_with_gis.jpg)\n\n"+
         "The **GIS Extensions** allow Dremio to perform standard GIS functions within Dremio SQL with 66 industry-standard GIS functions. "+
