@@ -55,100 +55,101 @@
     - [Syntax](#syntax-9)
     - [Return Type](#return-type-9)
     - [Examples](#examples-9)
-  - [(11) ST_Difference](#11-st_difference)
+  - [(11) ST_Densify](#11-st_densify)
     - [Definition](#definition-10)
     - [Syntax](#syntax-10)
     - [Return Type](#return-type-10)
     - [Examples](#examples-10)
-  - [(12) ST_Dimension](#12-st_dimension)
+  - [(12) ST_Difference](#12-st_difference)
     - [Definition](#definition-11)
     - [Syntax](#syntax-11)
     - [Return Type](#return-type-11)
     - [Examples](#examples-11)
-  - [(13) ST_Disjoint](#13-st_disjoint)
+  - [(13) ST_Dimension](#13-st_dimension)
     - [Definition](#definition-12)
     - [Syntax](#syntax-12)
     - [Return Type](#return-type-12)
     - [Examples](#examples-12)
-  - [(14) ST_Distance](#14-st_distance)
+  - [(14) ST_Disjoint](#14-st_disjoint)
     - [Definition](#definition-13)
     - [Syntax](#syntax-13)
     - [Return Type](#return-type-13)
     - [Examples](#examples-13)
-  - [(15) ST_DWithin](#15-st_dwithin)
+  - [(15) ST_Distance](#15-st_distance)
     - [Definition](#definition-14)
     - [Syntax](#syntax-14)
     - [Return Type](#return-type-14)
     - [Examples](#examples-14)
-  - [(16) ST_EndPoint](#16-st_endpoint)
+  - [(16) ST_DWithin](#16-st_dwithin)
     - [Definition](#definition-15)
     - [Syntax](#syntax-15)
     - [Return Type](#return-type-15)
     - [Examples](#examples-15)
-  - [(17) ST_Envelope](#17-st_envelope)
+  - [(17) ST_EndPoint](#17-st_endpoint)
     - [Definition](#definition-16)
     - [Syntax](#syntax-16)
     - [Return Type](#return-type-16)
     - [Examples](#examples-16)
-  - [(18) ST_EnvIntersects](#18-st_envintersects)
+  - [(18) ST_Envelope](#18-st_envelope)
     - [Definition](#definition-17)
     - [Syntax](#syntax-17)
     - [Return Type](#return-type-17)
     - [Examples](#examples-17)
-  - [(19) ST_Equals](#19-st_equals)
+  - [(19) ST_EnvIntersects](#19-st_envintersects)
     - [Definition](#definition-18)
     - [Syntax](#syntax-18)
     - [Return Type](#return-type-18)
     - [Examples](#examples-18)
-  - [(20) ST_ExteriorRing](#20-st_exteriorring)
+  - [(20) ST_Equals](#20-st_equals)
     - [Definition](#definition-19)
     - [Syntax](#syntax-19)
     - [Return Type](#return-type-19)
     - [Examples](#examples-19)
-  - [(21) ST_Generalize](#21-st_generalize)
+  - [(21) ST_ExteriorRing](#21-st_exteriorring)
     - [Definition](#definition-20)
     - [Syntax](#syntax-20)
     - [Return Type](#return-type-20)
     - [Examples](#examples-20)
-  - [(22) ST_GeodesicAreaWGS84](#22-st_geodesicareawgs84)
+  - [(22) ST_Generalize](#22-st_generalize)
     - [Definition](#definition-21)
     - [Syntax](#syntax-21)
     - [Return Type](#return-type-21)
     - [Examples](#examples-21)
-  - [(23) ST_GeodesicLengthWGS84](#23-st_geodesiclengthwgs84)
+  - [(23) ST_GeodesicAreaWGS84](#23-st_geodesicareawgs84)
     - [Definition](#definition-22)
     - [Syntax](#syntax-22)
     - [Return Type](#return-type-22)
     - [Examples](#examples-22)
-  - [(24) ST_GeometryN](#24-st_geometryn)
+  - [(24) ST_GeodesicLengthWGS84](#24-st_geodesiclengthwgs84)
     - [Definition](#definition-23)
     - [Syntax](#syntax-23)
     - [Return Type](#return-type-23)
     - [Examples](#examples-23)
-  - [(25) ST_GeometryType](#25-st_geometrytype)
+  - [(25) ST_GeometryN](#25-st_geometryn)
     - [Definition](#definition-24)
     - [Syntax](#syntax-24)
     - [Return Type](#return-type-24)
     - [Examples](#examples-24)
-  - [(26) ST_GeomFromEWKB](#26-st_geomfromewkb)
+  - [(26) ST_GeometryType](#26-st_geometrytype)
     - [Definition](#definition-25)
     - [Syntax](#syntax-25)
     - [Return Type](#return-type-25)
     - [Examples](#examples-25)
-  - [(27) ST_GeomFromGeoJSON](#27-st_geomfromgeojson)
+  - [(27) ST_GeomFromEWKB](#27-st_geomfromewkb)
     - [Definition](#definition-26)
     - [Syntax](#syntax-26)
     - [Return Type](#return-type-26)
     - [Examples](#examples-26)
-  - [(28) ST_GeomFromText](#28-st_geomfromtext)
+  - [(28) ST_GeomFromGeoJSON](#28-st_geomfromgeojson)
     - [Definition](#definition-27)
     - [Syntax](#syntax-27)
     - [Return Type](#return-type-27)
+    - [Examples](#examples-27)
   - [(29) ST_GeomFromText](#29-st_geomfromtext)
     - [Definition](#definition-28)
     - [Syntax](#syntax-28)
     - [Return Type](#return-type-28)
-  - [(30) ST_GeomFromWKB](#30-st_geomfromwkb)
+  - [(30) ST_GeomFromText](#30-st_geomfromtext)
     - [Definition](#definition-29)
     - [Syntax](#syntax-29)
     - [Return Type](#return-type-29)
@@ -156,201 +157,205 @@
     - [Definition](#definition-30)
     - [Syntax](#syntax-30)
     - [Return Type](#return-type-30)
-  - [(32) ST_GeoSize](#32-st_geosize)
+  - [(32) ST_GeomFromWKB](#32-st_geomfromwkb)
     - [Definition](#definition-31)
     - [Syntax](#syntax-31)
     - [Return Type](#return-type-31)
-  - [(33) ST_InteriorRingN](#33-st_interiorringn)
+  - [(33) ST_GeoSize](#33-st_geosize)
     - [Definition](#definition-32)
     - [Syntax](#syntax-32)
     - [Return Type](#return-type-32)
-    - [Examples](#examples-27)
-  - [(34) ST_Intersection](#34-st_intersection)
+  - [(34) ST_InteriorRingN](#34-st_interiorringn)
     - [Definition](#definition-33)
     - [Syntax](#syntax-33)
     - [Return Type](#return-type-33)
     - [Examples](#examples-28)
-  - [(35) ST_Intersects](#35-st_intersects)
+  - [(35) ST_Intersection](#35-st_intersection)
     - [Definition](#definition-34)
     - [Syntax](#syntax-34)
     - [Return Type](#return-type-34)
     - [Examples](#examples-29)
-  - [(36) ST_Is3D](#36-st_is3d)
+  - [(36) ST_Intersects](#36-st_intersects)
     - [Definition](#definition-35)
     - [Syntax](#syntax-35)
     - [Return Type](#return-type-35)
     - [Examples](#examples-30)
-  - [(37) ST_IsClosed](#37-st_isclosed)
+  - [(37) ST_Is3D](#37-st_is3d)
     - [Definition](#definition-36)
     - [Syntax](#syntax-36)
     - [Return Type](#return-type-36)
     - [Examples](#examples-31)
-  - [(38) ST_IsEmpty](#38-st_isempty)
+  - [(38) ST_IsClosed](#38-st_isclosed)
     - [Definition](#definition-37)
     - [Syntax](#syntax-37)
     - [Return Type](#return-type-37)
     - [Examples](#examples-32)
-  - [(39) ST_IsMeasured](#39-st_ismeasured)
+  - [(39) ST_IsEmpty](#39-st_isempty)
     - [Definition](#definition-38)
     - [Syntax](#syntax-38)
     - [Return Type](#return-type-38)
     - [Examples](#examples-33)
-  - [(40) ST_IsRing](#40-st_isring)
+  - [(40) ST_IsMeasured](#40-st_ismeasured)
     - [Definition](#definition-39)
     - [Syntax](#syntax-39)
     - [Return Type](#return-type-39)
     - [Examples](#examples-34)
-  - [(41) ST_IsSimple](#41-st_issimple)
+  - [(41) ST_IsRing](#41-st_isring)
     - [Definition](#definition-40)
     - [Syntax](#syntax-40)
     - [Return Type](#return-type-40)
     - [Examples](#examples-35)
-  - [(42) ST_JSONPath](#42-st_jsonpath)
+  - [(42) ST_IsSimple](#42-st_issimple)
     - [Definition](#definition-41)
     - [Syntax](#syntax-41)
     - [Return Type](#return-type-41)
     - [Examples](#examples-36)
-  - [(43) ST_Length](#43-st_length)
+  - [(43) ST_JSONPath](#43-st_jsonpath)
     - [Definition](#definition-42)
     - [Syntax](#syntax-42)
     - [Return Type](#return-type-42)
     - [Examples](#examples-37)
-  - [(44) ST_M](#44-st_m)
+  - [(44) ST_Length](#44-st_length)
     - [Definition](#definition-43)
     - [Syntax](#syntax-43)
     - [Return Type](#return-type-43)
     - [Examples](#examples-38)
-  - [(45) ST_MaxM](#45-st_maxm)
+  - [(45) ST_M](#45-st_m)
     - [Definition](#definition-44)
     - [Syntax](#syntax-44)
     - [Return Type](#return-type-44)
     - [Examples](#examples-39)
-  - [(46) ST_MaxX](#46-st_maxx)
+  - [(46) ST_MaxM](#46-st_maxm)
     - [Definition](#definition-45)
     - [Syntax](#syntax-45)
     - [Return Type](#return-type-45)
     - [Examples](#examples-40)
-  - [(47) ST_MaxY](#47-st_maxy)
+  - [(47) ST_MaxX](#47-st_maxx)
     - [Definition](#definition-46)
     - [Syntax](#syntax-46)
     - [Return Type](#return-type-46)
     - [Examples](#examples-41)
-  - [(48) ST_MaxZ](#48-st_maxz)
+  - [(48) ST_MaxY](#48-st_maxy)
     - [Definition](#definition-47)
     - [Syntax](#syntax-47)
     - [Return Type](#return-type-47)
     - [Examples](#examples-42)
-  - [(49) ST_MinM](#49-st_minm)
+  - [(49) ST_MaxZ](#49-st_maxz)
     - [Definition](#definition-48)
     - [Syntax](#syntax-48)
     - [Return Type](#return-type-48)
     - [Examples](#examples-43)
-  - [(50) ST_MinX](#50-st_minx)
+  - [(50) ST_MinM](#50-st_minm)
     - [Definition](#definition-49)
     - [Syntax](#syntax-49)
     - [Return Type](#return-type-49)
     - [Examples](#examples-44)
-  - [(51) ST_MinY](#51-st_miny)
+  - [(51) ST_MinX](#51-st_minx)
     - [Definition](#definition-50)
     - [Syntax](#syntax-50)
     - [Return Type](#return-type-50)
     - [Examples](#examples-45)
-  - [(52) ST_MinZ](#52-st_minz)
+  - [(52) ST_MinY](#52-st_miny)
     - [Definition](#definition-51)
     - [Syntax](#syntax-51)
     - [Return Type](#return-type-51)
     - [Examples](#examples-46)
-  - [(53) ST_NumGeometries](#53-st_numgeometries)
+  - [(53) ST_MinZ](#53-st_minz)
     - [Definition](#definition-52)
     - [Syntax](#syntax-52)
     - [Return Type](#return-type-52)
     - [Examples](#examples-47)
-  - [(54) ST_NumInteriorRing](#54-st_numinteriorring)
+  - [(54) ST_NumGeometries](#54-st_numgeometries)
     - [Definition](#definition-53)
     - [Syntax](#syntax-53)
     - [Return Type](#return-type-53)
     - [Examples](#examples-48)
-  - [(55) ST_NumPoints](#55-st_numpoints)
+  - [(55) ST_NumInteriorRing](#55-st_numinteriorring)
     - [Definition](#definition-54)
     - [Syntax](#syntax-54)
     - [Return Type](#return-type-54)
     - [Examples](#examples-49)
-  - [(56) ST_Overlaps](#56-st_overlaps)
+  - [(56) ST_NumPoints](#56-st_numpoints)
     - [Definition](#definition-55)
     - [Syntax](#syntax-55)
     - [Return Type](#return-type-55)
     - [Examples](#examples-50)
-  - [(57) ST_Point](#57-st_point)
+  - [(57) ST_Overlaps](#57-st_overlaps)
     - [Definition](#definition-56)
     - [Syntax](#syntax-56)
     - [Return Type](#return-type-56)
-  - [(58) ST_PointN](#58-st_pointn)
+    - [Examples](#examples-51)
+  - [(58) ST_Point](#58-st_point)
     - [Definition](#definition-57)
     - [Syntax](#syntax-57)
     - [Return Type](#return-type-57)
-    - [Examples](#examples-51)
-  - [(59) ST_PointZ](#59-st_pointz)
+  - [(59) ST_PointN](#59-st_pointn)
     - [Definition](#definition-58)
     - [Syntax](#syntax-58)
     - [Return Type](#return-type-58)
-  - [(60) ST_Relate](#60-st_relate)
+    - [Examples](#examples-52)
+  - [(60) ST_PointZ](#60-st_pointz)
     - [Definition](#definition-59)
     - [Syntax](#syntax-59)
     - [Return Type](#return-type-59)
-    - [Examples](#examples-52)
-  - [(61) ST_SetSRID](#61-st_setsrid)
+  - [(61) ST_Relate](#61-st_relate)
     - [Definition](#definition-60)
     - [Syntax](#syntax-60)
     - [Return Type](#return-type-60)
-  - [(62) ST_Simplify](#62-st_simplify)
+    - [Examples](#examples-53)
+  - [(62) ST_SetSRID](#62-st_setsrid)
     - [Definition](#definition-61)
     - [Syntax](#syntax-61)
     - [Return Type](#return-type-61)
-  - [(63) ST_StartPoint](#63-st_startpoint)
+  - [(63) ST_Simplify](#63-st_simplify)
     - [Definition](#definition-62)
     - [Syntax](#syntax-62)
     - [Return Type](#return-type-62)
-    - [Examples](#examples-53)
-  - [(64) ST_SymmetricDiff](#64-st_symmetricdiff)
+  - [(64) ST_StartPoint](#64-st_startpoint)
     - [Definition](#definition-63)
     - [Syntax](#syntax-63)
     - [Return Type](#return-type-63)
     - [Examples](#examples-54)
-  - [(65) ST_Touches](#65-st_touches)
+  - [(65) ST_SymmetricDiff](#65-st_symmetricdiff)
     - [Definition](#definition-64)
     - [Syntax](#syntax-64)
     - [Return Type](#return-type-64)
     - [Examples](#examples-55)
-  - [(66) ST_Transform](#66-st_transform)
+  - [(66) ST_Touches](#66-st_touches)
     - [Definition](#definition-65)
     - [Syntax](#syntax-65)
     - [Return Type](#return-type-65)
     - [Examples](#examples-56)
-  - [(67) ST_Union](#67-st_union)
+  - [(67) ST_Transform](#67-st_transform)
     - [Definition](#definition-66)
     - [Syntax](#syntax-66)
     - [Return Type](#return-type-66)
     - [Examples](#examples-57)
-  - [(68) ST_Within](#68-st_within)
+  - [(68) ST_Union](#68-st_union)
     - [Definition](#definition-67)
     - [Syntax](#syntax-67)
     - [Return Type](#return-type-67)
     - [Examples](#examples-58)
-  - [(69) ST_X](#69-st_x)
+  - [(69) ST_Within](#69-st_within)
     - [Definition](#definition-68)
     - [Syntax](#syntax-68)
     - [Return Type](#return-type-68)
     - [Examples](#examples-59)
-  - [(70) ST_Y](#70-st_y)
+  - [(70) ST_X](#70-st_x)
     - [Definition](#definition-69)
     - [Syntax](#syntax-69)
     - [Return Type](#return-type-69)
     - [Examples](#examples-60)
-  - [(71) ST_Z](#71-st_z)
+  - [(71) ST_Y](#71-st_y)
     - [Definition](#definition-70)
     - [Syntax](#syntax-70)
     - [Return Type](#return-type-70)
     - [Examples](#examples-61)
+  - [(72) ST_Z](#72-st_z)
+    - [Definition](#definition-71)
+    - [Syntax](#syntax-71)
+    - [Return Type](#return-type-71)
+    - [Examples](#examples-62)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -367,7 +372,7 @@
 
 ## Third-Party Libraries
 
-The **GIS Extensions** allow Dremio to perform standard GIS functions within Dremio SQL with 71 industry-standard GIS functions. These extensions use the [*Esri Java Geometry Library*](https://github.com/Esri/geometry-api-java/wiki/) for the underlying implementation of the core geometry functions. The author made heavy use of Esri's [*Spatial Framework for Hadoop*](https://github.com/Esri/spatial-framework-for-hadoop) as a reference for a similar implementation that also relies on the same library. 
+The **GIS Extensions** allow Dremio to perform standard GIS functions within Dremio SQL with 72 industry-standard GIS functions. These extensions use the [*Esri Java Geometry Library*](https://github.com/Esri/geometry-api-java/wiki/) for the underlying implementation of the core geometry functions. The author made heavy use of Esri's [*Spatial Framework for Hadoop*](https://github.com/Esri/spatial-framework-for-hadoop) as a reference for a similar implementation that also relies on the same library. 
 
 There were two significant gaps in the Geometry Library supplied by Esri that limited transforming geometries from `EPSG: 4326` to other coordinate systems and performing geodesic rather than 2D area and length calculations. Geodesic area function helpers backing the `ST_GeodesicAreaWGS84` function are copied almost exactly from the [*Trino Geospatial Library*](https://github.com/trinodb/trino/tree/master/plugin/trino-geospatial) as found in our `FunctionHelpers.stSphericalArea()` and `FunctionHelpers.computeSphericalExcess()`. Conversion to other coordinate systems in the `ST_Transform` function leverages the [Proj4J Library](https://trac.osgeo.org/proj4j/). All of the referenced works are also published under the *Apache 2.0 License*.
 
@@ -531,7 +536,22 @@ Returns true if *geometry1* crosses *geometry2*, otherwise false.
 | `SELECT ST_Crosses(ST_GeomFromText('LINESTRING (0 0, 1 1)'), ST_GeomFromText('LINESTRING (1 0, 0 1))'))` | `true` |
 | `SELECT ST_Crosses(ST_GeomFromText('LINESTRING (2 0, 2 3)'), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))'))` | `true` |
 | `SELECT ST_Crosses(ST_GeomFromText('LINESTRING (0 2, 0 1)'), ST_GeomFromText('LINESTRING (2 0, 1 0)'))` | `false` |
-## (11) ST_Difference
+## (11) ST_Densify
+
+### Definition
+Densifies a MultiPath (polygons and polylines) *geometry* by *maxLength* so that no segments are longer than given threshold value.
+
+### Syntax
+<code>ST_Densify(binary <em>geometry</em>, number <em>maxLength</em>)</code>
+
+### Return Type
+`binary`
+
+### Examples
+| Query      | Result |
+| ----------- | ----------- |
+| `SELECT ST_AsText(ST_Densify(ST_GeomFromText('POLYGON ((0 0, 8 0, 0 8, 0 0))'),4))` | `'POLYGON ((0 0, 4 0, 8 0, 5.333 2.667, 2.667 5.333, 0 8, 0 4, 0 0))'` |
+## (12) ST_Difference
 
 ### Definition
 Returns a geometry object that is the difference of the source objects.
@@ -547,7 +567,7 @@ Returns a geometry object that is the difference of the source objects.
 | ----------- | ----------- |
 | `SELECT ST_AsText(ST_Difference(ST_GeomFromText('MULTIPOINT (1 1, 1.5 1.5, 2 2)'), ST_Point(1.5, 1.5)))` | `'MULTIPOINT ((1 1), (2 2))'` |
 | `SELECT ST_AsText(ST_Difference(ST_GeomFromText('POLYGON ((0 0, 0 10, 10 10, 10 0))'), ST_GeomFromText('POLYGON ((0 0, 0 5, 5 5, 5 0))')))` | `'POLYGON ((5 0, 10 0, 10 10, 0 10, 0 5, 5 5, 5 0))'` |
-## (12) ST_Dimension
+## (13) ST_Dimension
 
 ### Definition
 Returns spatial dimension of geometry.
@@ -564,7 +584,7 @@ Returns spatial dimension of geometry.
 | `SELECT ST_Dimension(ST_Point(1.5, 2.5))` | `0` |
 | `SELECT ST_Dimension(ST_GeomFromText('LINESTRING (1.5 2.5, 3.0 2.2)'))` | `1` |
 | `SELECT ST_Dimension(ST_GeomFromText('POLYGON ((2 0, 2 3, 3 0))'))` | `2` |
-## (13) ST_Disjoint
+## (14) ST_Disjoint
 
 ### Definition
 Returns true if the intersection of the two geometries produces an empty set; otherwise, it returns false.
@@ -580,7 +600,7 @@ Returns true if the intersection of the two geometries produces an empty set; ot
 | ----------- | ----------- |
 | `SELECT ST_Disjoint(ST_GeomFromText('LINESTRING (0 0, 0 1)'), ST_GeomFromText('LINESTRING (1 1, 1 0)'))` | `true` |
 | `SELECT ST_Disjoint(ST_GeomFromText('LINESTRING (0 0, 1 1)'), ST_GeomFromText('LINESTRING (1 0, 0 1)'))` | `false` |
-## (14) ST_Distance
+## (15) ST_Distance
 
 ### Definition
 Returns the distance between two geometry objects.
@@ -595,7 +615,7 @@ Returns the distance between two geometry objects.
 | Query      | Result |
 | ----------- | ----------- |
 | `SELECT ST_Distance(ST_Point(0.0,0.0), ST_Point(3.0,4.0))` | `5.0` |
-## (15) ST_DWithin
+## (16) ST_DWithin
 
 ### Definition
 Returns true if the two geometries are within the specified distance of one another; otherwise, it returns false.
@@ -611,7 +631,7 @@ Returns true if the two geometries are within the specified distance of one anot
 | ----------- | ----------- |
 | `SELECT ST_DWithin(ST_GeomFromText('POLYGON ((10.02 20.01, 11.92 35.64, 25.02 34.15, 19.15 33.94, 10.02 20.01))'), ST_Point (1,2),100)` | `true` |
 | `SELECT ST_DWithin(ST_GeomFromText('POLYGON ((101.02 200.01, 111.92 350.64, 250.02 340.15, 190.15 330.94, 101.02 200.01))'), ST_Point (10.02,20.01), 100)` | `false` |
-## (16) ST_EndPoint
+## (17) ST_EndPoint
 
 ### Definition
 Returns the last point of a Linestring.
@@ -626,7 +646,7 @@ Returns the last point of a Linestring.
 | Query      | Result |
 | ----------- | ----------- |
 | `SELECT ST_AsText(ST_EndPoint(ST_GeomFromText('LINESTRING (1.5 2.5, 3.0 2.2)')))` | `'POINT(3.0 2.2)'` |
-## (17) ST_Envelope
+## (18) ST_Envelope
 
 ### Definition
 Returns the minimum bounding box of the geometry object as a polygon
@@ -642,7 +662,7 @@ Returns the minimum bounding box of the geometry object as a polygon
 | ----------- | ----------- |
 | `SELECT ST_AsText(ST_Envelope(ST_GeomFromText('LINESTRING (0 0, 2 2))')))` | `'POLYGON ((0 0, 2 0, 2 2, 0 2, 0 0))'` |
 | `SELECT ST_AsText(ST_Envelope(ST_GeomFromText('POLYGON ((2 0, 2 3, 3 0))')))` | `'POLYGON ((2 0, 3 0, 3 3, 2 3, 2 0))'` |
-## (18) ST_EnvIntersects
+## (19) ST_EnvIntersects
 
 ### Definition
 Returns true if the envelopes of *geometry1* and *geometry2* intersect, otherwise returns false.
@@ -658,7 +678,7 @@ Returns true if the envelopes of *geometry1* and *geometry2* intersect, otherwis
 | ----------- | ----------- |
 | `SELECT ST_EnvIntersects(ST_GeomFromText('LINESTRING (0 0, 1 1)'), ST_GeomFromText('LINESTRING (1 3, 2 2)'))` | `false` |
 | `SELECT ST_EnvIntersects(ST_GeomFromText('LINESTRING (0 0, 2 2)'), ST_GeomFromText('LINESTRING (1 0, 3 2)'))` | `true` |
-## (19) ST_Equals
+## (20) ST_Equals
 
 ### Definition
 Returns true if the two geometries occupy the same space even if they have a different number of vertices, otherwise it returns false.
@@ -675,7 +695,7 @@ Returns true if the two geometries occupy the same space even if they have a dif
 | `SELECT ST_Equals(ST_GeomFromText('LINESTRING (0 0, 1 1)'),ST_GeomFromText('LINESTRING (1 1, 0 0)'))` | `true` |
 | `SELECT ST_Equals(ST_GeomFromText('LINESTRING (0 0, 1 1)'),ST_GeomFromText('LINESTRING (1 0, 0 1)'))` | `false` |
 | `SELECT ST_Equals(ST_GeomFromText('LINESTRING (0 0, 3 3)'),ST_GeomFromText('LINESTRING (3 3, 2 2, 1 1, 0 0)'))` | `true` |
-## (20) ST_ExteriorRing
+## (21) ST_ExteriorRing
 
 ### Definition
 Returns the exterior ring of a polygon as a linestring.
@@ -691,7 +711,7 @@ Returns the exterior ring of a polygon as a linestring.
 | ----------- | ----------- |
 | `SELECT ST_AsText(ST_ExteriorRing(ST_GeomFromText('POLYGON ((1 1, 1 4, 4 1))')))` | `'LINESTRING (1 1, 4 1, 1 4, 1 1)'` |
 | `SELECT ST_AsText(ST_ExteriorRing(ST_GeomFromText('POLYGON ((0 0, 8 0, 0 8, 0 0), (1 1, 1 5, 5 1, 1 1))')))` | `'LINESTRING (0 0, 8 0, 0 8, 0 0)'` |
-## (21) ST_Generalize
+## (22) ST_Generalize
 
 ### Definition
 Simplifies geometries using the Douglas-Peucker algorithm. *maxDeviation* is the maximum allowed deviation from the generalized geometry to the original geometry.  When *removeDegenerateParts* is true, the degenerate parts of the geometry will be removed from the output.
@@ -706,7 +726,7 @@ Simplifies geometries using the Douglas-Peucker algorithm. *maxDeviation* is the
 | Query      | Result |
 | ----------- | ----------- |
 | `SELECT ST_AsText(ST_Generalize(ST_GeomFromText('POLYGON ((0 0, 1 1, 2 0, 3 2, 4 1, 5 0, 5 10, 0 10))'), 2, true))` | `'POLYGON ((0 0, 5 0, 5 10, 0 10, 0 0))'` |
-## (22) ST_GeodesicAreaWGS84
+## (23) ST_GeodesicAreaWGS84
 
 ### Definition
 Returns the area in square meters of a geometry on the Earth's surface using spherical model. Requires the geometry to be in the WGS84 spatial reference.
@@ -721,7 +741,7 @@ Returns the area in square meters of a geometry on the Earth's surface using sph
 | Query      | Result |
 | ----------- | ----------- |
 | `SELECT ST_GeodesicAreaWGS84(ST_GeomFromText('POLYGON ((-114.04702599994988 39.90609700007656, -114.0500520000997 37.0001909997149, -109.04517199998776 36.99897700038832, -109.05002599989996 41.000691000389395, -111.04681499981234 40.997875000031286, -111.04671399965133 42.00170200004732, -114.04147700036322 41.99387299963928, -114.04702599994988 39.90609700007656))'))/4047 AS utah_acreage` | `5.416484897473004E7` |
-## (23) ST_GeodesicLengthWGS84
+## (24) ST_GeodesicLengthWGS84
 
 ### Definition
 Returns distance along line on WGS84 spheroid, in meters, for geographic coordinates. Requires the geometry to be in the WGS84 spatial reference.
@@ -736,7 +756,7 @@ Returns distance along line on WGS84 spheroid, in meters, for geographic coordin
 | Query      | Result |
 | ----------- | ----------- |
 | `SELECT ST_GeodesicLengthWGS84(ST_GeomFromText('MultiLineString((0.0 80.0, 0.3 80.4))', 4326))` | `45026.96274781222` |
-## (24) ST_GeometryN
+## (25) ST_GeometryN
 
 ### Definition
 Takes a geometry collection and an integer index (1-based index) and returns the nth geometry object in the collection.
@@ -752,7 +772,7 @@ Takes a geometry collection and an integer index (1-based index) and returns the
 | ----------- | ----------- |
 | `SELECT ST_AsText(ST_GeometryN(ST_GeomFromText('MULTIPOINT (10 40, 40 30, 20 20, 30 10)'), 3))` | `'POINT (20 20)'` |
 | `SELECT ST_AsText(ST_GeometryN(ST_GeomFromText('MULTILINESTRING ((2 4, 10 10), (20 20, 7 8))'), 2))` | `'LINESTRING (20 20, 7 8)'` |
-## (25) ST_GeometryType
+## (26) ST_GeometryType
 
 ### Definition
 Takes a geometry object and returns its geometry type (for example, Point, Line, Polygon, MultiPoint) as a string.
@@ -769,7 +789,7 @@ Takes a geometry object and returns its geometry type (for example, Point, Line,
 | `SELECT ST_GeometryType(ST_Point(1.5, 2.5))` | `'ST_POINT'` |
 | `SELECT ST_GeometryType(ST_GeomFromText('LINESTRING (1.5 2.5, 3.0 2.2)'))` | `'ST_LINESTRING'` |
 | `SELECT ST_GeometryType(ST_GeomFromText('POLYGON ((2 0, 2 3, 3 0))'))` | `'ST_POLYGON'` |
-## (26) ST_GeomFromEWKB
+## (27) ST_GeomFromEWKB
 
 ### Definition
 Converts a Hex encoded binary string from Postgres/PostGIS geometry to native geometry including embedded SRID.
@@ -784,7 +804,7 @@ Converts a Hex encoded binary string from Postgres/PostGIS geometry to native ge
 | Query      | Result |
 | ----------- | ----------- |
 | `SELECT ST_AsText(ST_GeomFromEWKB(the_geom)) FROM table("postgis".external_query('SELECT ST_GeomFromText(''POINT(-71.064544 42.28787)'',4326) AS the_geom'))` | `'POINT (-71.064544 42.28787)'` |
-## (27) ST_GeomFromGeoJSON
+## (28) ST_GeomFromGeoJSON
 
 ### Definition
 Constructs a geometry from GeoJSON.
@@ -800,7 +820,7 @@ Constructs a geometry from GeoJSON.
 | ----------- | ----------- |
 | `SELECT ST_AsText(ST_GeomFromGeoJSON('{"type":"Point", "coordinates":[1.2, 2.4]}'))` | `'POINT (1.2 2.4)'` |
 | `SELECT ST_AsText(ST_GeomFromGeoJSON('{"type":"LineString", "coordinates":[[1,2], [3,4]]}'))` | `'LINESTRING (1 2, 3 4)'` |
-## (28) ST_GeomFromText
+## (29) ST_GeomFromText
 
 ### Definition
 Takes a well-known text representation and returns a geometry object.
@@ -813,7 +833,7 @@ Takes a well-known text representation and returns a geometry object.
 
 -------------
 
-## (29) ST_GeomFromText
+## (30) ST_GeomFromText
 
 ### Definition
 Takes a well-known text representation and a spatial reference ID and returns a geometry object.
@@ -826,7 +846,7 @@ Takes a well-known text representation and a spatial reference ID and returns a 
 
 -------------
 
-## (30) ST_GeomFromWKB
+## (31) ST_GeomFromWKB
 
 ### Definition
 Takes a well-known binary (WKB) representation and returns a geometry object.
@@ -839,7 +859,7 @@ Takes a well-known binary (WKB) representation and returns a geometry object.
 
 -------------
 
-## (31) ST_GeomFromWKB
+## (32) ST_GeomFromWKB
 
 ### Definition
 Takes a well-known binary (WKB) representation and a spatial reference ID and returns a geometry object.
@@ -852,7 +872,7 @@ Takes a well-known binary (WKB) representation and a spatial reference ID and re
 
 -------------
 
-## (32) ST_GeoSize
+## (33) ST_GeoSize
 
 ### Definition
 Takes a geometry object and returns its size in bytes.
@@ -865,7 +885,7 @@ Takes a geometry object and returns its size in bytes.
 
 -------------
 
-## (33) ST_InteriorRingN
+## (34) ST_InteriorRingN
 
 ### Definition
 Returns a LineString which is the nth interior ring of the input Polygon (1-based index)
@@ -880,7 +900,7 @@ Returns a LineString which is the nth interior ring of the input Polygon (1-base
 | Query      | Result |
 | ----------- | ----------- |
 | `SELECT ST_AsText(ST_InteriorRingN(ST_GeomFromText('polygon ((0 0, 8 0, 0 8, 0 0), (1 1, 1 5, 5 1, 1 1))'), 1))` | `'LINESTRING (1 1, 1 5, 5 1, 1 1)'` |
-## (34) ST_Intersection
+## (35) ST_Intersection
 
 ### Definition
 Returns a geometry object that is the geometric intersection of the source objects.
@@ -897,7 +917,7 @@ Returns a geometry object that is the geometric intersection of the source objec
 | `SELECT ST_AsText(ST_Intersection(ST_Point(1,1), ST_Point(1,1)))` | `'POINT (1 1)'` |
 | `SELECT ST_AsText(ST_Intersection(ST_GeomFromText('LINESTRING(0 2, 0 0, 2 0)'), ST_GeomFromText('LINESTRING(0 3, 0 1, 1 0, 3 0)')))` | `'MULTILINESTRING ((1 0, 2 0), (0 2, 0 1))'` |
 | `SELECT ST_AsText(ST_Intersection(ST_GeomFromText('POLYGON ((2 0, 2 3, 3 0))'), ST_GeomFromText('POLYGON ((1 1, 4 1, 4 4, 1 4))')))` | `'POLYGON ((2 1, 2.666666666666667 1, 2 3, 2 1))'` |
-## (35) ST_Intersects
+## (36) ST_Intersects
 
 ### Definition
 Returns true if *geometry1* intersects with *geometry2*, otherwise returns false.
@@ -913,7 +933,7 @@ Returns true if *geometry1* intersects with *geometry2*, otherwise returns false
 | ----------- | ----------- |
 | `SELECT ST_Intersects(ST_GeomFromText('LINESTRING (2 0, 2 3)'), ST_GeomFromText('POLYGON ((1 1, 4 1, 4 4, 1 4))'))` | `true` |
 | `SELECT ST_Intersects(ST_GeomFromText('LINESTRING (8 7, 7 8)'), ST_GeomFromText('POLYGON ((1 1, 4 1, 4 4, 1 4))'))` | `false` |
-## (36) ST_Is3D
+## (37) ST_Is3D
 
 ### Definition
 Returns true if the geometry object is three-dimensional including height 'Z', otherwise returns false.
@@ -931,7 +951,7 @@ Returns true if the geometry object is three-dimensional including height 'Z', o
 | `SELECT ST_Is3D(ST_GeomFromText('LINESTRING (0 0, 3 4, 0 4, 0 0)'))` | `false` |
 | `SELECT ST_Is3D(ST_Point(3, 4))` | `false` |
 | `SELECT ST_Is3D(ST_PointZ(3, 4, 2))` | `true` |
-## (37) ST_IsClosed
+## (38) ST_IsClosed
 
 ### Definition
 Return true if the linestring or multi-line has start and end points that are coincident.
@@ -947,7 +967,7 @@ Return true if the linestring or multi-line has start and end points that are co
 | ----------- | ----------- |
 | `SELECT ST_IsClosed(ST_GeomFromText('LINESTRING(0 0, 3 4, 0 4, 0 0)'))` | `true` |
 | `SELECT ST_IsClosed(ST_GeomFromText('LINESTRING(0 0, 3 4)'))` | `false` |
-## (38) ST_IsEmpty
+## (39) ST_IsEmpty
 
 ### Definition
 Return true if the geometry object is empty of geometric information.
@@ -963,7 +983,7 @@ Return true if the geometry object is empty of geometric information.
 | ----------- | ----------- |
 | `SELECT ST_IsEmpty(ST_Point(1.5, 2.5))` | `false` |
 | `SELECT ST_IsEmpty(ST_GeomFromText('POINT EMPTY'))` | `true` |
-## (39) ST_IsMeasured
+## (40) ST_IsMeasured
 
 ### Definition
 Returns true if the geometry object is measured including an additional dimension 'M', otherwise returns false.
@@ -980,7 +1000,7 @@ Returns true if the geometry object is measured including an additional dimensio
 | `SELECT ST_IsMeasured(ST_PointZ(3, 4, 2))` | `false` |
 | `SELECT ST_IsMeasured(ST_GeomFromText('POINT M (1 1 80)'))` | `true` |
 | `SELECT ST_IsMeasured(ST_GeomFromText('POINT ZM (1 1 5 60)'))` | `true` |
-## (40) ST_IsRing
+## (41) ST_IsRing
 
 ### Definition
 Returns true if the geometry is a linestring and the linestring is closed and simple.
@@ -997,7 +1017,7 @@ Returns true if the geometry is a linestring and the linestring is closed and si
 | `SELECT ST_IsRing(ST_GeomFromText('LINESTRING (0 0, 3 4, 0 4, 0 0)'))` | `true` |
 | `SELECT ST_IsRing(ST_GeomFromText('LINESTRING (0 0, 1 1, 1 2, 2 1, 1 1, 0 0)'))` | `false` |
 | `SELECT ST_IsRing(ST_GeomFromText('LINESTRING (0 0, 3 4)'))` | `false` |
-## (41) ST_IsSimple
+## (42) ST_IsSimple
 
 ### Definition
 Returns true if the geometry object is simple as defined by the Open Geospatial Consortium (OGC), otherwise, it returns false
@@ -1013,7 +1033,7 @@ Returns true if the geometry object is simple as defined by the Open Geospatial 
 | ----------- | ----------- |
 | `SELECT ST_IsSimple(ST_Point(1.5, 2.5))` | `true` |
 | `SELECT ST_IsSimple(ST_GeomFromText('LINESTRING (0 0, 1 1, 0 1, 1 0)'))` | `false` |
-## (42) ST_JSONPath
+## (43) ST_JSONPath
 
 ### Definition
 Extract a portion of *jsonData* as a string by following the specified path in the JSON Object from *jsonPath*.
@@ -1045,7 +1065,7 @@ Extract a portion of *jsonData* as a string by following the specified path in t
 | 'quoteSummary[6]/result[Array][0]' |  |
 | 'quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/lastSplitDate[Object]/raw1[Long]' |  |
 | 'quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/sharesOutstanding[Object]/raw[Integer]' |  |
-## (43) ST_Length
+## (44) ST_Length
 
 ### Definition
 Returns the length of a line string or multiline string.
@@ -1061,7 +1081,7 @@ Returns the length of a line string or multiline string.
 | ----------- | ----------- |
 | `SELECT ST_Length(ST_GeomFromText('LINESTRING (0 0, 3 4)'))` | `5.0` |
 | `SELECT ST_Length(ST_GeomFromText('MULTILINESTRING ((1 0, 2 0), (0 2, 0 1))'))` | `2.0` |
-## (44) ST_M
+## (45) ST_M
 
 ### Definition
 Takes a Point as an input parameter and returns its measure m-coordinate.
@@ -1077,7 +1097,7 @@ Takes a Point as an input parameter and returns its measure m-coordinate.
 | ----------- | ----------- |
 | `SELECT ST_M(ST_GeomFromText('POINT M (1 1 80)'))` | `80.0` |
 | `SELECT ST_M(ST_GeomFromText('POINT ZM (1 1 5 60)'))` | `60.0` |
-## (45) ST_MaxM
+## (46) ST_MaxM
 
 ### Definition
 Takes a geometry as an input parameter and returns its maximum measure m-coordinate.
@@ -1093,7 +1113,7 @@ Takes a geometry as an input parameter and returns its maximum measure m-coordin
 | ----------- | ----------- |
 | `SELECT ST_MaxM(ST_GeomFromText('LINESTRING M (1.5 2.5 2, 3.0 2.2 1)'))` | `2.0` |
 | `SELECT ST_MaxM(ST_GeomFromText('POINT M (1.5 2.5 3)'))` | `3.0` |
-## (46) ST_MaxX
+## (47) ST_MaxX
 
 ### Definition
 Takes a geometry as an input parameter and returns its maximum x-coordinate.
@@ -1109,7 +1129,7 @@ Takes a geometry as an input parameter and returns its maximum x-coordinate.
 | ----------- | ----------- |
 | `SELECT ST_MaxX(ST_GeomFromText('LINESTRING M (1.5 2.5 2, 3.0 2.2 1)'))` | `3.0` |
 | `SELECT ST_MaxX(ST_GeomFromText('POINT M (1.5 2.5 3)'))` | `1.5` |
-## (47) ST_MaxY
+## (48) ST_MaxY
 
 ### Definition
 Takes a geometry as an input parameter and returns its maximum y-coordinate.
@@ -1125,7 +1145,7 @@ Takes a geometry as an input parameter and returns its maximum y-coordinate.
 | ----------- | ----------- |
 | `SELECT ST_MaxY(ST_GeomFromText('LINESTRING M (1.5 2.5 2, 3.0 2.2 1)'))` | `2.5` |
 | `SELECT ST_MaxY(ST_GeomFromText('POINT M (1.5 2.5 3)'))` | `2.5` |
-## (48) ST_MaxZ
+## (49) ST_MaxZ
 
 ### Definition
 Takes a geometry as an input parameter and returns its maximum z-coordinate.
@@ -1141,7 +1161,7 @@ Takes a geometry as an input parameter and returns its maximum z-coordinate.
 | ----------- | ----------- |
 | `SELECT ST_MaxZ(ST_GeomFromText('LINESTRING ZM (1.5 2.5 2 60, 3.0 2.2 1 80)'))` | `2.0` |
 | `SELECT ST_MaxZ(ST_GeomFromText('LINESTRING Z (1.5 2.5 3, 3.0 2.2 4)'))` | `4.0` |
-## (49) ST_MinM
+## (50) ST_MinM
 
 ### Definition
 Takes a geometry as an input parameter and returns its minimum m-coordinate.
@@ -1157,7 +1177,7 @@ Takes a geometry as an input parameter and returns its minimum m-coordinate.
 | ----------- | ----------- |
 | `SELECT ST_MinM(ST_GeomFromText('LINESTRING M (1.5 2.5 2, 3.0 2.2 1)'))` | `1.0` |
 | `SELECT ST_MinM(ST_GeomFromText('POINT M (1.5 2.5 3)'))` | `3.0` |
-## (50) ST_MinX
+## (51) ST_MinX
 
 ### Definition
 Takes a geometry as an input parameter and returns its minimum x-coordinate.
@@ -1173,7 +1193,7 @@ Takes a geometry as an input parameter and returns its minimum x-coordinate.
 | ----------- | ----------- |
 | `SELECT ST_MinX(ST_GeomFromText('LINESTRING M (1.25 2.5 2, 3.0 2.2 1)'))` | `1.25` |
 | `SELECT ST_MinX(ST_GeomFromText('POINT M (1.75 2.5 3)'))` | `1.75` |
-## (51) ST_MinY
+## (52) ST_MinY
 
 ### Definition
 Takes a geometry as an input parameter and returns its minimum y-coordinate.
@@ -1189,7 +1209,7 @@ Takes a geometry as an input parameter and returns its minimum y-coordinate.
 | ----------- | ----------- |
 | `SELECT ST_MinY(ST_GeomFromText('LINESTRING M (1.5 2.5 2, 3.0 2.2 1)'))` | `2.2` |
 | `SELECT ST_MinY(ST_GeomFromText('POINT M (1.5 2.25 3)'))` | `2.25` |
-## (52) ST_MinZ
+## (53) ST_MinZ
 
 ### Definition
 Takes a geometry as an input parameter and returns its minimum z-coordinate.
@@ -1205,7 +1225,7 @@ Takes a geometry as an input parameter and returns its minimum z-coordinate.
 | ----------- | ----------- |
 | `SELECT ST_MinZ(ST_GeomFromText('LINESTRING ZM (1.5 2.5 2 60, 3.0 2.2 1 80)'))` | `1.0` |
 | `SELECT ST_MinZ(ST_GeomFromText('LINESTRING Z (1.5 2.5 3, 3.0 2.2 4)'))` | `3.0` |
-## (53) ST_NumGeometries
+## (54) ST_NumGeometries
 
 ### Definition
 Returns the number of geometries in the geometry collection.
@@ -1221,7 +1241,7 @@ Returns the number of geometries in the geometry collection.
 | ----------- | ----------- |
 | `SELECT ST_NumGeometries(ST_GeomFromText('MULTIPOINT ((10 40), (40 30), (20 20), (30 10))'))` | `4` |
 | `SELECT ST_NumGeometries(ST_GeomFromText('MULTILINESTRING ((2 4, 10 10), (20 20, 7 8))'))` | `2` |
-## (54) ST_NumInteriorRing
+## (55) ST_NumInteriorRing
 
 ### Definition
 Returns the number of interior rings in the polygon geometry.
@@ -1236,7 +1256,7 @@ Returns the number of interior rings in the polygon geometry.
 | Query      | Result |
 | ----------- | ----------- |
 | `SELECT ST_NumInteriorRing(ST_GeomFromText('POLYGON ((0 0, 8 0, 0 8, 0 0), (1 1, 1 5, 5 1, 1 1))'))` | `1` |
-## (55) ST_NumPoints
+## (56) ST_NumPoints
 
 ### Definition
 Returns the number of points (vertices) in the geometry. For polygons, both the starting and ending vertices are counted, even though they occupy the same location.
@@ -1253,7 +1273,7 @@ Returns the number of points (vertices) in the geometry. For polygons, both the 
 | `SELECT ST_NumPoints(ST_Point(1.5, 2.5))` | `1` |
 | `SELECT ST_NumPoints(ST_GeomFromText('LINESTRING (1.5 2.5, 3.0 2.2)'))` | `2` |
 | `SELECT ST_NumPoints((ST_GeomFromText('POLYGON ((0 0, 10 0, 0 10, 0 0))')))` | `4` |
-## (56) ST_Overlaps
+## (57) ST_Overlaps
 
 ### Definition
 Returns true if *geometry1* overlaps *geometry2*.
@@ -1269,7 +1289,7 @@ Returns true if *geometry1* overlaps *geometry2*.
 | ----------- | ----------- |
 | `SELECT ST_Overlaps(ST_GeomFromText('POLYGON ((2 0, 2 3, 3 0))'), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))'))` | `true` |
 | `SELECT ST_Overlaps(ST_GeomFromText('POLYGON ((2 0, 2 1, 3 1))'), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))'))` | `false` |
-## (57) ST_Point
+## (58) ST_Point
 
 ### Definition
 Returns a 2D point geometry from the provided lon (x) and lat (y) values.
@@ -1282,7 +1302,7 @@ Returns a 2D point geometry from the provided lon (x) and lat (y) values.
 
 -------------
 
-## (58) ST_PointN
+## (59) ST_PointN
 
 ### Definition
 Returns the point that is the nth vertex in an LineString or MultiPoint (1-based index)
@@ -1297,7 +1317,7 @@ Returns the point that is the nth vertex in an LineString or MultiPoint (1-based
 | Query      | Result |
 | ----------- | ----------- |
 | `SELECT ST_AsText(ST_PointN(ST_GeomFromText('LINESTRING (1.5 2.5, 3.0 2.2)'), 2))` | `'POINT (3 2.2)'` |
-## (59) ST_PointZ
+## (60) ST_PointZ
 
 ### Definition
 Returns a 3D point geometry from the provided lon (x), lat (y), and elev (z) values.
@@ -1310,7 +1330,7 @@ Returns a 3D point geometry from the provided lon (x), lat (y), and elev (z) val
 
 -------------
 
-## (60) ST_Relate
+## (61) ST_Relate
 
 ### Definition
 Compares the two geometries and returns true if the geometries meet the conditions specified by the DE-9IM pattern matrix string, otherwise, false is returned.
@@ -1328,7 +1348,7 @@ Compares the two geometries and returns true if the geometries meet the conditio
 | `SELECT ST_Relate(ST_GeomFromText('POLYGON ((2 0, 2 1, 3 1))'), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))'), 'T********')` | `false` |
 | `SELECT ST_Relate(ST_GeomFromText('LINESTRING (0 0, 3 3)'), ST_GeomFromText('LINESTRING (1 1, 4 4)'), 'T********')` | `true` |
 | `SELECT ST_Relate(ST_GeomFromText('LINESTRING (0 0, 3 3)'), ST_GeomFromText('LINESTRING (1 1, 4 4)'), '****T****')` | `false` |
-## (61) ST_SetSRID
+## (62) ST_SetSRID
 
 ### Definition
 Sets the Spatial Reference ID of *SRID* of the geometry.
@@ -1341,7 +1361,7 @@ Sets the Spatial Reference ID of *SRID* of the geometry.
 
 -------------
 
-## (62) ST_Simplify
+## (63) ST_Simplify
 
 ### Definition
 Simplifies the geometry or determines if the geometry is simple. The goal is to produce a geometry that is valid to store without additional processing.
@@ -1354,7 +1374,7 @@ Simplifies the geometry or determines if the geometry is simple. The goal is to 
 
 -------------
 
-## (63) ST_StartPoint
+## (64) ST_StartPoint
 
 ### Definition
 Returns the first point of a Linestring.
@@ -1369,7 +1389,7 @@ Returns the first point of a Linestring.
 | Query      | Result |
 | ----------- | ----------- |
 | `SELECT ST_AsText(ST_StartPoint(ST_GeomFromText('LINESTRING (1.5 2.5, 3.0 2.2)')))` | `'POINT(1.5 2.5)'` |
-## (64) ST_SymmetricDiff
+## (65) ST_SymmetricDiff
 
 ### Definition
 Returns a geometry object that is the symmetric difference of the source objects.
@@ -1385,7 +1405,7 @@ Returns a geometry object that is the symmetric difference of the source objects
 | ----------- | ----------- |
 | `SELECT ST_AsText(ST_SymmetricDiff(ST_GeomFromText('LINESTRING (0 2, 2 2)'), ST_GeomFromText('LINESTRING (1 2, 3 2)')))` | `'MULTILINESTRING ((0 2, 1 2), (2 2, 3 2))'` |
 | `SELECT ST_AsText(ST_SymmetricDiff(ST_GeomFromText('POLYGON ((0 0, 2 0, 2 2, 0 2, 0 0))'), ST_GeomFromText('POLYGON ((1 1, 3 1, 3 3, 1 3, 1 1))'))) --> 'MULTIPOLYGON (((0 0, 2 0, 2 1, 1 1, 1 2, 0 2, 0 0)), ((2 1, 3 1, 3 3, 1 3, 1 2, 2 2, 2 1)))' ` |  |
-## (65) ST_Touches
+## (66) ST_Touches
 
 ### Definition
 Returns true if none of the points common to both geometries intersect the interiors of both geometries, otherwise, it returns false. At least one geometry must be a LineString, Polygon, MultiLineString, or MultiPolygon.
@@ -1401,7 +1421,7 @@ Returns true if none of the points common to both geometries intersect the inter
 | ----------- | ----------- |
 | `SELECT ST_Touches(ST_Point(1, 2), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))'))` | `true` |
 | `SELECT ST_Touches(ST_Point(8, 8), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))'))` | `false` |
-## (66) ST_Transform
+## (67) ST_Transform
 
 ### Definition
 Takes the two-dimensional geometry as input and returns values converted from the spatial source reference specified by *sourceSRID* to the one specified by *targetSRID*.
@@ -1416,7 +1436,7 @@ Takes the two-dimensional geometry as input and returns values converted from th
 | Query      | Result |
 | ----------- | ----------- |
 | `SELECT ST_AsText(ST_Transform(ST_GeomFromText('POLYGON ((-114.04702599994988 39.90609700007656, -114.0500520000997 37.0001909997149, -109.04517199998776 36.99897700038832, -109.05002599989996 41.000691000389395, -111.04681499981234 40.997875000031286, -111.04671399965133 42.00170200004732, -114.04147700036322 41.99387299963928, -114.04702599994988 39.90609700007656))'), 4326, 3857))` | `'POLYGON ((-12695656.860801652 4852305.919673687, -12695993.71359747 4439133.410181124, -12138853.020503571 4438964.195256694, -12139393.365302108 5012443.58678148, -12361674.899993964 5012028.231889712, -12361663.65670747 5161234.398812287, -12695039.148993252 5160061.69329091, -12695656.860801652 4852305.919673687))'` |
-## (67) ST_Union
+## (68) ST_Union
 
 ### Definition
 Returns a geometry as the union of the two supplied geometries.
@@ -1431,7 +1451,7 @@ Returns a geometry as the union of the two supplied geometries.
 | Query      | Result |
 | ----------- | ----------- |
 | `SELECT ST_AsText(ST_Union(ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))'), ST_GeomFromText('POLYGON ((4 1, 4 4, 4 8, 8 1))')))` | `'POLYGON ((1 1, 4 1, 8 1, 4 8, 4 4, 1 4, 1 1))'` |
-## (68) ST_Within
+## (69) ST_Within
 
 ### Definition
 Returns true if *geometry1* is completely inside *geometry2*.
@@ -1447,7 +1467,7 @@ Returns true if *geometry1* is completely inside *geometry2*.
 | ----------- | ----------- |
 | `SELECT ST_Within(ST_Point(2, 3), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))'))` | `true` |
 | `SELECT ST_Within(ST_Point(8, 8), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))'))` | `false` |
-## (69) ST_X
+## (70) ST_X
 
 ### Definition
 Takes a Point as an input parameter and returns its longitude (x) coordinate.
@@ -1462,7 +1482,7 @@ Takes a Point as an input parameter and returns its longitude (x) coordinate.
 | Query      | Result |
 | ----------- | ----------- |
 | `SELECT ST_X(ST_Point(5, 7))` | `5.0` |
-## (70) ST_Y
+## (71) ST_Y
 
 ### Definition
 Takes a Point as an input parameter and returns its latitude (y) coordinate.
@@ -1477,7 +1497,7 @@ Takes a Point as an input parameter and returns its latitude (y) coordinate.
 | Query      | Result |
 | ----------- | ----------- |
 | `SELECT ST_Y(ST_GeomFromText('POINT (5 7)'))` | `7.0` |
-## (71) ST_Z
+## (72) ST_Z
 
 ### Definition
 Takes a Point as an input parameter and returns its elevation (z) coordinate.
