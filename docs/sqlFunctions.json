@@ -793,6 +793,16 @@
     "example": "ST_AsText(ST_Point(1, 2)) -> 'POINT (1 2)'"
   },
   {
+    "name": "ST_Boundary",
+    "args": "([binary] {geometry})",
+    "returnType": "binary",
+    "description": "Returns the closure of the combinatorial boundary of this Geometry.",
+    "tags": [
+      "gis"
+    ],
+    "example": "ST_AsText(ST_Boundary(ST_GeomFromText('LINESTRING (0 1, 1 0)'))) -> 'MULTIPOINT ((0 1), (1 0))'\nST_AsText(ST_Boundary(ST_GeomFromText('POLYGON ((1 1, 4 1, 1 4))'))) -> 'MULTILINESTRING ((1 1, 4 1, 1 4, 1 1))'"
+  },
+  {
     "name": "ST_Buffer",
     "args": "([binary] {geometry}, [number] {distance})",
     "returnType": "binary",
@@ -821,6 +831,16 @@
       "gis"
     ],
     "example": "ST_Contains(ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))'), ST_Point(2, 3)) -> true \nST_Contains(ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))'), ST_Point(8, 8)) -> false"
+  },
+  {
+    "name": "ST_ConvexHull",
+    "args": "([binary] {geometry})",
+    "returnType": "binary",
+    "description": "Computes the convex hull of {{geometry}}. The convex hull is the smallest convex geometry that encloses all geometries in the input. One can think of the convex hull as the geometry obtained by wrapping an rubber band around a set of geometries.",
+    "tags": [
+      "gis"
+    ],
+    "example": "ST_AsText(ST_ConvexHull(ST_GeomFromText('polygon ((0 0, 8 0, 0 8, 0 0), (1 1, 1 5, 5 1, 1 1))'))) -> 'POLYGON ((0 0, 8 0, 0 8, 0 0))'"
   },
   {
     "name": "ST_CoordDim",
@@ -893,6 +913,16 @@
     "example": "ST_DWithin(ST_GeomFromText('POLYGON ((10.02 20.01, 11.92 35.64, 25.02 34.15, 19.15 33.94, 10.02 20.01))'), ST_Point (1,2),100) -> true\nST_DWithin(ST_GeomFromText('POLYGON ((101.02 200.01, 111.92 350.64, 250.02 340.15, 190.15 330.94, 101.02 200.01))'), ST_Point (10.02,20.01), 100) -> false"
   },
   {
+    "name": "ST_EndPoint",
+    "args": "([binary] {geometry})",
+    "returnType": "binary",
+    "description": "Returns the last point of a Linestring.",
+    "tags": [
+      "gis"
+    ],
+    "example": "ST_AsText(ST_EndPoint(ST_GeomFromText('LINESTRING (1.5 2.5, 3.0 2.2)'))) -> 'POINT(3.0 2.2)'"
+  },
+  {
     "name": "ST_Envelope",
     "args": "([binary] {geometry})",
     "returnType": "binary",
@@ -901,6 +931,16 @@
       "gis"
     ],
     "example": "ST_AsText(ST_Envelope(ST_GeomFromText('LINESTRING (0 0, 2 2))'))) -> 'POLYGON ((0 0, 2 0, 2 2, 0 2, 0 0))'\nST_AsText(ST_Envelope(ST_GeomFromText('POLYGON ((2 0, 2 3, 3 0))'))) -> 'POLYGON ((2 0, 3 0, 3 3, 2 3, 2 0))'"
+  },
+  {
+    "name": "ST_EnvIntersects",
+    "args": "([binary] {geometry1}, [binary] {geometry2})",
+    "returnType": "boolean",
+    "description": "Returns true if the envelopes of {{geometry1}} and {{geometry2}} intersect, otherwise returns false.",
+    "tags": [
+      "gis"
+    ],
+    "example": "ST_EnvIntersects(ST_GeomFromText('LINESTRING (0 0, 1 1)'), ST_GeomFromText('LINESTRING (1 3, 2 2)')) -> false\nST_EnvIntersects(ST_GeomFromText('LINESTRING (0 0, 2 2)'), ST_GeomFromText('LINESTRING (1 0, 3 2)')) -> true"
   },
   {
     "name": "ST_Equals",
