@@ -31,7 +31,17 @@ View the [SQL Function Reference](./docs/sqlFunctions.md) for definitions, synta
 3. Run `docker-compose up` to start the new image.
 
 ## Docker Image (on Docker Hub or build yourself)
-See [Dremio Docker Build with Dezota Extensions](https://github.com/Dezota/dremio-docker-with-extensions) for a complete solution that includes patches to Dremio to support Varchar and VarBinary fields large enough to accomodate GIS data.
+See [Dremio Docker Build with Dezota Extensions](https://github.com/Dezota/dremio-docker-with-extensions) for a complete solution that includes built-in documentation for all GIS functions when using the Dremio query tool UI.  The updated support key values described below have been changed from the previous defaults. 
+
+## Recommended Support Key Settings for GIS Extensions in Dremio
+
+![Dremio Support Settings for GIS](./docs/dremio_support_settings.jpg)
+
+Paste the following keys in the `Settings > Support` screen in Dremio and update the default values to the ones below:
+```
+limits.single_field_size_bytes = 10485759
+exec.batch.field.variable-width.size-estimate = 60
+```
 
 ## Inspiration
 
