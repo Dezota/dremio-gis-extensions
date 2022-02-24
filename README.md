@@ -14,7 +14,7 @@ There were two significant gaps in the Geometry Library supplied by Esri that li
 
 ## Usage and Available Functions
 
-View the [SQL Function Reference](./docs/sqlFunctions.md) for definitions, syntax, and examples of the 66 functions implemented or [download the PDF](./docs/DremioGISExtFuncRef.pdf).
+View the [SQL Function Reference](./docs/sqlFunctions.md) for definitions, syntax, and examples of the functions implemented or [download the PDF](./docs/DremioGISExtFuncRef.pdf).
 
 ## Building and Installation
 
@@ -33,7 +33,7 @@ View the [SQL Function Reference](./docs/sqlFunctions.md) for definitions, synta
 ## Docker Image (on Docker Hub or build yourself)
 See [Dremio Docker Build with Dezota Extensions](https://github.com/Dezota/dremio-docker-with-extensions) for a complete solution that includes built-in documentation for all GIS functions when using the Dremio query tool UI.  The updated support key values described below have been changed from the previous defaults. 
 
-## Recommended Support Key Settings for GIS Extensions in Dremio
+## Recommended Support Key Settings for GIS Extensions in Dremio 🤫
 
 ![Dremio Support Settings for GIS](./docs/dremio_support_settings.jpg)
 
@@ -45,16 +45,18 @@ exec.batch.field.variable-width.size-estimate = 60
 
 ## Inspiration
 
-* https://github.com/christyharagan/dremio-gis
-* https://github.com/k255/drill-gis
-* https://github.com/Esri/spatial-framework-for-hadoop
-* https://github.com/geographiclib/geographiclib/tree/main/java
-* https://github.com/Esri/geometry-api-java
+* Esri Open Source Libraries
+  * https://github.com/Esri/spatial-framework-for-hadoop
+  * https://github.com/Esri/geometry-api-java
 * [Algorithms for geodesics by Charles F. F. Karney](https://arxiv.org/pdf/1109.4448.pdf)
+  * https://github.com/geographiclib/geographiclib/tree/main/java
 * [Trino Geospatial Toolkit](https://github.com/trinodb/trino/tree/master/plugin/trino-geospatial)
 * [Geodesic intersection: proposed algorithm and error assessment of current software](https://cartosig.webs.upv.es/2021/07/27/geodesic-intersection-proposed-algorithm-and-error-assessment-of-current-software/)
   * [Geodesic Spatial Operators on the ellipsoid](https://github.com/jomarlla/geodesicSpatialOperators)
   * [Research Paper PDF](https://www.mdpi.com/2076-3417/11/11/5129/pdf)
+* Earlier Incomplete Attempts to implement GIS support
+  * https://github.com/christyharagan/dremio-gis
+  * https://github.com/k255/drill-gis
 
 ## Dependencies
 
