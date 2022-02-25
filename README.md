@@ -31,7 +31,7 @@ View the [SQL Function Reference](./docs/sqlFunctions.md) for definitions, synta
 3. Run `docker-compose up` to start the new image.
 
 ## Docker Image (on Docker Hub or build yourself)
-See [Dremio Docker Build with Dezota Extensions](https://github.com/Dezota/dremio-docker-with-extensions) for a complete solution that includes built-in documentation for all GIS functions when using the Dremio query tool UI.  The updated support key values described below have been changed from the previous defaults. 
+See [Dremio Docker Build with Dezota Extensions](https://github.com/Dezota/dremio-docker-with-extensions) for a complete solution that includes built-in documentation for all GIS functions when using the *Dremio Analyst Center* UI.  The updated support key values described below have been changed from the previous defaults. 
 
 ## Recommended Support Key Settings for GIS Extensions in Dremio 🤫
 

@@ -1,0 +1,9 @@
+---
+title:  'GIS Extensions for Dremio - SQL Functions Reference'
+author:
+- Brian K. Holman
+keywords: [GIS, Dremio]
+abstract: |
+  Complete Reference to the 72 GIS-related functions in the *GIS Extensions
+  for Dremio* implementation including syntax, return type, and examples.
+...
