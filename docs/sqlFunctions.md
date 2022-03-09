@@ -823,10 +823,10 @@ Constructs a geometry from GeoJSON.
 ## (29) ST_GeomFromText
 
 ### Definition
-Takes a well-known text representation and returns a geometry object.
+Takes a well-known text representation and returns a geometry object. Set *ignoreErrors* to *true* to ignore bad data or *false* to fail and show the bad WKT value.
 
 ### Syntax
-<code>ST_GeomFromText(string <em>wktString</em>)</code>
+<code>ST_GeomFromText(string <em>wktString</em>, boolean <em>ignoreErrors</em>)</code>
 
 ### Return Type
 `binary`
@@ -836,10 +836,10 @@ Takes a well-known text representation and returns a geometry object.
 ## (30) ST_GeomFromText
 
 ### Definition
-Takes a well-known text representation and a spatial reference ID and returns a geometry object.
+Takes a well-known text representation and a spatial reference ID and returns a geometry object. Set *ignoreErrors* to *true* to ignore bad data or *false* to fail and show the bad WKT value.
 
 ### Syntax
-<code>ST_GeomFromText(string <em>wktString</em>, number <em>SRID</em>)</code>
+<code>ST_GeomFromText(string <em>wktString</em>, boolean <em>ignoreErrors</em>, number <em>SRID</em>)</code>
 
 ### Return Type
 `binary`

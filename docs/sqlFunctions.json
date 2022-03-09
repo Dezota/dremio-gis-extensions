@@ -1044,21 +1044,21 @@
   },
   {
     "name": "ST_GeomFromText",
-    "args": "([string] {wktString})",
+    "args": "([string] {wktString}, [boolean] {ignoreErrors})",
     "returnType": "binary",
     "tags": [
       "gis"
     ],
-    "description": "Takes a well-known text representation and returns a geometry object."
+    "description": "Takes a well-known text representation and returns a geometry object. Set {{ignoreErrors}} to {{true}} to ignore bad data or {{false}} to fail and show the bad WKT value."
   },
   {
     "name": "ST_GeomFromText",
-    "args": "([string] {wktString}, [number] {SRID})",
+    "args": "([string] {wktString}, [boolean] {ignoreErrors}, [number] {SRID})",
     "returnType": "binary",
     "tags": [
       "gis"
     ],
-    "description": "Takes a well-known text representation and a spatial reference ID and returns a geometry object."
+    "description": "Takes a well-known text representation and a spatial reference ID and returns a geometry object. Set {{ignoreErrors}} to {{true}} to ignore bad data or {{false}} to fail and show the bad WKT value."
   },
   {
     "name": "ST_GeomFromWKB",

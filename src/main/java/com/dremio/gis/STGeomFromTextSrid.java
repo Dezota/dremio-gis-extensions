@@ -27,25 +27,28 @@ import com.dremio.exec.expr.annotations.Param;
 /**
  *
  *  @name			ST_GeomFromText
- *  @args			([string] {wktString}, [number] {SRID})
+ *  @args			([string] {wktString}, [boolean] {ignoreErrors}, [number] {SRID})
  *  @returnType		binary
- *  @description	Takes a well-known text representation and a spatial reference ID and returns a geometry object.
+ *  @description	Takes a well-known text representation and a spatial reference ID and returns a geometry object. Set {{ignoreErrors}} to {{true}} to ignore bad data or {{false}} to fail and show the bad WKT value.
  *
  *  @author			Brian Holman <bholman@dezota.com>
  *
  */
 
 @FunctionTemplate(name = "st_geomfromtext", scope = FunctionTemplate.FunctionScope.SIMPLE,
-  nulls = FunctionTemplate.NullHandling.NULL_IF_NULL)
+        nulls = FunctionTemplate.NullHandling.INTERNAL)
 public class STGeomFromTextSrid implements SimpleFunction {
   @Param
   org.apache.arrow.vector.holders.NullableVarCharHolder input;
 
   @Param
-  org.apache.arrow.vector.holders.NullableIntHolder sridParam;
+  org.apache.arrow.vector.holders.BitHolder ignoreErrors;
+
+  @Param
+  org.apache.arrow.vector.holders.IntHolder sridParam;
 
   @Output
-  org.apache.arrow.vector.holders.VarBinaryHolder out;
+  org.apache.arrow.vector.holders.NullableVarBinaryHolder out;
 
   @Inject
   org.apache.arrow.memory.ArrowBuf buffer;
@@ -54,21 +57,32 @@ public class STGeomFromTextSrid implements SimpleFunction {
   }
 
   public void eval() {
-    int srid = sridParam.value;
-    String wktText = com.dremio.gis.FunctionHelpers.toStringFromUTF8(input.start, input.end,
-        input.buffer);
+    if (input.isSet == 0) {
+      out.isSet = 0;
+    } else {
+      int srid = sridParam.value;
+      String wktText = com.dremio.gis.FunctionHelpers.toStringFromUTF8(input.start, input.end, input.buffer);
+      try {
+        com.esri.core.geometry.ogc.OGCGeometry geom = com.esri.core.geometry.ogc.OGCGeometry.fromText(wktText);
+        geom.setSpatialReference(com.esri.core.geometry.SpatialReference.create(srid));
+        if (!geom.isEmpty()) {
+          java.nio.ByteBuffer pointBytes = geom.asBinary();
 
-    com.esri.core.geometry.ogc.OGCGeometry geom;
-
-    geom = com.esri.core.geometry.ogc.OGCGeometry.fromText(wktText);
-    geom.setSpatialReference(com.esri.core.geometry.SpatialReference.create(srid));
-
-    java.nio.ByteBuffer pointBytes = geom.asBinary();
-    
-    int outputSize = pointBytes.remaining();
-    buffer = out.buffer = buffer.reallocIfNeeded(outputSize);
-    out.start = 0;
-    out.end = outputSize;
-    buffer.setBytes(0, pointBytes);
+          int outputSize = pointBytes.remaining();
+          out.isSet = 1;
+          buffer = out.buffer = buffer.reallocIfNeeded(outputSize);
+          out.start = 0;
+          out.end = outputSize;
+          buffer.setBytes(0, pointBytes);
+        } else {
+          out.isSet = 0;
+        }
+      } catch (Exception e) {
+        if (ignoreErrors.value == 1)
+          out.isSet = 0;
+        else
+          throw new IllegalArgumentException("Malformed WKT Geometry: '" + wktText + "'");
+      }
+    }
   }
 }
