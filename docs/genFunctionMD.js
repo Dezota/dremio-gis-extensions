@@ -27,7 +27,7 @@ fs.readFile("./sqlFunctions.json", "utf8", (err, response) => {
 });
 
 function function1(currentValue, index) {
-    if (currentValue["name"].toString().startsWith('ST_')) {
+    if (currentValue["name"].toString().startsWith('ST_') || currentValue["name"].toString().startsWith('H3_')) {
         counter++;
         console.log("## (" + counter+") "+currentValue["name"] + '\n');
         console.log("### Definition");
@@ -43,7 +43,7 @@ function function1(currentValue, index) {
             console.log("| ----------- | ----------- |");
             for (var i = 0; i < exampleLines.length; i++) {
                 queryResults = exampleLines[i].split(" -> ");
-                console.log("| "+ (queryResults[0].startsWith("ST_") ? ("`SELECT "+queryResults[0]+"`") : queryResults[0])+" | "+(queryResults[1] ? "`"+queryResults[1]+"`" : "" )+ " |")
+                console.log("| "+ (queryResults[0].startsWith("ST_") || queryResults[0].startsWith("H3_") ? ("`SELECT "+queryResults[0]+"`") : "`"+queryResults[0]+"`")+" | "+(queryResults[1] ? "`"+queryResults[1]+"`" : "" )+ " |")
             }
         }
         else

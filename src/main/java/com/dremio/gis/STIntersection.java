@@ -39,16 +39,16 @@ import com.dremio.exec.expr.annotations.Param;
  */
 
 @FunctionTemplate(name = "st_intersection", scope = FunctionTemplate.FunctionScope.SIMPLE,
-        nulls = FunctionTemplate.NullHandling.NULL_IF_NULL)
+        nulls = FunctionTemplate.NullHandling.INTERNAL)
 public class STIntersection implements SimpleFunction {
     @Param
-    org.apache.arrow.vector.holders.VarBinaryHolder geom1Param;
+    org.apache.arrow.vector.holders.NullableVarBinaryHolder geom1Param;
 
     @Param
-    org.apache.arrow.vector.holders.VarBinaryHolder geom2Param;
+    org.apache.arrow.vector.holders.NullableVarBinaryHolder geom2Param;
 
     @Output
-    org.apache.arrow.vector.holders.VarBinaryHolder out;
+    org.apache.arrow.vector.holders.NullableVarBinaryHolder out;
 
     @Inject
     org.apache.arrow.memory.ArrowBuf buffer;
@@ -57,21 +57,33 @@ public class STIntersection implements SimpleFunction {
     }
 
     public void eval() {
-        com.esri.core.geometry.ogc.OGCGeometry geom1;
-        com.esri.core.geometry.ogc.OGCGeometry geom2;
-        geom1 = com.esri.core.geometry.ogc.OGCGeometry
-                .fromBinary(geom1Param.buffer.nioBuffer(geom1Param.start, geom1Param.end - geom1Param.start));
-        geom2 = com.esri.core.geometry.ogc.OGCGeometry
-                .fromBinary(geom2Param.buffer.nioBuffer(geom2Param.start, geom2Param.end - geom2Param.start));
+        if (geom1Param.isSet == 0 || geom2Param.isSet == 0)
+        {
+            out.isSet = 0;
+        }
+        else {
+            com.esri.core.geometry.ogc.OGCGeometry geom1;
+            com.esri.core.geometry.ogc.OGCGeometry geom2;
+            geom1 = com.esri.core.geometry.ogc.OGCGeometry
+                    .fromBinary(geom1Param.buffer.nioBuffer(geom1Param.start, geom1Param.end - geom1Param.start));
+            geom2 = com.esri.core.geometry.ogc.OGCGeometry
+                    .fromBinary(geom2Param.buffer.nioBuffer(geom2Param.start, geom2Param.end - geom2Param.start));
 
-        com.esri.core.geometry.ogc.OGCGeometry intersectionGeom = geom1.intersection(geom2);
+            try {
+                com.esri.core.geometry.ogc.OGCGeometry intersectionGeom = geom1.intersection(geom2);
 
-        java.nio.ByteBuffer bufferedGeomBytes = intersectionGeom.asBinary();
+                java.nio.ByteBuffer bufferedGeomBytes = intersectionGeom.asBinary();
 
-        int outputSize = bufferedGeomBytes.remaining();
-        buffer = out.buffer = buffer.reallocIfNeeded(outputSize);
-        out.start = 0;
-        out.end = outputSize;
-        buffer.setBytes(0, bufferedGeomBytes);
+                int outputSize = bufferedGeomBytes.remaining();
+                buffer = out.buffer = buffer.reallocIfNeeded(outputSize);
+                out.start = 0;
+                out.end = outputSize;
+                buffer.setBytes(0, bufferedGeomBytes);
+                out.isSet = 1;
+            }
+            catch (Exception e) {
+                throw new IllegalArgumentException("Unable to perform intersections between '" + geom1.asText() + "' and '" + geom2.asText() + "'");
+            }
+        }
     }
 }

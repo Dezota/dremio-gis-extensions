@@ -763,6 +763,226 @@
     "example": "REPLACE('the catatonic cat','cat','dog') -> 'the dogatonic dog'"
   },
   {
+    "name": "H3_AsText",
+    "args": "([bigint] {h3Value})",
+    "returnType": "string",
+    "description": "Returns a Hex representation of the H3 value as a string.",
+    "tags": [
+      "gis"
+    ],
+    "example": "H3_AsText(H3_FromGeomPoint(ST_Point(40.4168, -3.7038), 4)) -> '847b59dffffffff'"
+  },
+  {
+    "name": "H3_Boundary",
+    "args": "([bigint] {h3Value})",
+    "returnType": "binary",
+    "description": "Returns a polygon geography representing the H3 cell.",
+    "tags": [
+      "gis"
+    ],
+    "example": "ST_AsText(H3_Boundary(H3_FromLongLat(40.4168, -3.7038, 15))) -> 'POLYGON ((-3.703802360352346 40.41680913267208, -3.7038075007518416 40.41680558484906, -3.703806130063667 40.41680018598506, -3.7037996189769617 40.41679833494421, -3.7037944785779335 40.41680188276699, -3.7037958492651386 40.416807281630845, -3.703802360352346 40.41680913267208))'"
+  },
+  {
+    "name": "H3_Center",
+    "args": "([bigint] {h3Value})",
+    "returnType": "binary",
+    "description": "Returns the center of the H3 cell as a point.  It will throw an error if the {{h3Value}} is not valid as an H3 Value.",
+    "tags": [
+      "gis"
+    ],
+    "example": "ST_AsText(H3_Center(H3_FromText('847b59dffffffff'))) -> 'POINT (40.305476423174326 -3.743203325561687)'"
+  },
+  {
+    "name": "H3_Compact",
+    "args": "([bigint] {h3Value}[])",
+    "returnType": "bigint[]",
+    "description": "Returns an array with the indexes of a set of hexagons across multiple resolutions that represent the same area as the input set of hexagons.",
+    "tags": [
+      "gis"
+    ],
+    "example": "H3_Compact(H3_Uncompact(H3_Wrap(H3_FromText('847b59dffffffff')),5)) -> [596645165859340300]"
+  },
+  {
+    "name": "H3_Distance",
+    "args": "([bigint] {h3Value1}, [bigint] {h3Value2})",
+    "returnType": "numeric",
+    "description": "Returns the grid distance between two hexagon indexes. This function may fail to find the distance between two indexes if they are very far apart or on opposite sides of a pentagon.",
+    "tags": [
+      "gis"
+    ],
+    "example": "H3_Distance(H3_FromText('847b591ffffffff'), H3_FromText('847b59bffffffff')) -> 1"
+  },
+  {
+    "name": "H3_FromGeomPoint",
+    "args": "([binary] {pointGeom}, [number] {resolution})",
+    "returnType": "bigint",
+    "description": "Returns the H3 cell index that the point belongs to in the required {{resolution}}. It will return `null` for non-point geometry and throw an error for resolution outside the valid range [0,15].",
+    "tags": [
+      "gis"
+    ],
+    "example": "H3_AsText(H3_FromGeomPoint(ST_Point(40.4168, -3.7038), 4)) -> '847b59dffffffff'"
+  },
+  {
+    "name": "H3_FromLongLat",
+    "args": "([number] {lon}, [number] {lat}, [number] {resolution})",
+    "returnType": "bigint",
+    "description": "Returns the H3 cell index specified by {{lon}} and {{lat}} at the specified {{resolution}}.  It will throw an error for resolution outside the valid range [0,15].",
+    "tags": [
+      "gis"
+    ],
+    "example": "H3_AsText(H3_FromLongLat(40.4168, -3.7038, 4)) -> '84390cbffffffff'"
+  },
+  {
+    "name": "H3_FromText",
+    "args": "([string] {h3Text})",
+    "returnType": "bigint",
+    "description": "Converts from String representation of H3 cell value to the bigint representation. It will throw an error if the hex representation is not valid as an H3 Value.",
+    "tags": [
+      "gis"
+    ],
+    "example": "ST_AsText(H3_Center(H3_FromText('847b59dffffffff'))) -> 'POINT (40.305476423174326 -3.743203325561687)'"
+  },
+  {
+    "name": "H3_HexRing",
+    "args": "([bigint] h3Origin, [int] ringSize)",
+    "returnType": "bigint[]",
+    "description": "Returns all cell indexes in a hollow hexagonal ring centered at the origin in no particular order. Unlike H3_Kring, this function will throw an exception if there is a pentagon anywhere in the ring.",
+    "tags": [
+      "gis"
+    ],
+    "example": "H3_Hexring(H3_FromText('837b59fffffffff'), 1) -> [592141849699811300,592141506102427600,592141712260857900,592124875989057500,592124738550104000,592140544029753300]"
+  },
+  {
+    "name": "H3_IsPentagon",
+    "args": "([bigint] h3Value)",
+    "returnType": "boolean",
+    "description": "Returns {{true}} if given H3 index is a pentagon. Returns {{false}} otherwise, even on invalid input.",
+    "tags": [
+      "gis"
+    ],
+    "example": "H3_IsPentagon(H3_FromText('837b59fffffffff')) -> false\nH3_IsPentagon(H3_FromText('8075fffffffffff')) -> true"
+  },
+  {
+    "name": "H3_IsValid",
+    "args": "([bigint] h3Value)",
+    "returnType": "boolean",
+    "description": "Returns {{true}} when the given index is valid, {{false}} otherwise.",
+    "tags": [
+      "gis"
+    ],
+    "example": "H3_IsValid(8675309) -> false\nH3_IsValid(H3_FromText('837b59fffffffff')) -> true"
+  },
+  {
+    "name": "H3_KRing",
+    "args": "([bigint] h3Origin, [int] ringSize)",
+    "returnType": "bigint[]",
+    "description": "Returns all cell indexes in a filled hexagonal k-ring centered at the origin in no particular order.",
+    "tags": [
+      "gis"
+    ],
+    "example": "H3_KRing(H3_FromText('837b59fffffffff'), 1) -> [592141574821904400,592141506102427600,592141712260857900,592124875989057500,592124738550104000,592140544029753300,592141849699811300]"
+  },
+  {
+    "name": "H3_KRing_Distances",
+    "args": "([bigint] h3Origin, [int] ringSize)",
+    "returnType": "struct{index, distance}",
+    "description": "Returns all cell indexes and their distances in a filled hexagonal k-ring centered at the origin in no particular order.",
+    "tags": [
+      "gis"
+    ],
+    "example": "H3_KRingDistances(H3_FromText('837b59fffffffff'), 1) -> [{\"index\":592141574821904383,\"distance\":0},{\"index\":592141506102427647,\"distance\":1},{\"index\":592141712260857855,\"distance\":1},{\"index\":592124875989057535,\"distance\":1},{\"index\":592124738550104063,\"distance\":1},{\"index\":592140544029753343,\"distance\":1},{\"index\":592141849699811327,\"distance\":1}]"
+  },
+  {
+    "name": "H3_Polyfill",
+    "args": "[binary] {geometry}, [number] {resolution}",
+    "returnType": "bigint[]",
+    "description": "Returns an array with all the H3 cell indexes for the given polygon or multipolygon including automatically handling the inner holes.",
+    "tags": [
+      "gis"
+    ],
+    "example": "H3_Polyfill(ST_GeomFromText('POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))',false), 1) -> [582059465512058900,582072659651592200,582068261605081100,582081455744614400,582855511930568700,582063863558570000,582077057698103300,582851113884057600]"
+  },
+  {
+    "name": "H3_Resolution",
+    "args": "([bigint] {h3Value})",
+    "returnType": "integer",
+    "description": "Returns the H3 cell resolution as an integer. It will throw an error if the {{h3Value}} is not valid as an H3 Value.",
+    "tags": [
+      "gis"
+    ],
+    "example": "H3_Resolution(H3_FromText('847b59dffffffff')) -> 4"
+  },
+  {
+    "name": "H3_ToChildren",
+    "args": "([bigint] {h3Value}, [number] {childResolution})",
+    "returnType": "bigint[]",
+    "description": "Returns an array with the indexes of the children/descendents of the given hexagon at the given resolution.",
+    "tags": [
+      "gis"
+    ],
+    "example": "WITH H3Children AS (SELECT FLATTEN(H3_ToChildren(H3_FromText('837b59fffffffff'), 4)) AS H3Values) SELECT H3_AsText(H3Values) FROM H3Children -> '847b591ffffffff' '847b593ffffffff' '847b595ffffffff' '847b597ffffffff' '847b599ffffffff' '847b59bffffffff' '847b59dffffffff'"
+  },
+  {
+    "name": "H3_ToParent",
+    "args": "([bigint] {h3Value}, [number] {resolution})",
+    "returnType": "bigint",
+    "description": "Returns the H3 cell index of the parent of the given hexagon at the given resolution.",
+    "tags": [
+      "gis"
+    ],
+    "example": "H3_AsText(H3_ToParent(H3_FromText('847b59dffffffff'), 3)) -> '837b59fffffffff'"
+  },
+  {
+    "name": "H3_Uncompact",
+    "args": "([bigint] {h3Value}[], [number] {resolution})",
+    "returnType": "bigint[]",
+    "description": "Returns an array with the indexes of a set of hexagons of the same {{resolution}} that represent the same area as the compacted input hexagons.",
+    "tags": [
+      "gis"
+    ],
+    "example": "H3_Uncompact(H3_Wrap(H3_FromText('847b59dffffffff')),5) -> [601148757970518000,601148759044259800,601148760118001700,601148761191743500,601148762265485300,601148763339227100,601148764412969000]"
+  },
+  {
+    "name": "H3_Wrap",
+    "args": "([bigint] {h3Value})",
+    "returnType": "bigint[]",
+    "description": "Takes a single H3 value and wraps it in a list",
+    "tags": [
+      "gis"
+    ],
+    "example": "H3_Wrap(H3_FromText('847b59dffffffff'))[0] -> 596645165859340287"
+  },
+  {
+    "name": "ST_AggrConvexHull",
+    "args": "([binary] {geometry})",
+    "returnType": "binary",
+    "description": "Creates a single geometry that is a convex hull of a geometry that resulted from a union of all aggregate input geometries.",
+    "tags": [
+      "gis"
+    ],
+    "example": "WITH GEOMLIST AS (SELECT ST_GeomFromText('polygon ((40 40, 40 60, 60 60, 60 40, 40 40))', true) AS GEOM1, ST_GeomFromText('polygon ((20 30, 30 30, 30 40, 20 40, 20 30))', true) AS GEOM2) SELECT ST_AsText(ST_AggrConvexHull(GEOM)) FROM GEOMLIST UNPIVOT (\"GEOM\" for \"COL\" in  (GEOM1, GEOM2)) -> 'POLYGON ((20 30, 30 30, 60 40, 60 60, 40 60, 20 40, 20 30))'"
+  },
+  {
+    "name": "ST_AggrIntersection",
+    "args": "([binary] {geometry})",
+    "returnType": "binary",
+    "description": "Returns a single geometry that is an intersection of all aggregate input geometries.",
+    "tags": [
+      "gis"
+    ],
+    "example": "WITH GEOMLIST AS (SELECT ST_GeomFromText('polygon ((5 5, 12 5, 12 10, 5 10, 5 5))', true) AS GEOM1, ST_GeomFromText('polygon ((10 8, 14 8, 14 15, 10 15, 10 8))', true) AS GEOM2, ST_GeomFromText('polygon ((6 8, 20 8, 20 20, 6 20, 6 8))', true) AS GEOM3) SELECT ST_AsText(ST_AggrIntersection(GEOM)) FROM GEOMLIST UNPIVOT (\"GEOM\" for \"COL\" in  (GEOM1, GEOM2, GEOM3)) -> 'POLYGON ((10 8, 12 8, 12 10, 10 10, 10 8))'"
+  },
+  {
+    "name": "ST_AggrUnion",
+    "args": "([binary] {geometry})",
+    "returnType": "binary",
+    "description": "Returns a single geometry that is the union of all aggregate input geometries.",
+    "tags": [
+      "gis"
+    ],
+    "example": "WITH GEOMLIST AS (SELECT ST_GeomFromText('polygon ((20 30, 30 30, 30 40, 20 40, 20 30))', true) AS GEOM1, ST_GeomFromText('polygon ((40 40, 40 60, 60 60, 60 40, 40 40))', true) AS GEOM2) SELECT ST_AsText(ST_AggrUnion(GEOM)) FROM GEOMLIST UNPIVOT (\"GEOM\" for \"COL\" in  (GEOM1, GEOM2)) -> 'MULTIPOLYGON (((20 30, 30 30, 30 40, 20 40, 20 30)), ((40 40, 60 40, 60 60, 40 60, 40 40)))'"
+  },
+  {
     "name": "ST_Area",
     "args": "([binary] {geometry})",
     "returnType": "number",
@@ -1329,7 +1549,7 @@
   },
   {
     "name": "ST_Point",
-    "args": "[number] {lon}, [number] {lat}",
+    "args": "([number] {lon}, [number] {lat})",
     "returnType": "binary",
     "description": "Returns a 2D point geometry from the provided lon (x) and lat (y) values.",
     "tags": [
@@ -1428,6 +1648,16 @@
     "args": "([binary] {geometry1}, [binary] {geometry2})",
     "returnType": "binary",
     "description": "Returns a geometry as the union of the two supplied geometries.",
+    "tags": [
+      "gis"
+    ],
+    "example": "ST_AsText(ST_Union(ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))'), ST_GeomFromText('POLYGON ((4 1, 4 4, 4 8, 8 1))'))) -> 'POLYGON ((1 1, 4 1, 8 1, 4 8, 4 4, 1 4, 1 1))'"
+  },
+  {
+    "name": "ST_Union",
+    "args": "([binary] {geometry})",
+    "returnType": "binary",
+    "description": "Returns a geometry as the union of the supplied geometry.",
     "tags": [
       "gis"
     ],

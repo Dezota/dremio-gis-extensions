@@ -11,7 +11,7 @@ fs.readFile("./sqlFunctions.json", "utf8", (err, response) => {
 });
 
 function function1(currentValue, index) {
-    if (currentValue["name"].toString().startsWith('ST_')) {
+    if (currentValue["name"].toString().startsWith('ST_') || currentValue["name"].toString().startsWith('H3_')) {
         console.log("\n/**\n" + " *");
         console.log(" *  @name\t\t\t" + currentValue["name"]);
         console.log(" *  @args\t\t\t" + currentValue["args"]);

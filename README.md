@@ -8,7 +8,7 @@
 
 ![DAC with GIS extensions](./docs/dremio_dac_with_gis.jpg)
 
-The **GIS Extensions** allow Dremio to perform standard GIS functions within Dremio SQL with 72 industry-standard GIS functions. These extensions use the [*Esri Java Geometry Library*](https://github.com/Esri/geometry-api-java/wiki/) for the underlying implementation of the core geometry functions. The author made heavy use of Esri's [*Spatial Framework for Hadoop*](https://github.com/Esri/spatial-framework-for-hadoop) as a reference for a similar implementation that also relies on the same library.
+The **GIS Extensions** allow Dremio to perform standard GIS functions within Dremio SQL with 76 industry-standard GIS functions and 19 H3 index functions. These extensions use the [*Esri Java Geometry Library*](https://github.com/Esri/geometry-api-java/wiki/) for the underlying implementation of the core geometry functions.  The [Java Bindings](https://github.com/uber/h3-java.git) for the [Uber H3 Library](https://h3geo.org/) were used to implement the H3 functions. The author made heavy use of Esri's [*Spatial Framework for Hadoop*](https://github.com/Esri/spatial-framework-for-hadoop) as a reference for a similar implementation that also relies on the same library.
 
 There were two significant gaps in the Geometry Library supplied by Esri that limited transforming geometries from `EPSG: 4326` to other coordinate systems and performing geodesic rather than 2D area and length calculations. Geodesic area function helpers backing the `ST_GeodesicAreaWGS84` function are copied almost exactly from the [*Trino Geospatial Library*](https://github.com/trinodb/trino/tree/master/plugin/trino-geospatial) as found in our `FunctionHelpers.stSphericalArea()` and `FunctionHelpers.computeSphericalExcess()`. Conversion to other coordinate systems in the `ST_Transform` function leverages the [Proj4J Library](https://trac.osgeo.org/proj4j/). All of the referenced works are also published under the *Apache 2.0 License*.
 
@@ -48,6 +48,9 @@ exec.batch.field.variable-width.size-estimate = 60
 * Esri Open Source Libraries
   * https://github.com/Esri/spatial-framework-for-hadoop
   * https://github.com/Esri/geometry-api-java
+* [Uber H3 Library](https://h3geo.org/)
+  * [Java Language Bindings](https://github.com/uber/h3-java)
+  * [Analytics Toolbox for BigQuery](https://github.com/CartoDB/analytics-toolbox-core/tree/master/modules/h3/bigquery)
 * [Algorithms for geodesics by Charles F. F. Karney](https://arxiv.org/pdf/1109.4448.pdf)
   * https://github.com/geographiclib/geographiclib/tree/main/java
 * [Trino Geospatial Toolkit](https://github.com/trinodb/trino/tree/master/plugin/trino-geospatial)
@@ -60,8 +63,10 @@ exec.batch.field.variable-width.size-estimate = 60
 
 ## Dependencies
 
-The ```com.esri.geometry:esri-geometry-api``` and ```org.osgeo:proj4j``` libraries are required and not installed in
-Dremio. They are automatically included as shade jars in the final jar with the maven build process and don't need to be
-included separately in `/opt/dremio/jars/3rdparty`.
+The ```com.esri.geometry:esri-geometry-api```,```org.osgeo:proj4j```, and ```com.uber:h3``` libraries are required and not installed in
+Dremio. The first two are automatically included as shade jars in the final jar with the maven build process and don't need to be
+included separately in `/opt/dremio/jars/3rdparty`.  The third library needs to be copied into the `3rdparty` folder.  This is because our
+default docker image requires a rebuild of the native H3 library.  See [docker-h3-java-build](./docker-h3-java-build/README.me) for details.
+
 
 

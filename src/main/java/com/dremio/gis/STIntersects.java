@@ -38,16 +38,16 @@ import com.dremio.exec.expr.annotations.Param;
  */
 
 @FunctionTemplate(name = "st_intersects", scope = FunctionTemplate.FunctionScope.SIMPLE,
-        nulls = FunctionTemplate.NullHandling.NULL_IF_NULL)
+        nulls = FunctionTemplate.NullHandling.INTERNAL)
 public class STIntersects implements SimpleFunction {
     @Param
-    org.apache.arrow.vector.holders.VarBinaryHolder geom1Param;
+    org.apache.arrow.vector.holders.NullableVarBinaryHolder geom1Param;
 
     @Param
-    org.apache.arrow.vector.holders.VarBinaryHolder geom2Param;
+    org.apache.arrow.vector.holders.NullableVarBinaryHolder geom2Param;
 
     @Output
-    org.apache.arrow.vector.holders.BitHolder out;
+    org.apache.arrow.vector.holders.NullableBitHolder out;
 
     @Inject
     org.apache.arrow.memory.ArrowBuf buffer;
@@ -56,15 +56,25 @@ public class STIntersects implements SimpleFunction {
     }
 
     public void eval() {
-        com.esri.core.geometry.ogc.OGCGeometry geom1;
-        com.esri.core.geometry.ogc.OGCGeometry geom2;
-        geom1 = com.esri.core.geometry.ogc.OGCGeometry
-                .fromBinary(geom1Param.buffer.nioBuffer(geom1Param.start, geom1Param.end - geom1Param.start));
-        geom2 = com.esri.core.geometry.ogc.OGCGeometry
-                .fromBinary(geom2Param.buffer.nioBuffer(geom2Param.start, geom2Param.end - geom2Param.start));
+        if (geom1Param.isSet == 0 || geom2Param.isSet == 0)
+        {
+            out.isSet = 0;
+        }
+        else {
+            com.esri.core.geometry.ogc.OGCGeometry geom1;
+            com.esri.core.geometry.ogc.OGCGeometry geom2;
+            geom1 = com.esri.core.geometry.ogc.OGCGeometry
+                    .fromBinary(geom1Param.buffer.nioBuffer(geom1Param.start, geom1Param.end - geom1Param.start));
+            geom2 = com.esri.core.geometry.ogc.OGCGeometry
+                    .fromBinary(geom2Param.buffer.nioBuffer(geom2Param.start, geom2Param.end - geom2Param.start));
 
-        int intersects = geom1.intersects(geom2) ? 1 : 0;
-
-        out.value = intersects;
+            try {
+                int intersects = geom1.intersects(geom2) ? 1 : 0;
+                out.value = intersects;
+                out.isSet = 0;
+            } catch (Exception e) {
+                throw new IllegalArgumentException("Unable to perform intersections between '" + geom1.asText() + "' and '" + geom2.asText() + "'");
+            }
+        }
     }
 }

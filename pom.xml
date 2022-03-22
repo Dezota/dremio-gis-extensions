@@ -36,6 +36,11 @@
       <version>0.1.0</version>
     </dependency>
     <dependency>
+      <groupId>com.uber</groupId>
+      <artifactId>h3</artifactId>
+      <version>3.7.2</version>
+    </dependency>
+    <dependency>
       <groupId>org.apache.arrow</groupId>
       <artifactId>arrow-memory</artifactId>
       <version>0.15.0-20200308131102-f6b34ee198-dremio</version>

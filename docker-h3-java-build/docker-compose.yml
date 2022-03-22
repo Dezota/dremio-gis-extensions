@@ -1,0 +1,10 @@
+version: "2"
+
+services:
+  dremio:
+    restart: always
+    image: dezota/build-h3-java:1.0.0
+    hostname: h3-java
+    environment:
+      - TZ="America/Denver"
+      
