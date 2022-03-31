@@ -8,7 +8,7 @@
 
 ![DAC with GIS extensions](./docs/dremio_dac_with_gis.jpg)
 
-The **GIS Extensions** allow Dremio to perform standard GIS functions within Dremio SQL with 76 industry-standard GIS functions and 19 H3 index functions. These extensions use the [*Esri Java Geometry Library*](https://github.com/Esri/geometry-api-java/wiki/) for the underlying implementation of the core geometry functions.  The [Java Bindings](https://github.com/uber/h3-java.git) for the [Uber H3 Library](https://h3geo.org/) were used to implement the H3 functions. The author made heavy use of Esri's [*Spatial Framework for Hadoop*](https://github.com/Esri/spatial-framework-for-hadoop) as a reference for a similar implementation that also relies on the same library.
+The **GIS Extensions** allow Dremio to perform standard GIS functions within Dremio SQL with 76 industry-standard GIS functions and 21 H3 index functions. These extensions use the [*Esri Java Geometry Library*](https://github.com/Esri/geometry-api-java/wiki/) for the underlying implementation of the core geometry functions.  The [Java Bindings](https://github.com/uber/h3-java.git) for the [Uber H3 Library](https://h3geo.org/) were used to implement the H3 functions. The author made heavy use of Esri's [*Spatial Framework for Hadoop*](https://github.com/Esri/spatial-framework-for-hadoop) as a reference for a similar implementation that also relies on the same library.
 
 There were two significant gaps in the Geometry Library supplied by Esri that limited transforming geometries from `EPSG: 4326` to other coordinate systems and performing geodesic rather than 2D area and length calculations. Geodesic area function helpers backing the `ST_GeodesicAreaWGS84` function are copied almost exactly from the [*Trino Geospatial Library*](https://github.com/trinodb/trino/tree/master/plugin/trino-geospatial) as found in our `FunctionHelpers.stSphericalArea()` and `FunctionHelpers.computeSphericalExcess()`. Conversion to other coordinate systems in the `ST_Transform` function leverages the [Proj4J Library](https://trac.osgeo.org/proj4j/). All of the referenced works are also published under the *Apache 2.0 License*.
 
@@ -41,6 +41,16 @@ Paste the following keys in the `Settings > Support` screen in Dremio and update
 ```
 limits.single_field_size_bytes = 10485759
 exec.batch.field.variable-width.size-estimate = 60
+```
+## Emerging GeoParquet Standard
+
+* [GeoParquet](https://github.com/opengeospatial/geoparquet) - the native binary format of these GIS functions is compatible with this standard.
+  * Try uploading [nz-buildings-outlines.parquet](https://storage.googleapis.com/open-geodata/linz-examples/nz-buildings-outlines.parquet) from their example set into Dremio.  Here is an example query on that dataset's geometry column:
+
+```sql
+SELECT ST_AsText(geometry) AS geometry_wkt,
+    ST_GeodesicAreaWGS84(ST_Simplify(geometry))/4047 AS area_acres
+FROM "minio-storage"."dremio-user-storage"."nz-buildings-outlines.parquet"
 ```
 
 ## Inspiration

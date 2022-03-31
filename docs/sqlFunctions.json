@@ -823,6 +823,16 @@
     "example": "H3_AsText(H3_FromGeomPoint(ST_Point(40.4168, -3.7038), 4)) -> '847b59dffffffff'"
   },
   {
+    "name": "H3_FromGeomPoly",
+    "args": "([binary] {polyGeom})",
+    "returnType": "bigint",
+    "description": "Returns the smallest H3 cell that completely encloses the polygon with a dynamic resolution. It will return `null` if there isn't a value to fit the polygon and throw an error if a non-polygon geometry is supplied.",
+    "tags": [
+      "gis"
+    ],
+    "example": "H3_FromGeomPoly(ST_GeomFromText('POLYGON ((-111.69808887205492 40.238737891364416, -111.69837535651395 40.23873740478143, -111.6983745544178 40.2384602506758, -111.69808807598443 40.23846160818078, -111.69808887205492 40.238737891364416))',true)) -> 622175171754917887"
+  },
+  {
     "name": "H3_FromLongLat",
     "args": "([number] {lon}, [number] {lat}, [number] {resolution})",
     "returnType": "bigint",
@@ -913,6 +923,16 @@
     "example": "H3_Resolution(H3_FromText('847b59dffffffff')) -> 4"
   },
   {
+    "name": "H3_ToCenterChild",
+    "args": "([bigint] {h3Value}, [number] {childResolution})",
+    "returnType": "bigint",
+    "description": "Returns the center child (finer) index for the given hexagon at the given resolution.",
+    "tags": [
+      "gis"
+    ],
+    "example": "H3_AsText(H3_ToCenterChild(H3_FromText('837b59fffffffff'), 4)) -> '847b591ffffffff'"
+  },
+  {
     "name": "H3_ToChildren",
     "args": "([bigint] {h3Value}, [number] {childResolution})",
     "returnType": "bigint[]",
@@ -990,7 +1010,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_Area(ST_GeomFromText('POLYGON ((0 0, 8 0, 0 8, 0 0), (1 1, 1 5, 5 1, 1 1))')) -> 24.0"
+    "example": "ST_Area(ST_GeomFromText('POLYGON ((0 0, 8 0, 0 8, 0 0), (1 1, 1 5, 5 1, 1 1))',true))  -> 24.0"
   },
   {
     "name": "ST_AsGeoJSON",
@@ -1020,7 +1040,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_AsText(ST_Boundary(ST_GeomFromText('LINESTRING (0 1, 1 0)'))) -> 'MULTIPOINT ((0 1), (1 0))'\nST_AsText(ST_Boundary(ST_GeomFromText('POLYGON ((1 1, 4 1, 1 4))'))) -> 'MULTILINESTRING ((1 1, 4 1, 1 4, 1 1))'"
+    "example": "ST_AsText(ST_Boundary(ST_GeomFromText('LINESTRING (0 1, 1 0)',true))) -> 'MULTIPOINT ((0 1), (1 0))'\nST_AsText(ST_Boundary(ST_GeomFromText('POLYGON ((1 1, 4 1, 1 4))',true))) -> 'MULTILINESTRING ((1 1, 4 1, 1 4, 1 1))'"
   },
   {
     "name": "ST_Buffer",
@@ -1040,7 +1060,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_AsText(ST_Centroid(ST_GeomFromText('point (2 3)'))) -> 'POINT(2 3)'\nST_AsText(ST_Centroid(ST_GeomFromText('MULTIPOINT ((0 0), (1 1), (1 -1), (6 0))'))) -> 'POINT(2 0)'\nST_AsText(ST_Centroid(ST_GeomFromText('linestring (0 0, 6 0)'))) -> 'POINT(3 0)'\nST_AsText(ST_Centroid(ST_GeomFromText('POLYGON ((0 0, 0 8, 8 8, 8 0, 0 0))'))) -> 'POINT(4 4)'\nST_AsText(ST_Centroid(ST_GeomFromText('POLYGON ((1 1, 5 1, 3 4))'))) -> 'POINT(3 2)'"
+    "example": "ST_AsText(ST_Centroid(ST_GeomFromText('point (2 3)',true))) -> 'POINT(2 3)'\nST_AsText(ST_Centroid(ST_GeomFromText('MULTIPOINT ((0 0), (1 1), (1 -1), (6 0))',true))) -> 'POINT(2 0)'\nST_AsText(ST_Centroid(ST_GeomFromText('linestring (0 0, 6 0)',true))) -> 'POINT(3 0)'\nST_AsText(ST_Centroid(ST_GeomFromText('POLYGON ((0 0, 0 8, 8 8, 8 0, 0 0))',true))) -> 'POINT(4 4)'\nST_AsText(ST_Centroid(ST_GeomFromText('POLYGON ((1 1, 5 1, 3 4))',true))) -> 'POINT(3 2)'"
   },
   {
     "name": "ST_Contains",
@@ -1050,7 +1070,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_Contains(ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))'), ST_Point(2, 3)) -> true \nST_Contains(ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))'), ST_Point(8, 8)) -> false"
+    "example": "ST_Contains(ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true), ST_Point(2, 3)) -> true \nST_Contains(ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true), ST_Point(8, 8)) -> false"
   },
   {
     "name": "ST_ConvexHull",
@@ -1060,7 +1080,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_AsText(ST_ConvexHull(ST_GeomFromText('polygon ((0 0, 8 0, 0 8, 0 0), (1 1, 1 5, 5 1, 1 1))'))) -> 'POLYGON ((0 0, 8 0, 0 8, 0 0))'"
+    "example": "ST_AsText(ST_ConvexHull(ST_GeomFromText('polygon ((0 0, 8 0, 0 8, 0 0), (1 1, 1 5, 5 1, 1 1))',true))) -> 'POLYGON ((0 0, 8 0, 0 8, 0 0))'"
   },
   {
     "name": "ST_CoordDim",
@@ -1070,7 +1090,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_CoordDim(ST_Point(1.5, 2.5)) -> 2\nST_CoordDim(ST_GeomFromText('POINTZ (1.5 2.5 3)')) -> 3"
+    "example": "ST_CoordDim(ST_Point(1.5, 2.5)) -> 2\nST_CoordDim(ST_GeomFromText('POINTZ (1.5 2.5 3)',true)) -> 3"
   },
   {
     "name": "ST_Crosses",
@@ -1080,7 +1100,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_Crosses(ST_GeomFromText('LINESTRING (0 0, 1 1)'), ST_GeomFromText('LINESTRING (1 0, 0 1))')) -> true\nST_Crosses(ST_GeomFromText('LINESTRING (2 0, 2 3)'), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))')) -> true\nST_Crosses(ST_GeomFromText('LINESTRING (0 2, 0 1)'), ST_GeomFromText('LINESTRING (2 0, 1 0)')) -> false"
+    "example": "ST_Crosses(ST_GeomFromText('LINESTRING (0 0, 1 1)',true), ST_GeomFromText('LINESTRING (1 0, 0 1))',true)) -> true\nST_Crosses(ST_GeomFromText('LINESTRING (2 0, 2 3)',true), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true)) -> true\nST_Crosses(ST_GeomFromText('LINESTRING (0 2, 0 1)',true), ST_GeomFromText('LINESTRING (2 0, 1 0)',true)) -> false"
   },
   {
     "name": "ST_Densify",
@@ -1090,7 +1110,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_AsText(ST_Densify(ST_GeomFromText('POLYGON ((0 0, 8 0, 0 8, 0 0))'),4)) -> 'POLYGON ((0 0, 4 0, 8 0, 5.333 2.667, 2.667 5.333, 0 8, 0 4, 0 0))'"
+    "example": "ST_AsText(ST_Densify(ST_GeomFromText('POLYGON ((0 0, 8 0, 0 8, 0 0))',true),4)) -> 'POLYGON ((0 0, 4 0, 8 0, 5.333 2.667, 2.667 5.333, 0 8, 0 4, 0 0))'"
   },
   {
     "name": "ST_Difference",
@@ -1100,7 +1120,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_AsText(ST_Difference(ST_GeomFromText('MULTIPOINT (1 1, 1.5 1.5, 2 2)'), ST_Point(1.5, 1.5))) -> 'MULTIPOINT ((1 1), (2 2))'\nST_AsText(ST_Difference(ST_GeomFromText('POLYGON ((0 0, 0 10, 10 10, 10 0))'), ST_GeomFromText('POLYGON ((0 0, 0 5, 5 5, 5 0))'))) -> 'POLYGON ((5 0, 10 0, 10 10, 0 10, 0 5, 5 5, 5 0))'"
+    "example": "ST_AsText(ST_Difference(ST_GeomFromText('MULTIPOINT (1 1, 1.5 1.5, 2 2)',true), ST_Point(1.5, 1.5))) -> 'MULTIPOINT ((1 1), (2 2))'\nST_AsText(ST_Difference(ST_GeomFromText('POLYGON ((0 0, 0 10, 10 10, 10 0))',true), ST_GeomFromText('POLYGON ((0 0, 0 5, 5 5, 5 0))',true))) -> 'POLYGON ((5 0, 10 0, 10 10, 0 10, 0 5, 5 5, 5 0))'"
   },
   {
     "name": "ST_Dimension",
@@ -1110,7 +1130,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_Dimension(ST_Point(1.5, 2.5)) -> 0\nST_Dimension(ST_GeomFromText('LINESTRING (1.5 2.5, 3.0 2.2)')) -> 1\nST_Dimension(ST_GeomFromText('POLYGON ((2 0, 2 3, 3 0))')) -> 2"
+    "example": "ST_Dimension(ST_Point(1.5, 2.5)) -> 0\nST_Dimension(ST_GeomFromText('LINESTRING (1.5 2.5, 3.0 2.2)',true)) -> 1\nST_Dimension(ST_GeomFromText('POLYGON ((2 0, 2 3, 3 0))',true)) -> 2"
   },
   {
     "name": "ST_Disjoint",
@@ -1120,7 +1140,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_Disjoint(ST_GeomFromText('LINESTRING (0 0, 0 1)'), ST_GeomFromText('LINESTRING (1 1, 1 0)')) -> true\nST_Disjoint(ST_GeomFromText('LINESTRING (0 0, 1 1)'), ST_GeomFromText('LINESTRING (1 0, 0 1)')) -> false"
+    "example": "ST_Disjoint(ST_GeomFromText('LINESTRING (0 0, 0 1)',true), ST_GeomFromText('LINESTRING (1 1, 1 0)',true)) -> true\nST_Disjoint(ST_GeomFromText('LINESTRING (0 0, 1 1)',true), ST_GeomFromText('LINESTRING (1 0, 0 1)',true)) -> false"
   },
   {
     "name": "ST_Distance",
@@ -1140,7 +1160,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_DWithin(ST_GeomFromText('POLYGON ((10.02 20.01, 11.92 35.64, 25.02 34.15, 19.15 33.94, 10.02 20.01))'), ST_Point (1,2),100) -> true\nST_DWithin(ST_GeomFromText('POLYGON ((101.02 200.01, 111.92 350.64, 250.02 340.15, 190.15 330.94, 101.02 200.01))'), ST_Point (10.02,20.01), 100) -> false"
+    "example": "ST_DWithin(ST_GeomFromText('POLYGON ((10.02 20.01, 11.92 35.64, 25.02 34.15, 19.15 33.94, 10.02 20.01))',true), ST_Point (1,2),100) -> true\nST_DWithin(ST_GeomFromText('POLYGON ((101.02 200.01, 111.92 350.64, 250.02 340.15, 190.15 330.94, 101.02 200.01))',true), ST_Point (10.02,20.01), 100) -> false"
   },
   {
     "name": "ST_EndPoint",
@@ -1150,7 +1170,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_AsText(ST_EndPoint(ST_GeomFromText('LINESTRING (1.5 2.5, 3.0 2.2)'))) -> 'POINT(3.0 2.2)'"
+    "example": "ST_AsText(ST_EndPoint(ST_GeomFromText('LINESTRING (1.5 2.5, 3.0 2.2)',true))) -> 'POINT(3.0 2.2)'"
   },
   {
     "name": "ST_Envelope",
@@ -1160,7 +1180,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_AsText(ST_Envelope(ST_GeomFromText('LINESTRING (0 0, 2 2))'))) -> 'POLYGON ((0 0, 2 0, 2 2, 0 2, 0 0))'\nST_AsText(ST_Envelope(ST_GeomFromText('POLYGON ((2 0, 2 3, 3 0))'))) -> 'POLYGON ((2 0, 3 0, 3 3, 2 3, 2 0))'"
+    "example": "ST_AsText(ST_Envelope(ST_GeomFromText('LINESTRING (0 0, 2 2))',true))) -> 'POLYGON ((0 0, 2 0, 2 2, 0 2, 0 0))'\nST_AsText(ST_Envelope(ST_GeomFromText('POLYGON ((2 0, 2 3, 3 0))',true))) -> 'POLYGON ((2 0, 3 0, 3 3, 2 3, 2 0))'"
   },
   {
     "name": "ST_EnvIntersects",
@@ -1170,7 +1190,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_EnvIntersects(ST_GeomFromText('LINESTRING (0 0, 1 1)'), ST_GeomFromText('LINESTRING (1 3, 2 2)')) -> false\nST_EnvIntersects(ST_GeomFromText('LINESTRING (0 0, 2 2)'), ST_GeomFromText('LINESTRING (1 0, 3 2)')) -> true"
+    "example": "ST_EnvIntersects(ST_GeomFromText('LINESTRING (0 0, 1 1)',true), ST_GeomFromText('LINESTRING (1 3, 2 2)',true)) -> false\nST_EnvIntersects(ST_GeomFromText('LINESTRING (0 0, 2 2)',true), ST_GeomFromText('LINESTRING (1 0, 3 2)',true)) -> true"
   },
   {
     "name": "ST_Equals",
@@ -1180,7 +1200,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_Equals(ST_GeomFromText('LINESTRING (0 0, 1 1)'),ST_GeomFromText('LINESTRING (1 1, 0 0)')) -> true\nST_Equals(ST_GeomFromText('LINESTRING (0 0, 1 1)'),ST_GeomFromText('LINESTRING (1 0, 0 1)')) -> false\nST_Equals(ST_GeomFromText('LINESTRING (0 0, 3 3)'),ST_GeomFromText('LINESTRING (3 3, 2 2, 1 1, 0 0)')) -> true"
+    "example": "ST_Equals(ST_GeomFromText('LINESTRING (0 0, 1 1)',true),ST_GeomFromText('LINESTRING (1 1, 0 0)',true)) -> true\nST_Equals(ST_GeomFromText('LINESTRING (0 0, 1 1)',true),ST_GeomFromText('LINESTRING (1 0, 0 1)',true)) -> false\nST_Equals(ST_GeomFromText('LINESTRING (0 0, 3 3)',true),ST_GeomFromText('LINESTRING (3 3, 2 2, 1 1, 0 0)',true)) -> true"
   },
   {
     "name": "ST_ExteriorRing",
@@ -1190,7 +1210,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_AsText(ST_ExteriorRing(ST_GeomFromText('POLYGON ((1 1, 1 4, 4 1))'))) -> 'LINESTRING (1 1, 4 1, 1 4, 1 1)'\nST_AsText(ST_ExteriorRing(ST_GeomFromText('POLYGON ((0 0, 8 0, 0 8, 0 0), (1 1, 1 5, 5 1, 1 1))'))) -> 'LINESTRING (0 0, 8 0, 0 8, 0 0)'"
+    "example": "ST_AsText(ST_ExteriorRing(ST_GeomFromText('POLYGON ((1 1, 1 4, 4 1))',true))) -> 'LINESTRING (1 1, 4 1, 1 4, 1 1)'\nST_AsText(ST_ExteriorRing(ST_GeomFromText('POLYGON ((0 0, 8 0, 0 8, 0 0), (1 1, 1 5, 5 1, 1 1))',true))) -> 'LINESTRING (0 0, 8 0, 0 8, 0 0)'"
   },
   {
     "name": "ST_Generalize",
@@ -1200,7 +1220,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_AsText(ST_Generalize(ST_GeomFromText('POLYGON ((0 0, 1 1, 2 0, 3 2, 4 1, 5 0, 5 10, 0 10))'), 2, true)) -> 'POLYGON ((0 0, 5 0, 5 10, 0 10, 0 0))'"
+    "example": "ST_AsText(ST_Generalize(ST_GeomFromText('POLYGON ((0 0, 1 1, 2 0, 3 2, 4 1, 5 0, 5 10, 0 10))',true), 2, true)) -> 'POLYGON ((0 0, 5 0, 5 10, 0 10, 0 0))'"
   },
   {
     "name": "ST_GeodesicAreaWGS84",
@@ -1210,7 +1230,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_GeodesicAreaWGS84(ST_GeomFromText('POLYGON ((-114.04702599994988 39.90609700007656, -114.0500520000997 37.0001909997149, -109.04517199998776 36.99897700038832, -109.05002599989996 41.000691000389395, -111.04681499981234 40.997875000031286, -111.04671399965133 42.00170200004732, -114.04147700036322 41.99387299963928, -114.04702599994988 39.90609700007656))'))/4047 AS utah_acreage -> 5.416484897473004E7"
+    "example": "ST_GeodesicAreaWGS84(ST_GeomFromText('POLYGON ((-114.04702599994988 39.90609700007656, -114.0500520000997 37.0001909997149, -109.04517199998776 36.99897700038832, -109.05002599989996 41.000691000389395, -111.04681499981234 40.997875000031286, -111.04671399965133 42.00170200004732, -114.04147700036322 41.99387299963928, -114.04702599994988 39.90609700007656))',true))/4047 AS utah_acreage -> 5.416484897473004E7"
   },
   {
     "name": "ST_GeodesicLengthWGS84",
@@ -1220,7 +1240,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_GeodesicLengthWGS84(ST_GeomFromText('MultiLineString((0.0 80.0, 0.3 80.4))', 4326)) -> 45026.96274781222"
+    "example": "ST_GeodesicLengthWGS84(ST_GeomFromText('MultiLineString((0.0 80.0, 0.3 80.4))', true, 4326)) -> 45026.96274781222"
   },
   {
     "name": "ST_GeometryN",
@@ -1230,7 +1250,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_AsText(ST_GeometryN(ST_GeomFromText('MULTIPOINT (10 40, 40 30, 20 20, 30 10)'), 3)) -> 'POINT (20 20)'\nST_AsText(ST_GeometryN(ST_GeomFromText('MULTILINESTRING ((2 4, 10 10), (20 20, 7 8))'), 2)) -> 'LINESTRING (20 20, 7 8)'"
+    "example": "ST_AsText(ST_GeometryN(ST_GeomFromText('MULTIPOINT (10 40, 40 30, 20 20, 30 10)',true), 3)) -> 'POINT (20 20)'\nST_AsText(ST_GeometryN(ST_GeomFromText('MULTILINESTRING ((2 4, 10 10), (20 20, 7 8))',true), 2)) -> 'LINESTRING (20 20, 7 8)'"
   },
   {
     "name": "ST_GeometryType",
@@ -1240,7 +1260,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_GeometryType(ST_Point(1.5, 2.5)) -> 'ST_POINT'\nST_GeometryType(ST_GeomFromText('LINESTRING (1.5 2.5, 3.0 2.2)')) -> 'ST_LINESTRING'\nST_GeometryType(ST_GeomFromText('POLYGON ((2 0, 2 3, 3 0))')) -> 'ST_POLYGON'"
+    "example": "ST_GeometryType(ST_Point(1.5, 2.5)) -> 'ST_POINT'\nST_GeometryType(ST_GeomFromText('LINESTRING (1.5 2.5, 3.0 2.2)',true)) -> 'ST_LINESTRING'\nST_GeometryType(ST_GeomFromText('POLYGON ((2 0, 2 3, 3 0))',true)) -> 'ST_POLYGON'"
   },
   {
     "name": "ST_GeomFromEWKB",
@@ -1315,7 +1335,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_AsText(ST_InteriorRingN(ST_GeomFromText('polygon ((0 0, 8 0, 0 8, 0 0), (1 1, 1 5, 5 1, 1 1))'), 1)) -> 'LINESTRING (1 1, 1 5, 5 1, 1 1)'"
+    "example": "ST_AsText(ST_InteriorRingN(ST_GeomFromText('polygon ((0 0, 8 0, 0 8, 0 0), (1 1, 1 5, 5 1, 1 1))',true), 1)) -> 'LINESTRING (1 1, 1 5, 5 1, 1 1)'"
   },
   {
     "name": "ST_Intersection",
@@ -1325,7 +1345,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_AsText(ST_Intersection(ST_Point(1,1), ST_Point(1,1))) -> 'POINT (1 1)'\nST_AsText(ST_Intersection(ST_GeomFromText('LINESTRING(0 2, 0 0, 2 0)'), ST_GeomFromText('LINESTRING(0 3, 0 1, 1 0, 3 0)'))) -> 'MULTILINESTRING ((1 0, 2 0), (0 2, 0 1))'\nST_AsText(ST_Intersection(ST_GeomFromText('POLYGON ((2 0, 2 3, 3 0))'), ST_GeomFromText('POLYGON ((1 1, 4 1, 4 4, 1 4))'))) -> 'POLYGON ((2 1, 2.666666666666667 1, 2 3, 2 1))'"
+    "example": "ST_AsText(ST_Intersection(ST_Point(1,1), ST_Point(1,1))) -> 'POINT (1 1)'\nST_AsText(ST_Intersection(ST_GeomFromText('LINESTRING(0 2, 0 0, 2 0)',true), ST_GeomFromText('LINESTRING(0 3, 0 1, 1 0, 3 0)',true))) -> 'MULTILINESTRING ((1 0, 2 0), (0 2, 0 1))'\nST_AsText(ST_Intersection(ST_GeomFromText('POLYGON ((2 0, 2 3, 3 0))',true), ST_GeomFromText('POLYGON ((1 1, 4 1, 4 4, 1 4))',true))) -> 'POLYGON ((2 1, 2.666666666666667 1, 2 3, 2 1))'"
   },
   {
     "name": "ST_Intersects",
@@ -1335,7 +1355,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_Intersects(ST_GeomFromText('LINESTRING (2 0, 2 3)'), ST_GeomFromText('POLYGON ((1 1, 4 1, 4 4, 1 4))')) -> true\nST_Intersects(ST_GeomFromText('LINESTRING (8 7, 7 8)'), ST_GeomFromText('POLYGON ((1 1, 4 1, 4 4, 1 4))')) -> false"
+    "example": "ST_Intersects(ST_GeomFromText('LINESTRING (2 0, 2 3)',true), ST_GeomFromText('POLYGON ((1 1, 4 1, 4 4, 1 4))',true)) -> true\nST_Intersects(ST_GeomFromText('LINESTRING (8 7, 7 8)',true), ST_GeomFromText('POLYGON ((1 1, 4 1, 4 4, 1 4))',true)) -> false"
   },
   {
     "name": "ST_Is3D",
@@ -1345,7 +1365,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_Is3D(ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))')) -> false\nST_Is3D(ST_GeomFromText('LINESTRING (0 0, 3 4, 0 4, 0 0)')) -> false\nST_Is3D(ST_Point(3, 4)) -> false\nST_Is3D(ST_PointZ(3, 4, 2)) -> true"
+    "example": "ST_Is3D(ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true)) -> false\nST_Is3D(ST_GeomFromText('LINESTRING (0 0, 3 4, 0 4, 0 0)',true)) -> false\nST_Is3D(ST_Point(3, 4)) -> false\nST_Is3D(ST_PointZ(3, 4, 2)) -> true"
   },
   {
     "name": "ST_IsClosed",
@@ -1355,7 +1375,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_IsClosed(ST_GeomFromText('LINESTRING(0 0, 3 4, 0 4, 0 0)')) -> true\nST_IsClosed(ST_GeomFromText('LINESTRING(0 0, 3 4)')) -> false"
+    "example": "ST_IsClosed(ST_GeomFromText('LINESTRING(0 0, 3 4, 0 4, 0 0)',true)) -> true\nST_IsClosed(ST_GeomFromText('LINESTRING(0 0, 3 4)',true)) -> false"
   },
   {
     "name": "ST_IsEmpty",
@@ -1365,7 +1385,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_IsEmpty(ST_Point(1.5, 2.5)) -> false\nST_IsEmpty(ST_GeomFromText('POINT EMPTY')) -> true"
+    "example": "ST_IsEmpty(ST_Point(1.5, 2.5)) -> false\nST_IsEmpty(ST_GeomFromText('POINT EMPTY',true)) -> true"
   },
   {
     "name": "ST_IsMeasured",
@@ -1375,7 +1395,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_IsMeasured(ST_PointZ(3, 4, 2)) -> false\nST_IsMeasured(ST_GeomFromText('POINT M (1 1 80)')) -> true\nST_IsMeasured(ST_GeomFromText('POINT ZM (1 1 5 60)')) -> true"
+    "example": "ST_IsMeasured(ST_PointZ(3, 4, 2)) -> false\nST_IsMeasured(ST_GeomFromText('POINT M (1 1 80)',true)) -> true\nST_IsMeasured(ST_GeomFromText('POINT ZM (1 1 5 60)',true)) -> true"
   },
   {
     "name": "ST_IsRing",
@@ -1385,7 +1405,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_IsRing(ST_GeomFromText('LINESTRING (0 0, 3 4, 0 4, 0 0)')) -> true\nST_IsRing(ST_GeomFromText('LINESTRING (0 0, 1 1, 1 2, 2 1, 1 1, 0 0)')) -> false\nST_IsRing(ST_GeomFromText('LINESTRING (0 0, 3 4)')) -> false"
+    "example": "ST_IsRing(ST_GeomFromText('LINESTRING (0 0, 3 4, 0 4, 0 0)',true)) -> true\nST_IsRing(ST_GeomFromText('LINESTRING (0 0, 1 1, 1 2, 2 1, 1 1, 0 0)',true)) -> false\nST_IsRing(ST_GeomFromText('LINESTRING (0 0, 3 4)',true)) -> false"
   },
   {
     "name": "ST_IsSimple",
@@ -1395,17 +1415,17 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_IsSimple(ST_Point(1.5, 2.5)) -> true\nST_IsSimple(ST_GeomFromText('LINESTRING (0 0, 1 1, 0 1, 1 0)')) -> false"
+    "example": "ST_IsSimple(ST_Point(1.5, 2.5)) -> true\nST_IsSimple(ST_GeomFromText('LINESTRING (0 0, 1 1, 0 1, 1 0)',true)) -> false"
   },
   {
     "name": "ST_JSONPath",
     "args": "([string] jsonPath, [string] jsonData)",
     "returnType": "string",
-    "description": "Extract a portion of {{jsonData}} as a string by following the specified path in the JSON Object from {{jsonPath}}.",
+    "description": "Extract a portion of {{jsonData}} as a string by following the specified path in the JSON Object from {{jsonPath}}.\n**Example JSON Path Syntax (similar to XPath for XML):**\n'/data[Array]'\n'/data[Array][1]/id[String]'\n'/data[Array][1]/likes[Object]'\n'/data[Array][1]/likes[Object]/summary[Object]/total_count[String]'\n'/data[Array][3]'\n'/data[Array][id=131272076894593_1420960724592382]/likes[Object]/summary[Object]/total_count'\n'/fbids[String]'\n'/quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/enterpriseValue[Object]/fmt[String]'\n'/quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/forwardPE[Object]/raw[Double]'\n'quoteSummary[6]/result[4][0]/defaultKeyStatistics[6]/sharesOutstanding[6]/raw[1]'\n'quoteSummary[6]/result[Array]'\n'quoteSummary[6]/result[Array][0]'\n'quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/lastSplitDate[Object]/raw1[Long]'\n'quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/sharesOutstanding[Object]/raw[Integer]'",
     "tags": [
       "gis"
     ],
-    "example": "ST_JSONPath('/coordinates[Array][0]',ST_AsGeoJSON(ST_Envelope(the_geom))) FROM utah_county_taxparcels\nST_JSONPath('/crs[Object]/properties[Object]/name',ST_AsGeoJSON(ST_Envelope(the_geom))) FROM utah_county_taxparcels\n\n**Example JSON Path Syntax (similar to XPath for XML):**\n'/data[Array]'\n'/data[Array][1]/id[String]'\n'/data[Array][1]/likes[Object]'\n'/data[Array][1]/likes[Object]/summary[Object]/total_count[String]'\n'/data[Array][3]'\n'/data[Array][id=131272076894593_1420960724592382]/likes[Object]/summary[Object]/total_count'\n'/fbids[String]'\n'/quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/enterpriseValue[Object]/fmt[String]'\n'/quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/forwardPE[Object]/raw[Double]'\n'quoteSummary[6]/result[4][0]/defaultKeyStatistics[6]/sharesOutstanding[6]/raw[1]'\n'quoteSummary[6]/result[Array]'\n'quoteSummary[6]/result[Array][0]'\n'quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/lastSplitDate[Object]/raw1[Long]'\n'quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/sharesOutstanding[Object]/raw[Integer]'"
+    "example": "ST_JSONPath('/coordinates[Array][0]',ST_AsGeoJSON(ST_Envelope(ST_GeomFromText('POLYGON ((-114.04702599994988 39.90609700007656, -114.0500520000997 37.0001909997149, -109.04517199998776 36.99897700038832, -109.05002599989996 41.000691000389395, -111.04681499981234 40.997875000031286, -111.04671399965133 42.00170200004732, -114.04147700036322 41.99387299963928, -114.04702599994988 39.90609700007656))',true)))) -> '[[-114.0500520000997,36.99897700038832],[-109.04517199998776,36.99897700038832],[-109.04517199998776,42.00170200004732],[-114.0500520000997,42.00170200004732],[-114.0500520000997,36.99897700038832]]'"
   },
   {
     "name": "ST_Length",
@@ -1415,7 +1435,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_Length(ST_GeomFromText('LINESTRING (0 0, 3 4)')) -> 5.0\nST_Length(ST_GeomFromText('MULTILINESTRING ((1 0, 2 0), (0 2, 0 1))')) -> 2.0"
+    "example": "ST_Length(ST_GeomFromText('LINESTRING (0 0, 3 4)',true)) -> 5.0\nST_Length(ST_GeomFromText('MULTILINESTRING ((1 0, 2 0), (0 2, 0 1))',true)) -> 2.0"
   },
   {
     "name": "ST_M",
@@ -1425,7 +1445,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_M(ST_GeomFromText('POINT M (1 1 80)')) -> 80.0\nST_M(ST_GeomFromText('POINT ZM (1 1 5 60)')) -> 60.0"
+    "example": "ST_M(ST_GeomFromText('POINT M (1 1 80)',true)) -> 80.0\nST_M(ST_GeomFromText('POINT ZM (1 1 5 60)',true)) -> 60.0"
   },
   {
     "name": "ST_MaxM",
@@ -1435,7 +1455,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_MaxM(ST_GeomFromText('LINESTRING M (1.5 2.5 2, 3.0 2.2 1)')) -> 2.0\nST_MaxM(ST_GeomFromText('POINT M (1.5 2.5 3)')) -> 3.0"
+    "example": "ST_MaxM(ST_GeomFromText('LINESTRING M (1.5 2.5 2, 3.0 2.2 1)',true)) -> 2.0\nST_MaxM(ST_GeomFromText('POINT M (1.5 2.5 3)',true)) -> 3.0"
   },
   {
     "name": "ST_MaxX",
@@ -1445,7 +1465,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_MaxX(ST_GeomFromText('LINESTRING M (1.5 2.5 2, 3.0 2.2 1)')) -> 3.0\nST_MaxX(ST_GeomFromText('POINT M (1.5 2.5 3)')) -> 1.5"
+    "example": "ST_MaxX(ST_GeomFromText('LINESTRING M (1.5 2.5 2, 3.0 2.2 1)',true)) -> 3.0\nST_MaxX(ST_GeomFromText('POINT M (1.5 2.5 3)',true)) -> 1.5"
   },
   {
     "name": "ST_MaxY",
@@ -1455,7 +1475,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_MaxY(ST_GeomFromText('LINESTRING M (1.5 2.5 2, 3.0 2.2 1)')) -> 2.5\nST_MaxY(ST_GeomFromText('POINT M (1.5 2.5 3)')) -> 2.5"
+    "example": "ST_MaxY(ST_GeomFromText('LINESTRING M (1.5 2.5 2, 3.0 2.2 1)',true)) -> 2.5\nST_MaxY(ST_GeomFromText('POINT M (1.5 2.5 3)',true)) -> 2.5"
   },
   {
     "name": "ST_MaxZ",
@@ -1465,7 +1485,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_MaxZ(ST_GeomFromText('LINESTRING ZM (1.5 2.5 2 60, 3.0 2.2 1 80)')) -> 2.0\nST_MaxZ(ST_GeomFromText('LINESTRING Z (1.5 2.5 3, 3.0 2.2 4)')) -> 4.0"
+    "example": "ST_MaxZ(ST_GeomFromText('LINESTRING ZM (1.5 2.5 2 60, 3.0 2.2 1 80)',true)) -> 2.0\nST_MaxZ(ST_GeomFromText('LINESTRING Z (1.5 2.5 3, 3.0 2.2 4)',true)) -> 4.0"
   },
   {
     "name": "ST_MinM",
@@ -1475,7 +1495,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_MinM(ST_GeomFromText('LINESTRING M (1.5 2.5 2, 3.0 2.2 1)')) -> 1.0\nST_MinM(ST_GeomFromText('POINT M (1.5 2.5 3)')) -> 3.0"
+    "example": "ST_MinM(ST_GeomFromText('LINESTRING M (1.5 2.5 2, 3.0 2.2 1)',true)) -> 1.0\nST_MinM(ST_GeomFromText('POINT M (1.5 2.5 3)',true)) -> 3.0"
   },
   {
     "name": "ST_MinX",
@@ -1485,7 +1505,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_MinX(ST_GeomFromText('LINESTRING M (1.25 2.5 2, 3.0 2.2 1)')) -> 1.25\nST_MinX(ST_GeomFromText('POINT M (1.75 2.5 3)')) -> 1.75"
+    "example": "ST_MinX(ST_GeomFromText('LINESTRING M (1.25 2.5 2, 3.0 2.2 1)',true)) -> 1.25\nST_MinX(ST_GeomFromText('POINT M (1.75 2.5 3)',true)) -> 1.75"
   },
   {
     "name": "ST_MinY",
@@ -1495,7 +1515,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_MinY(ST_GeomFromText('LINESTRING M (1.5 2.5 2, 3.0 2.2 1)')) -> 2.2\nST_MinY(ST_GeomFromText('POINT M (1.5 2.25 3)')) -> 2.25"
+    "example": "ST_MinY(ST_GeomFromText('LINESTRING M (1.5 2.5 2, 3.0 2.2 1)',true)) -> 2.2\nST_MinY(ST_GeomFromText('POINT M (1.5 2.25 3)',true)) -> 2.25"
   },
   {
     "name": "ST_MinZ",
@@ -1505,7 +1525,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_MinZ(ST_GeomFromText('LINESTRING ZM (1.5 2.5 2 60, 3.0 2.2 1 80)')) -> 1.0\nST_MinZ(ST_GeomFromText('LINESTRING Z (1.5 2.5 3, 3.0 2.2 4)')) -> 3.0"
+    "example": "ST_MinZ(ST_GeomFromText('LINESTRING ZM (1.5 2.5 2 60, 3.0 2.2 1 80)',true)) -> 1.0\nST_MinZ(ST_GeomFromText('LINESTRING Z (1.5 2.5 3, 3.0 2.2 4)',true)) -> 3.0"
   },
   {
     "name": "ST_NumGeometries",
@@ -1515,7 +1535,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_NumGeometries(ST_GeomFromText('MULTIPOINT ((10 40), (40 30), (20 20), (30 10))')) -> 4\nST_NumGeometries(ST_GeomFromText('MULTILINESTRING ((2 4, 10 10), (20 20, 7 8))')) -> 2"
+    "example": "ST_NumGeometries(ST_GeomFromText('MULTIPOINT ((10 40), (40 30), (20 20), (30 10))',true)) -> 4\nST_NumGeometries(ST_GeomFromText('MULTILINESTRING ((2 4, 10 10), (20 20, 7 8))',true)) -> 2"
   },
   {
     "name": "ST_NumInteriorRing",
@@ -1525,7 +1545,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_NumInteriorRing(ST_GeomFromText('POLYGON ((0 0, 8 0, 0 8, 0 0), (1 1, 1 5, 5 1, 1 1))')) -> 1"
+    "example": "ST_NumInteriorRing(ST_GeomFromText('POLYGON ((0 0, 8 0, 0 8, 0 0), (1 1, 1 5, 5 1, 1 1))',true)) -> 1"
   },
   {
     "name": "ST_NumPoints",
@@ -1535,7 +1555,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_NumPoints(ST_Point(1.5, 2.5)) -> 1\nST_NumPoints(ST_GeomFromText('LINESTRING (1.5 2.5, 3.0 2.2)')) -> 2\nST_NumPoints((ST_GeomFromText('POLYGON ((0 0, 10 0, 0 10, 0 0))'))) -> 4"
+    "example": "ST_NumPoints(ST_Point(1.5, 2.5)) -> 1\nST_NumPoints(ST_GeomFromText('LINESTRING (1.5 2.5, 3.0 2.2)',true)) -> 2\nST_NumPoints((ST_GeomFromText('POLYGON ((0 0, 10 0, 0 10, 0 0))',true))) -> 4"
   },
   {
     "name": "ST_Overlaps",
@@ -1545,7 +1565,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_Overlaps(ST_GeomFromText('POLYGON ((2 0, 2 3, 3 0))'), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))')) -> true\nST_Overlaps(ST_GeomFromText('POLYGON ((2 0, 2 1, 3 1))'), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))')) -> false"
+    "example": "ST_Overlaps(ST_GeomFromText('POLYGON ((2 0, 2 3, 3 0))',true), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true)) -> true\nST_Overlaps(ST_GeomFromText('POLYGON ((2 0, 2 1, 3 1))',true), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true)) -> false"
   },
   {
     "name": "ST_Point",
@@ -1564,7 +1584,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_AsText(ST_PointN(ST_GeomFromText('LINESTRING (1.5 2.5, 3.0 2.2)'), 2)) -> 'POINT (3 2.2)'"
+    "example": "ST_AsText(ST_PointN(ST_GeomFromText('LINESTRING (1.5 2.5, 3.0 2.2)',true), 2)) -> 'POINT (3 2.2)'"
   },
   {
     "name": "ST_PointZ",
@@ -1583,7 +1603,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_Relate(ST_GeomFromText('POLYGON ((2 0, 2 1, 3 1))'), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))'), '****T****') -> true\nST_Relate(ST_GeomFromText('POLYGON ((2 0, 2 1, 3 1))'), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))'), 'T********') -> false\nST_Relate(ST_GeomFromText('LINESTRING (0 0, 3 3)'), ST_GeomFromText('LINESTRING (1 1, 4 4)'), 'T********') -> true\nST_Relate(ST_GeomFromText('LINESTRING (0 0, 3 3)'), ST_GeomFromText('LINESTRING (1 1, 4 4)'), '****T****') -> false"
+    "example": "ST_Relate(ST_GeomFromText('POLYGON ((2 0, 2 1, 3 1))',true), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true), '****T****') -> true\nST_Relate(ST_GeomFromText('POLYGON ((2 0, 2 1, 3 1))',true), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true), 'T********') -> false\nST_Relate(ST_GeomFromText('LINESTRING (0 0, 3 3)',true), ST_GeomFromText('LINESTRING (1 1, 4 4)',true), 'T********') -> true\nST_Relate(ST_GeomFromText('LINESTRING (0 0, 3 3)',true), ST_GeomFromText('LINESTRING (1 1, 4 4)',true), '****T****') -> false"
   },
   {
     "name": "ST_SetSRID",
@@ -1611,7 +1631,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_AsText(ST_StartPoint(ST_GeomFromText('LINESTRING (1.5 2.5, 3.0 2.2)'))) -> 'POINT(1.5 2.5)'"
+    "example": "ST_AsText(ST_StartPoint(ST_GeomFromText('LINESTRING (1.5 2.5, 3.0 2.2)',true))) -> 'POINT(1.5 2.5)'"
   },
   {
     "name": "ST_SymmetricDiff",
@@ -1621,7 +1641,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_AsText(ST_SymmetricDiff(ST_GeomFromText('LINESTRING (0 2, 2 2)'), ST_GeomFromText('LINESTRING (1 2, 3 2)'))) -> 'MULTILINESTRING ((0 2, 1 2), (2 2, 3 2))'\nST_AsText(ST_SymmetricDiff(ST_GeomFromText('POLYGON ((0 0, 2 0, 2 2, 0 2, 0 0))'), ST_GeomFromText('POLYGON ((1 1, 3 1, 3 3, 1 3, 1 1))'))) --> 'MULTIPOLYGON (((0 0, 2 0, 2 1, 1 1, 1 2, 0 2, 0 0)), ((2 1, 3 1, 3 3, 1 3, 1 2, 2 2, 2 1)))' "
+    "example": "ST_AsText(ST_SymmetricDiff(ST_GeomFromText('LINESTRING (0 2, 2 2)',true), ST_GeomFromText('LINESTRING (1 2, 3 2)',true))) -> 'MULTILINESTRING ((0 2, 1 2), (2 2, 3 2))'\nST_AsText(ST_SymmetricDiff(ST_GeomFromText('POLYGON ((0 0, 2 0, 2 2, 0 2, 0 0))',true), ST_GeomFromText('POLYGON ((1 1, 3 1, 3 3, 1 3, 1 1))',true))) -> 'MULTIPOLYGON (((0 0, 2 0, 2 1, 1 1, 1 2, 0 2, 0 0)), ((2 1, 3 1, 3 3, 1 3, 1 2, 2 2, 2 1)))'"
   },
   {
     "name": "ST_Touches",
@@ -1631,7 +1651,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_Touches(ST_Point(1, 2), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))')) -> true\nST_Touches(ST_Point(8, 8), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))')) -> false"
+    "example": "ST_Touches(ST_Point(1, 2), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true)) -> true\nST_Touches(ST_Point(8, 8), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true)) -> false"
   },
   {
     "name": "ST_Transform",
@@ -1641,7 +1661,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_AsText(ST_Transform(ST_GeomFromText('POLYGON ((-114.04702599994988 39.90609700007656, -114.0500520000997 37.0001909997149, -109.04517199998776 36.99897700038832, -109.05002599989996 41.000691000389395, -111.04681499981234 40.997875000031286, -111.04671399965133 42.00170200004732, -114.04147700036322 41.99387299963928, -114.04702599994988 39.90609700007656))'), 4326, 3857)) -> 'POLYGON ((-12695656.860801652 4852305.919673687, -12695993.71359747 4439133.410181124, -12138853.020503571 4438964.195256694, -12139393.365302108 5012443.58678148, -12361674.899993964 5012028.231889712, -12361663.65670747 5161234.398812287, -12695039.148993252 5160061.69329091, -12695656.860801652 4852305.919673687))'"
+    "example": "ST_AsText(ST_Transform(ST_GeomFromText('POLYGON ((-114.04702599994988 39.90609700007656, -114.0500520000997 37.0001909997149, -109.04517199998776 36.99897700038832, -109.05002599989996 41.000691000389395, -111.04681499981234 40.997875000031286, -111.04671399965133 42.00170200004732, -114.04147700036322 41.99387299963928, -114.04702599994988 39.90609700007656))', true), 4326, 3857)) -> 'POLYGON ((-12695656.860801652 4852305.919673687, -12695993.71359747 4439133.410181124, -12138853.020503571 4438964.195256694, -12139393.365302108 5012443.58678148, -12361674.899993964 5012028.231889712, -12361663.65670747 5161234.398812287, -12695039.148993252 5160061.69329091, -12695656.860801652 4852305.919673687))'"
   },
   {
     "name": "ST_Union",
@@ -1651,7 +1671,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_AsText(ST_Union(ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))'), ST_GeomFromText('POLYGON ((4 1, 4 4, 4 8, 8 1))'))) -> 'POLYGON ((1 1, 4 1, 8 1, 4 8, 4 4, 1 4, 1 1))'"
+    "example": "ST_AsText(ST_Union(ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true), ST_GeomFromText('POLYGON ((4 1, 4 4, 4 8, 8 1))',true))) -> 'POLYGON ((1 1, 4 1, 8 1, 4 8, 4 4, 1 4, 1 1))'"
   },
   {
     "name": "ST_Union",
@@ -1661,7 +1681,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_AsText(ST_Union(ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))'), ST_GeomFromText('POLYGON ((4 1, 4 4, 4 8, 8 1))'))) -> 'POLYGON ((1 1, 4 1, 8 1, 4 8, 4 4, 1 4, 1 1))'"
+    "example": "ST_AsText(ST_Union(ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true), ST_GeomFromText('POLYGON ((4 1, 4 4, 4 8, 8 1))',true))) -> 'POLYGON ((1 1, 4 1, 8 1, 4 8, 4 4, 1 4, 1 1))'"
   },
   {
     "name": "ST_Within",
@@ -1671,7 +1691,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_Within(ST_Point(2, 3), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))')) -> true\nST_Within(ST_Point(8, 8), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))')) -> false"
+    "example": "ST_Within(ST_Point(2, 3), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true)) -> true\nST_Within(ST_Point(8, 8), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true)) -> false"
   },
   {
     "name": "ST_X",
@@ -1691,7 +1711,7 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_Y(ST_GeomFromText('POINT (5 7)')) -> 7.0"
+    "example": "ST_Y(ST_GeomFromText('POINT (5 7)',true)) -> 7.0"
   },
   {
     "name": "ST_Z",
@@ -1701,6 +1721,6 @@
     "tags": [
       "gis"
     ],
-    "example": "ST_Z(ST_GeomFromText('POINT Z (5 7 9)')) -> 9.0"
+    "example": "ST_Z(ST_GeomFromText('POINT Z (5 7 9)',true)) -> 9.0"
   }
 ]

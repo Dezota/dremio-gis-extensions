@@ -4,6 +4,5 @@ author:
 - Brian K. Holman
 keywords: [GIS, Dremio]
 abstract: |
-  Complete Reference to the 72 GIS-related functions in the *GIS Extensions
-  for Dremio* implementation including syntax, return type, and examples.
+  Complete Reference to the 76 GIS-related functions and 21 H3 index functions including syntax, return type, and examples.
 ...
