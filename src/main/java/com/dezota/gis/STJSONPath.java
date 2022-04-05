@@ -75,10 +75,10 @@ public class STJSONPath implements SimpleFunction {
                 jsonData.buffer);
         String jsonPathString = com.dezota.gis.FunctionHelpers.toStringFromUTF8(jsonPath.start, jsonPath.end,
                 jsonPath.buffer);
-        JSONDataReader jdr = new JSONDataReader();
+        com.dezota.gis.JSONDataReader jdr = new com.dezota.gis.JSONDataReader();
         jdr.SUPPRESS_JSON_EXCEPTION = false;
         String outputString = null;
-        org.codehaus.jettison.json.JSONObject jsonDataObj= null;
+        org.codehaus.jettison.json.JSONObject jsonDataObj = null;
         try {
             jsonDataObj = new org.codehaus.jettison.json.JSONObject(jsonDataString);
             try {

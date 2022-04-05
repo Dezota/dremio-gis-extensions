@@ -70,18 +70,24 @@ public class GISQueries {
                                     sql = exampleLine[0];
                                 System.out.println("Executing statement...");
                                 System.out.println(sql);
-                                ResultSet rs = stmt.executeQuery(sql);
+                                try {
+                                    ResultSet rs = stmt.executeQuery(sql);
 
-                                System.out.print("Printing the result\n");
-                                System.out.print("-------------------\n");
+                                    System.out.print("Printing the result\n");
+                                    System.out.print("-------------------\n");
 
-                                while (rs.next()) {
-                                    System.out.print("Actual Results:" + rs.getString(1) + "\n");
-                                    System.out.print("Expected Results:" + exampleLine[1] + "\n");
+                                    while (rs.next()) {
+                                        System.out.print("Actual Results:" + rs.getString(1) + "\n");
+                                        System.out.print("Expected Results:" + exampleLine[1] + "\n");
+                                    }
+
+                                    System.out.print("-------------------\n");
+                                    rs.close();
                                 }
-
-                                System.out.print("-------------------\n");
-                                rs.close();
+                                catch (Exception e)
+                                {
+                                    System.err.println("QUERY FAILED: " + sql);
+                                }
                             }
                         }
                     }

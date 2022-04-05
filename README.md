@@ -77,6 +77,3 @@ The ```com.esri.geometry:esri-geometry-api```,```org.osgeo:proj4j```, and ```com
 Dremio. The first two are automatically included as shade jars in the final jar with the maven build process and don't need to be
 included separately in `/opt/dremio/jars/3rdparty`.  The third library needs to be copied into the `3rdparty` folder.  This is because our
 default docker image requires a rebuild of the native H3 library.  See [docker-h3-java-build](./docker-h3-java-build/README.md) for details.
-
-
-
