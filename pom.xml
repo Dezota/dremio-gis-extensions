@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.dezota.gis</groupId>
   <artifactId>dremio-gis-extensions</artifactId>
-  <version>20.1.0-202202061055110045-36733c65</version>
+  <version>21.1.1-202204292111390812-57b1832f</version>
   <licenses>
     <license>
       <name>The Apache License, Version 2.0</name>
@@ -22,7 +22,7 @@
     <dependency>
       <groupId>com.dremio.sabot</groupId>
       <artifactId>dremio-sabot-kernel</artifactId>
-      <version>20.1.0-202202061055110045-36733c65</version>
+      <version>21.1.1-202204292111390812-57b1832f</version>
       <type>jar</type>
     </dependency>
     <dependency>

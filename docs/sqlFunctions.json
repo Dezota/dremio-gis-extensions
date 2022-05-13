@@ -1,1726 +1,1726 @@
 [
-  {
-    "name": "AVG",
-    "args": "([number] {x})",
-    "returnType": "number",
-    "tags": [
-      "aggregate"
-    ],
-    "description": "Aggregate function. Returns the average value of {{x}}."
-  },
-  {
-    "name": "COUNT",
-    "args": "(*)",
-    "returnType": "number",
-    "description": "Gives the total number of records."
-  },
-  {
-    "name": "COUNT",
-    "args": "(DISTINCT [field name] {givenfield})",
-    "returnType": "number",
-    "tags": [
-      "aggregate"
-    ],
-    "description": "Aggregate function. Gives the number of distinct values in the field named {{givenfield}}."
-  },
-  {
-    "name": "MAX",
-    "args": "([number] {x})",
-    "returnType": "number",
-    "tags": [
-      "aggregate"
-    ],
-    "description": "Aggregate function. Returns the maximum value of {{x}}."
-  },
-  {
-    "name": "MAX",
-    "args": "([timetype] {giventime})",
-    "returnType": "timetype",
-    "tags": [
-      "aggregate"
-    ],
-    "description": "Aggregate function. Returns the latest value of {{giventime}}."
-  },
-  {
-    "name": "MIN",
-    "args": "([number] {x})",
-    "returnType": "number",
-    "tags": [
-      "aggregate"
-    ],
-    "description": "Aggregate function. Returns the minimum value of {{x}}."
-  },
-  {
-    "name": "MIN",
-    "args": "([timetype] {giventime})",
-    "returnType": "timetype",
-    "tags": [
-      "aggregate"
-    ],
-    "description": "Aggregate function. Returns the earliest value of {{giventime}}."
-  },
-  {
-    "name": "SUM",
-    "args": "([timeinterval] {giveninterval})",
-    "returnType": "timeinterval",
-    "tags": [
-      "aggregate"
-    ],
-    "description": "Aggregate function. Returns the sum of values of {{giveninterval}}."
-  },
-  {
-    "name": "SUM",
-    "args": "([number] {x})",
-    "returnType": "number",
-    "tags": [
-      "aggregate"
-    ],
-    "description": "Aggregate function. Returns the sum of values of {{x}}."
-  },
-  {
-    "name": "STDDEV",
-    "args": "([number] {x})",
-    "returnType": "number",
-    "tags": [
-      "aggregate",
-      "STDDEV_SAMP"
-    ],
-    "description": "Aggregate function. Takes the sample standard deviation of values of {{x}}."
-  },
-  {
-    "name": "STDDEV_POP",
-    "args": "([number] {x})",
-    "returnType": "number",
-    "tags": [
-      "aggregate"
-    ],
-    "description": "Aggregate function. Takes the population standard deviation of values of {{x}}."
-  },
-  {
-    "name": "VARIANCE",
-    "args": "([number] {x})",
-    "returnType": "number",
-    "tags": [
-      "aggregate",
-      "VAR_SAMP"
-    ],
-    "description": "Aggregate function. Takes the sample variance of values of {{x}}."
-  },
-  {
-    "name": "VAR_POP",
-    "args": "([number] {x})",
-    "returnType": "number",
-    "tags": [
-      "aggregate"
-    ],
-    "description": "Aggregate function. Takes the population variance of values of {{x}}."
-  },
-  {
-    "name": "\"CORR\"",
-    "args": "([number] {x}, [number] {y})",
-    "returnType": "boolean",
-    "tags": [
-      "aggregate",
-      "CORRELATION"
-    ],
-    "description": "Aggregate function. Calculates the covariance of the values in {{x}} and {{y}}. Function name must be enclosed in double quotes."
-  },
-  {
-    "name": "CAST",
-    "args": "([any] {value} AS {<type>})",
-    "returnType": "<type>",
-    "description": "Converts {{value}} to a type specified by {{<type>}}.",
-    "example": "CAST(3.14159 AS INTEGER) -> 3\nCAST('0.3456' AS FLOAT) + 1 -> 1.3456"
-  },
-  {
-    "name": "CONVERT_TO",
-    "args": "({expression}, [literal string] {conv_type})",
-    "returnType": "bytes",
-    "description": "Converts {{expression}} to bytes, depending on the type specified in {{conv_type}}. {{expression}} can be a literal value (string, number, etc.) or a field name. Please consult Conversion Types in the Reference section of the Dremio documentation for more details."
-  },
-  {
-    "name": "CONVERT_FROM",
-    "args": "({expression}, [literal string] {conv_type})",
-    "returnType": "Depends on the conversion type specified.",
-    "description": "Converts the byte data in {{expression}} to the type specified in {{conv_type}}. {{expression}} can be a literal string or a field name. Please consult Conversion Types in the Reference section of the Dremio documentation for more details."
-  },
-  {
-    "name": "STRING_BINARY",
-    "args": "([binary] {data})",
-    "returnType": "string",
-    "description": "Returns the bytes in {{data}} as a string. Unprintable bytes are given in hexadecimal with a preceding '\\x'."
-  },
-  {
-    "name": "BINARY_STRING",
-    "args": "([string] {giventext})",
-    "returnType": "binary",
-    "description": "Converts {{giventext}} to binary."
-  },
-  {
-    "name": "TO_CHAR",
-    "args": "({expression}, [literal string] {format})",
-    "returnType": "string",
-    "description": "Converts {{expression}} to a string using the format specified in {{format}}. {{expression}} can be a literal value (string, number, etc.) or a field name.",
-    "example": "TO_CHAR(381928933.2398474,'#,###.##') -> '381,928,933.24'"
-  },
-  {
-    "name": "TO_DATE",
-    "args": "([string] {giventext}, [literal string] {format})",
-    "returnType": "timetype",
-    "description": "Converts {{giventext}} to a date using the format given in {{format}}."
-  },
-  {
-    "name": "TO_DATE",
-    "args": "([number] {epochms})",
-    "returnType": "timetype",
-    "description": "Converts {{epochms}}, the Unix time given in milliseconds, to a date."
-  },
-  {
-    "name": "TO_TIME",
-    "args": "([string] {giventext}, [literal string] {format})",
-    "returnType": "timetype",
-    "description": "Converts {{giventext}} to a time using the format given in {{format}}."
-  },
-  {
-    "name": "TO_TIME",
-    "args": "([number] {ms})",
-    "returnType": "timetype",
-    "description": "Converts {{ms}}, the number of milliseconds since midnight, to a time."
-  },
-  {
-    "name": "TO_TIMESTAMP",
-    "args": "([string] {giventext}, [literal string] {format})",
-    "returnType": "timetype",
-    "description": "Converts {{giventext}} to a timestamp (date & time) using the format given in {{format}}."
-  },
-  {
-    "name": "TO_TIMESTAMP",
-    "args": "([number] {epochsec})",
-    "returnType": "timetype",
-    "description": "Converts the Unix time {{epochsec}} to a timestamp (date & time)."
-  },
-  {
-    "name": "TIMESTAMPADD",
-    "args": "({<time unit>}, [number] {count}, [timetype] {giventime})",
-    "returnType": "timetype",
-    "description": "{{<time unit>}} has possible values YEAR, QUARTER, MONTH, WEEK, DAY, HOUR, MINUTE, SECOND, MICROSECOND. Adds {{count}} units of {{<time unit>}} to the {{giventime}}."
-  },
-  {
-    "name": "TIMESTAMPDIFF",
-    "args": "({<time unit>}, [timetype] {giventime1}, [timetype] {giventime2})",
-    "returnType": "number",
-    "description": "{{<time unit>}} has possible values YEAR, QUARTER, MONTH, WEEK, DAY, HOUR, MINUTE, SECOND. Returns the {{count}} units of time between {{giventime1}} and {{giventime2}}, by subtracting {{giventime1}} from {{giventime2}} (rounded down)."
-  },
-  {
-    "name": "TO_NUMBER",
-    "args": "([string] {giventext}, [literal string] {format})",
-    "returnType": "number",
-    "description": "Parses the string {{giventext}} into a number according to the format indicated in {{format}}.",
-    "example": "TO_NUMBER('12,374.0023','##,###.####') + 300 -> 12674.0023"
-  },
-  {
-    "name": "EXTRACT",
-    "args": "({<time unit>} FROM [timetype] {giventime})",
-    "returnType": "number",
-    "description": "{{<time unit>}} has possible values SECOND, MINUTE, HOUR, DAY, MONTH, YEAR. Returns the number in {{giventime}} corresponding to the specified unit."
-  },
-  {
-    "name": "CURRENT_DATE",
-    "args": null,
-    "returnType": "timetype",
-    "description": "Today's date."
-  },
-  {
-    "name": "CURRENT_TIME",
-    "args": null,
-    "returnType": "timetype",
-    "description": "The current time."
-  },
-  {
-    "name": "CURRENT_TIMESTAMP",
-    "args": null,
-    "returnType": "timetype",
-    "description": "The current date and time."
-  },
-  {
-    "name": "NOW",
-    "args": "()",
-    "returnType": "timetype",
-    "description": "Returns the current date and time."
-  },
-  {
-    "name": "LOCALTIME",
-    "args": null,
-    "returnType": "timetype",
-    "description": "The current time."
-  },
-  {
-    "name": "LOCALTIMESTAMP",
-    "args": null,
-    "returnType": "timetype",
-    "description": "The current date and time."
-  },
-  {
-    "name": "TIMEOFDAY",
-    "args": "()",
-    "returnType": "string",
-    "description": "Returns a string of the date and time as well as the name of the time zone.",
-    "example": "TIMEOFDAY() -> '18:17:43.056 America/Los_Angeles'"
-  },
-  {
-    "name": "DATE_ADD",
-    "args": "(DATE [literal string] {giventime}, [number] {x})",
-    "returnType": "timetype",
-    "description": "Adds {{x}} days to {{giventime}}.",
-    "example": "DATE_ADD(DATE '2016-06-20', 5) -> 2016-06-25"
-  },
-  {
-    "name": "DATE_ADD",
-    "args": "(DATE or TIME or TIMESTAMP [literal string] {giventime}, [timeinterval] {giveninterval})",
-    "returnType": "timetype",
-    "description": "Adds {{giveninterval}} to {{giventime}}.",
-    "example": "DATE_ADD(TIMESTAMP '2016-06-20 03:34:23', AGE('2016-06-01','2017-06-01')) -> 2015-06-15 03:34:23.0\nDATE_ADD(TIMESTAMP '2016-06-20 03:34:23', CAST(3 AS INTERVAL DAY)) -> 2016-06-23 03:34:23.0"
-  },
-  {
-    "name": "DATE_ADD",
-    "args": "(DATE [field name] {datefield}, [number] {x})",
-    "returnType": "timetype",
-    "description": "Adds {{x}} days to the values in the field named {{datefield}}.",
-    "example": "DATE_ADD(deliveryDate, 5) -> 2016-06-25"
-  },
-  {
-    "name": "DATE_ADD",
-    "args": "(DATE or TIME or TIMESTAMP [field name] {timetypefield}, [timeinterval] {giveninterval})",
-    "returnType": "timetype",
-    "description": "Adds {{giveninterval}} to the values in the field named {{timetypefield}}.",
-    "example": "DATE_ADD(deliveryDate, AGE('2016-06-01','2017-06-01')) -> 2015-06-15 03:34:23.0\nDATE_ADD(TIMESTAMP deliveryDate, CAST(3 AS INTERVAL DAY)) -> 2016-06-23 03:34:23.0"
-  },
-  {
-    "name": "DATE_SUB",
-    "args": "(DATE [literal string] {giventime}, [number] {x})",
-    "returnType": "timetype",
-    "description": "Subtracts {{x}} days from {{giventime}}.",
-    "example": "DATE_SUB(DATE '2016-06-20', 5) -> 2016-06-25"
-  },
-  {
-    "name": "DATE_SUB",
-    "args": "(DATE or TIME or TIMESTAMP [literal string] {giventime}, [timeinterval] {giveninterval})",
-    "returnType": "timetype",
-    "description": "Subtracts {{giveninterval}} from {{giventime}}.",
-    "example": "DATE_SUB(TIMESTAMP '2016-06-20 03:34:23', AGE('2016-06-01','2017-06-01')) -> 2015-06-15 03:34:23.0\nDATE_SUB(TIMESTAMP '2016-06-20 03:34:23', CAST(3 AS INTERVAL DAY)) -> 2016-06-23 03:34:23.0"
-  },
-  {
-    "name": "DATE_SUB",
-    "args": "(DATE [field name] {datefield}, [number] {x})",
-    "returnType": "timetype",
-    "description": "Subtracts {{x}} days from the values in the field named {{datefield}}.",
-    "example": "DATE_SUB(deliveryDate, 5) -> 2016-06-25"
-  },
-  {
-    "name": "DATE_SUB",
-    "args": "(DATE or TIME or TIMESTAMP [field name] {timetypefield}, [timeinterval] {giveninterval})",
-    "returnType": "timetype",
-    "description": "Subtracts {{giveninterval}} from the values in the field named {{timetypefield}}.",
-    "example": "DATE_SUB(deliveryDate, AGE('2016-06-01','2017-06-01')) -> 2015-06-15 03:34:23.0\nDATE_SUB(TIMESTAMP deliveryDate, CAST(3 AS INTERVAL DAY)) -> 2016-06-23 03:34:23.0"
-  },
-  {
-    "name": "DATE_PART",
-    "args": "([literal string] {timeunit}, [timetype] {giventime})",
-    "returnType": "number",
-    "description": "Returns the number in {{giventime}} corresponding to the unit specified by {{timeunit}}. {{timeunit}} has possible values 'second', 'minute', 'hour', 'day', 'month', 'year'."
-  },
-  {
-    "name": "UNIX_TIMESTAMP",
-    "args": "()",
-    "returnType": "number",
-    "description": "Gives the current Unix time in seconds."
-  },
-  {
-    "name": "UNIX_TIMESTAMP",
-    "args": "([string] {timestring})",
-    "returnType": "number",
-    "description": "Gives the Unix time for the date in {{timestring}} assuming a format of 'YYYY-MM-DD HH24:MI:SS'."
-  },
-  {
-    "name": "UNIX_TIMESTAMP",
-    "args": "([string] {timestring}, [string] {format})",
-    "returnType": "number",
-    "description": "Gives the Unix time for the date in {{timestring}} using the format specified in {{format}}.",
-    "example": "UNIX_TIMESTAMP('3/14/2015 09:00:00','MM/DD/YYYY HH:MI:SS') -> 1426348800"
-  },
-  {
-    "name": "ISDATE",
-    "args": "([string] {giventext})",
-    "returnType": "boolean",
-    "description": "Returns true if {{giventext}} is castable to a date of format 'YYYY-MM-DD'."
-  },
-  {
-    "name": "DATE_TRUNC",
-    "args": "([literal string] {timeunit}, [timetype] {giventime})",
-    "returnType": "timetype",
-    "description": "Truncates the precision of {{giventime}} to the unit given in {{timeunit}}. The more precise time units assume their lowest possible value. {{timeunit}} has possible values 'second', 'minute', 'hour', 'day', 'month', 'year'.",
-    "example": "DATE_TRUNC('month',CAST('2011-12-23 12:28:23' AS TIMESTAMP)) -> 2011-12-01 00:00:00.0"
-  },
-  {
-    "name": "SIN",
-    "args": "([number] {x})",
-    "returnType": "number",
-    "description": "Calculates the sine of {{x}}, where {{x}} is given in radians."
-  },
-  {
-    "name": "COS",
-    "args": "([number] {x})",
-    "returnType": "number",
-    "description": "Calculates the cosine of {{x}}, where {{x}} is given in radians."
-  },
-  {
-    "name": "TAN",
-    "args": "([number] {x})",
-    "returnType": "number",
-    "description": "Calculates the tangent of {{x}}, where {{x}} is given in radians."
-  },
-  {
-    "name": "ASIN",
-    "args": "([number] {x})",
-    "returnType": "number",
-    "description": "Calculates the arcsine of {{x}} in radians."
-  },
-  {
-    "name": "ACOS",
-    "args": "([number] {x})",
-    "returnType": "number",
-    "description": "Calculates the arccosine of {{x}} in radians."
-  },
-  {
-    "name": "ATAN",
-    "args": "([number] {x})",
-    "returnType": "number",
-    "description": "Calculates the arctangent of {{x}} in radians."
-  },
-  {
-    "name": "DEGREES",
-    "args": "([number] {x})",
-    "returnType": "number",
-    "description": "Converts the value in radians given by {{x}} to degrees."
-  },
-  {
-    "name": "RADIANS",
-    "args": "([number] {x})",
-    "returnType": "number",
-    "description": "Converts the value in degrees given by {{x}} to radians."
-  },
-  {
-    "name": "PI",
-    "args": null,
-    "returnType": "number",
-    "description": "Returns the value of the mathematical constant pi."
-  },
-  {
-    "name": "FLOOR",
-    "args": "([number] {x})",
-    "returnType": "number",
-    "description": "Returns the nearest whole number less than {{x}}."
-  },
-  {
-    "name": "CEILING",
-    "args": "([number] {x})",
-    "returnType": "number",
-    "description": "Returns the nearest whole number greater than {{x}}.",
-    "tags": [
-      "CEIL"
-    ]
-  },
-  {
-    "name": "ROUND",
-    "args": "([number] {x})",
-    "returnType": "number",
-    "description": "Returns the whole number nearest the value {{x}}."
-  },
-  {
-    "name": "SQRT",
-    "args": "([number] {x})",
-    "returnType": "number",
-    "description": "Calculates the square root of {{x}}."
-  },
-  {
-    "name": "CBRT",
-    "args": "([number] {x})",
-    "returnType": "number",
-    "description": "Calculates the cube root of {{x}}."
-  },
-  {
-    "name": "LOG",
-    "args": "([number] {x})",
-    "returnType": "number",
-    "description": "Calculates the natural logarithm of {{x}}."
-  },
-  {
-    "name": "LOG10",
-    "args": "([number] {x})",
-    "returnType": "number",
-    "description": "Calculates the log base 10 of {{x}}."
-  },
-  {
-    "name": "LOG",
-    "args": "([number] {x}, [number] {y})",
-    "returnType": "number",
-    "description": "Calculates the log base {{x}} of {{y}}."
-  },
-  {
-    "name": "POW",
-    "args": "([number] {x}, [number] {y})",
-    "returnType": "number",
-    "description": "Calculates the {{x}} to the power of {{y}}."
-  },
-  {
-    "name": "EXP",
-    "args": "([number] {x})",
-    "returnType": "number",
-    "description": "Calculates the value of the constant e raised to the power of {{x}}."
-  },
-  {
-    "name": "E",
-    "args": "()",
-    "returnType": "number",
-    "description": "Returns the mathematical constant e."
-  },
-  {
-    "name": "SINH",
-    "args": "([number] {x})",
-    "returnType": "number",
-    "description": "Calculates the hyperbolic sine of {{x}}."
-  },
-  {
-    "name": "COSH",
-    "args": "([number] {x})",
-    "returnType": "number",
-    "description": "Calculates the hyperbolic cosine of {{x}}."
-  },
-  {
-    "name": "TANH",
-    "args": "([number] {x})",
-    "returnType": "number",
-    "description": "Calculates the hyperbolic tangent of {{x}}."
-  },
-  {
-    "name": "MOD",
-    "args": "([number] {x}, [number] {y})",
-    "returnType": "number",
-    "description": "Calculates the modulus of {{x}} and {{y}} (e.g. {{x % y}})."
-  },
-  {
-    "name": "LSHIFT",
-    "args": "([number] {x}, [number] {y})",
-    "returnType": "number",
-    "description": "Returns the binary representation of {{x}} shifted to the left by {{y}} digits."
-  },
-  {
-    "name": "RSHIFT",
-    "args": "([number] {x}, [number] {y})",
-    "returnType": "number",
-    "description": "Returns the binary representation of {{x}} shifted to the right by {{y}} digits."
-  },
-  {
-    "name": "SIGN",
-    "args": "([number] {x})",
-    "returnType": "number",
-    "description": "Returns the sign of {{x}} (e.g. either -1 or +1)."
-  },
-  {
-    "name": "ABS",
-    "args": "([number] {x})",
-    "returnType": "number",
-    "description": "Returns the absolute value of {{x}}."
-  },
-  {
-    "name": "TRUNC",
-    "args": "([number] {x}, [optional number] {y})",
-    "returnType": "number",
-    "description": "Keeps the first {{y}} digits to right of {{x}}'s decimal point. If the second argument is omitted then {{y = 1}}."
-  },
-  {
-    "name": "COT",
-    "args": "([number] {x})",
-    "returnType": "number",
-    "description": "Calculates the cotangent of {{x}}, where {{x}} is given in radians."
-  },
-  {
-    "name": "RAND",
-    "args": "()",
-    "returnType": "number",
-    "description": "Generates a random number greater than or equal to 0 and less than 1. This random number will be the same for each entry."
-  },
-  {
-    "name": "RANDOM",
-    "args": "()",
-    "returnType": "number",
-    "description": "Generates a random number greater than or equal to 0 and less than 1. A new random number will made for each entry."
-  },
-  {
-    "name": "FLATTEN",
-    "args": "([JSON array] {givenarray})",
-    "returnType": null,
-    "description": "Creates a new entry in the dataset for each element in {{givenarray}}. Same as 'Unnest' on arrays."
-  },
-  {
-    "name": "BIT_LENGTH",
-    "args": "([string] {giventext})",
-    "returnType": "number",
-    "description": "Returns the length in bits of the string {{giventext}}."
-  },
-  {
-    "name": "TYPEOF",
-    "args": "([field name] {givenfield})",
-    "returnType": "string",
-    "description": "Returns the type(s) of values in {{givenfield}}."
-  },
-  {
-    "name": "ISNULL",
-    "args": "({<expression>})",
-    "returnType": "boolean",
-    "description": "Returns true if {{<expression>}} is NULL, and false otherwise."
-  },
-  {
-    "name": "ISNOTNULL",
-    "args": "({<expression>})",
-    "returnType": "boolean",
-    "description": "Returns false if {{<expression>}} is NULL, and true otherwise."
-  },
-  {
-    "name": "TRIM",
-    "args": "(LEADING or TRAILING or BOTH [string] {trimtext} FROM [string] {basetext})",
-    "returnType": "string",
-    "description": "Trims {{trimtext}} from the left side, the right side, or both sides of {{basetext}}.",
-    "example": "TRIM(TRAILING 'derful stuff' FROM 'We have wonderful stuff') -> 'We have won'"
-  },
-  {
-    "name": "LTRIM",
-    "args": "([string] {basetext}, [optional string] {trimtext})",
-    "returnType": "string",
-    "description": "Trims {{trimtext}} from the left of {{basetext}}. If {{trimtext}} is omitted then spaces are trimmed.",
-    "example": "LTRIM('pancake','pan') -> 'cake'"
-  },
-  {
-    "name": "RTRIM",
-    "args": "([string] {basetext}, [optional string] {trimtext})",
-    "returnType": "string",
-    "description": "Trims {{trimtext}} from the right of {{basetext}}. If {{trimtext}} is omitted then spaces are trimmed.",
-    "example": "RTRIM('ice cream',' cream') -> 'ice'"
-  },
-  {
-    "name": "BTRIM",
-    "args": "([string] {basetext}, [optional string] {trimtext})",
-    "returnType": "string",
-    "description": "Trims {{trimtext}} from both sides of {{basetext}}. If {{trimtext}} is omitted then spaces are trimmed.",
-    "example": "BTRIM('~~CoolScreenName~~','~') -> 'CoolScreenName'"
-  },
-  {
-    "name": "LPAD",
-    "args": "([string] {basetext}, [number] {x}, [optional string] {padtext})",
-    "returnType": "string",
-    "description": "Prepends {{padtext}} to {{basetext}} in a way that allows as many characters as possible from {{padtext}} given an output string length of {{x}}. When {{x}} is less than or equal to the length of {{basetext}}, only characters from {{basetext}} are printed in the output. If {{padtext}} is omitted then spaces are prepended.",
-    "example": "LPAD(' hugs and kisses',20,'XO') -> 'XOXO hugs and kisses'"
-  },
-  {
-    "name": "RPAD",
-    "args": "([string] {basetext}, [number] {x}, [optional string] {padtext})",
-    "returnType": "string",
-    "description": "Appends {{padtext}} to {{basetext}} in a way that allows as many characters as possible from {{padtext}} given an output string length of {{x}}. When {{x}} is less than or equal to the length of {{basetext}}, only characters from {{basetext}} are printed in the output. If {{padtext}} is omitted then spaces are appended.",
-    "example": "RPAD('hugs and kisses ',21,'XO') -> 'hugs and kisses XOXOX'"
-  },
-  {
-    "name": "LOWER",
-    "args": "([string] {giventext})",
-    "returnType": "string",
-    "description": "Converts the string {{giventext}} to all lowercase letters."
-  },
-  {
-    "name": "UPPER",
-    "args": "([string] {giventext})",
-    "returnType": "string",
-    "description": "Converts the string {{giventext}} to all uppercase letters."
-  },
-  {
-    "name": "INITCAP",
-    "args": "([string] {giventext})",
-    "returnType": "string",
-    "description": "Capitalizes the first letter in each word of {{giventext}}.",
-    "example": "INITCAP('a guide to big data') -> 'A Guide To Big Data'"
-  },
-  {
-    "name": "POSITION",
-    "args": "([string] {sometext} IN [string] {giventext})",
-    "returnType": "number",
-    "description": "Gives the location of the string {{sometext}} in {{giventext}}.",
-    "example": "POSITION('and' IN 'beans and rice') -> 7"
-  },
-  {
-    "name": "STRPOS",
-    "args": "([string] {giventext}, [string] {sometext})",
-    "returnType": "number",
-    "description": "Gives the location of the string {{sometext}} in {{giventext}}.",
-    "example": "STRPOS('beans and rice','and') -> 7"
-  },
-  {
-    "name": "BYTE_SUBSTR",
-    "args": "([string] {giventext}, [number] {x}, [number] {y})",
-    "returnType": "binary",
-    "description": "Produces the binary representation of a string {{y}} characters long derived by starting at position {{x}} in the string {{giventext}}. {{y}} may also be given by the expression {{LENGTH(giventext)}}, which indicates that you wish to convert every remaining character in {{giventext}}."
-  },
-  {
-    "name": "SUBSTR",
-    "args": "([string] {giventext}, [number] {x}, [optional number] {y})",
-    "returnType": "string",
-    "description": "Returns a {{y}} character string derived from {{giventext}} that begins at position {{x}}. If the number {{y}} is omitted then rest of the characters in {{giventext}} past position {{x}} are returned.",
-    "tags": [
-      "SUBSTRING"
-    ],
-    "example": "SUBSTR('gastronomy',2,5) -> 'astro'"
-  },
-  {
-    "name": "CHAR_LENGTH",
-    "args": "([string] {giventext})",
-    "returnType": "number",
-    "description": "Calculates the length of the string {{giventext}}.",
-    "tags": [
-      "CHARACTER_LENGTH",
-      "LENGTH"
-    ]
-  },
-  {
-    "name": "LENGTH",
-    "args": "([string] {giventext}, [optional literal string] {character_encoding}",
-    "returnType": "number",
-    "description": "Gives the length of string {{giventext}} in the encoding scheme designated by the string {{character_encoding}}. If {{character_encoding}} is not specified then 'UTF8' is assumed."
-  },
-  {
-    "name": "ILIKE",
-    "args": "([string] {text1}, [string] {text2})",
-    "returnType": "boolean",
-    "description": "Returns true if {{text1}} and {{text2}} are the same, and false otherwise."
-  },
-  {
-    "name": "REGEXP_REPLACE",
-    "args": "([string] {basetext}. [string] {matching}, [string] {{newtext}})",
-    "returnType": "string",
-    "description": "Replaces the patterns in {{basetext}} described by the regular expression {{matching}} with the string {{newtext}}.",
-    "example": "SELECT REGEXP_REPLACE('The cat was catatonic.','cat\\b','dog') -> 'The dog was catatonic.'"
-  },
-  {
-    "name": "CONCAT",
-    "args": "([string] {text1}, [optional string] {text2}, [optional string] {text3}, ...)",
-    "returnType": "string",
-    "description": "Combines strings.",
-    "example": "CONCAT('un','sports','man','like') -> 'unsportsmanlike'"
-  },
-  {
-    "name": "SPLIT_PART",
-    "args": "([string] {basetext}, [string] {splitter}, [number] {index})",
-    "returnType": "string",
-    "description": "Splits {{basetext}} wherever {{splitter}} occurs, and returns the Nth element in this list, where N is given by {{index}}. The first element is retrieved by setting {{index = 1}}.",
-    "example": "SPLIT_PART('two words',' ',2) -> 'words'"
-  },
-  {
-    "name": "REGEXP_LIKE",
-    "args": "([string] {giventext}, [string literal] {matching})",
-    "returnType": "boolean",
-    "description": "Returns true if the regular expression in {{matching}} matches the string in {{giventext}}.",
-    "example": "REGEXP_LIKE('catatonic','cat\\S+') -> true"
-  },
-  {
-    "name": "REGEXP_MATCHES",
-    "args": "([string] {giventext}, [string literal] {matching})",
-    "returnType": "boolean",
-    "description": "Returns true if the regular expression in {{matching}} matches the string in {{giventext}}.",
-    "example": "REGEXP_MATCHES('catatonic','cat\\S+') -> true"
-  },
-  {
-    "name": "REVERSE",
-    "args": "([string] {giventext})",
-    "returnType": "string",
-    "description": "Reverses {{giventext}}.",
-    "example": "REVERSE('palindrome') -> 'emordnilap'"
-  },
-  {
-    "name": "\"LEFT\"",
-    "args": "([string] {giventext}, [number] {x})",
-    "returnType": "string",
-    "description": "Returns the {{x}} leftmost characters of {{giventext}}. Function name must be enclosed in double quotes.",
-    "example": "\"LEFT\"('stuff',3) -> 'stu'"
-  },
-  {
-    "name": "\"RIGHT\"",
-    "args": "([string] {giventext}, [number] {x})",
-    "returnType": "string",
-    "description": "Returns the {{x}} rightmost characters of {{giventext}}. Function name must be enclosed in double quotes.",
-    "example": "\"RIGHT\"('stuff',2) -> 'ff'"
-  },
-  {
-    "name": "REPLACE",
-    "args": "([string] {basetext}, [string] {text1}, [string] {text2})",
-    "returnType": "string",
-    "description": "Replaces {{text1}} with {{text2}} in {{basetext}}.",
-    "example": "REPLACE('the catatonic cat','cat','dog') -> 'the dogatonic dog'"
-  },
-  {
-    "name": "H3_AsText",
-    "args": "([bigint] {h3Value})",
-    "returnType": "string",
-    "description": "Returns a Hex representation of the H3 value as a string.",
-    "tags": [
-      "gis"
-    ],
-    "example": "H3_AsText(H3_FromGeomPoint(ST_Point(40.4168, -3.7038), 4)) -> '847b59dffffffff'"
-  },
-  {
-    "name": "H3_Boundary",
-    "args": "([bigint] {h3Value})",
-    "returnType": "binary",
-    "description": "Returns a polygon geography representing the H3 cell.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_AsText(H3_Boundary(H3_FromLongLat(40.4168, -3.7038, 15))) -> 'POLYGON ((-3.703802360352346 40.41680913267208, -3.7038075007518416 40.41680558484906, -3.703806130063667 40.41680018598506, -3.7037996189769617 40.41679833494421, -3.7037944785779335 40.41680188276699, -3.7037958492651386 40.416807281630845, -3.703802360352346 40.41680913267208))'"
-  },
-  {
-    "name": "H3_Center",
-    "args": "([bigint] {h3Value})",
-    "returnType": "binary",
-    "description": "Returns the center of the H3 cell as a point.  It will throw an error if the {{h3Value}} is not valid as an H3 Value.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_AsText(H3_Center(H3_FromText('847b59dffffffff'))) -> 'POINT (40.305476423174326 -3.743203325561687)'"
-  },
-  {
-    "name": "H3_Compact",
-    "args": "([bigint] {h3Value}[])",
-    "returnType": "bigint[]",
-    "description": "Returns an array with the indexes of a set of hexagons across multiple resolutions that represent the same area as the input set of hexagons.",
-    "tags": [
-      "gis"
-    ],
-    "example": "H3_Compact(H3_Uncompact(H3_Wrap(H3_FromText('847b59dffffffff')),5)) -> [596645165859340300]"
-  },
-  {
-    "name": "H3_Distance",
-    "args": "([bigint] {h3Value1}, [bigint] {h3Value2})",
-    "returnType": "numeric",
-    "description": "Returns the grid distance between two hexagon indexes. This function may fail to find the distance between two indexes if they are very far apart or on opposite sides of a pentagon.",
-    "tags": [
-      "gis"
-    ],
-    "example": "H3_Distance(H3_FromText('847b591ffffffff'), H3_FromText('847b59bffffffff')) -> 1"
-  },
-  {
-    "name": "H3_FromGeomPoint",
-    "args": "([binary] {pointGeom}, [number] {resolution})",
-    "returnType": "bigint",
-    "description": "Returns the H3 cell index that the point belongs to in the required {{resolution}}. It will return `null` for non-point geometry and throw an error for resolution outside the valid range [0,15].",
-    "tags": [
-      "gis"
-    ],
-    "example": "H3_AsText(H3_FromGeomPoint(ST_Point(40.4168, -3.7038), 4)) -> '847b59dffffffff'"
-  },
-  {
-    "name": "H3_FromGeomPoly",
-    "args": "([binary] {polyGeom})",
-    "returnType": "bigint",
-    "description": "Returns the smallest H3 cell that completely encloses the polygon with a dynamic resolution. It will return `null` if there isn't a value to fit the polygon and throw an error if a non-polygon geometry is supplied.",
-    "tags": [
-      "gis"
-    ],
-    "example": "H3_FromGeomPoly(ST_GeomFromText('POLYGON ((-111.69808887205492 40.238737891364416, -111.69837535651395 40.23873740478143, -111.6983745544178 40.2384602506758, -111.69808807598443 40.23846160818078, -111.69808887205492 40.238737891364416))',true)) -> 622175171754917887"
-  },
-  {
-    "name": "H3_FromLongLat",
-    "args": "([number] {lon}, [number] {lat}, [number] {resolution})",
-    "returnType": "bigint",
-    "description": "Returns the H3 cell index specified by {{lon}} and {{lat}} at the specified {{resolution}}.  It will throw an error for resolution outside the valid range [0,15].",
-    "tags": [
-      "gis"
-    ],
-    "example": "H3_AsText(H3_FromLongLat(40.4168, -3.7038, 4)) -> '84390cbffffffff'"
-  },
-  {
-    "name": "H3_FromText",
-    "args": "([string] {h3Text})",
-    "returnType": "bigint",
-    "description": "Converts from String representation of H3 cell value to the bigint representation. It will throw an error if the hex representation is not valid as an H3 Value.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_AsText(H3_Center(H3_FromText('847b59dffffffff'))) -> 'POINT (40.305476423174326 -3.743203325561687)'"
-  },
-  {
-    "name": "H3_HexRing",
-    "args": "([bigint] h3Origin, [int] ringSize)",
-    "returnType": "bigint[]",
-    "description": "Returns all cell indexes in a hollow hexagonal ring centered at the origin in no particular order. Unlike H3_Kring, this function will throw an exception if there is a pentagon anywhere in the ring.",
-    "tags": [
-      "gis"
-    ],
-    "example": "H3_Hexring(H3_FromText('837b59fffffffff'), 1) -> [592141849699811300,592141506102427600,592141712260857900,592124875989057500,592124738550104000,592140544029753300]"
-  },
-  {
-    "name": "H3_IsPentagon",
-    "args": "([bigint] h3Value)",
-    "returnType": "boolean",
-    "description": "Returns {{true}} if given H3 index is a pentagon. Returns {{false}} otherwise, even on invalid input.",
-    "tags": [
-      "gis"
-    ],
-    "example": "H3_IsPentagon(H3_FromText('837b59fffffffff')) -> false\nH3_IsPentagon(H3_FromText('8075fffffffffff')) -> true"
-  },
-  {
-    "name": "H3_IsValid",
-    "args": "([bigint] h3Value)",
-    "returnType": "boolean",
-    "description": "Returns {{true}} when the given index is valid, {{false}} otherwise.",
-    "tags": [
-      "gis"
-    ],
-    "example": "H3_IsValid(8675309) -> false\nH3_IsValid(H3_FromText('837b59fffffffff')) -> true"
-  },
-  {
-    "name": "H3_KRing",
-    "args": "([bigint] h3Origin, [int] ringSize)",
-    "returnType": "bigint[]",
-    "description": "Returns all cell indexes in a filled hexagonal k-ring centered at the origin in no particular order.",
-    "tags": [
-      "gis"
-    ],
-    "example": "H3_KRing(H3_FromText('837b59fffffffff'), 1) -> [592141574821904400,592141506102427600,592141712260857900,592124875989057500,592124738550104000,592140544029753300,592141849699811300]"
-  },
-  {
-    "name": "H3_KRing_Distances",
-    "args": "([bigint] h3Origin, [int] ringSize)",
-    "returnType": "struct{index, distance}",
-    "description": "Returns all cell indexes and their distances in a filled hexagonal k-ring centered at the origin in no particular order.",
-    "tags": [
-      "gis"
-    ],
-    "example": "H3_KRingDistances(H3_FromText('837b59fffffffff'), 1) -> [{\"index\":592141574821904383,\"distance\":0},{\"index\":592141506102427647,\"distance\":1},{\"index\":592141712260857855,\"distance\":1},{\"index\":592124875989057535,\"distance\":1},{\"index\":592124738550104063,\"distance\":1},{\"index\":592140544029753343,\"distance\":1},{\"index\":592141849699811327,\"distance\":1}]"
-  },
-  {
-    "name": "H3_Polyfill",
-    "args": "[binary] {geometry}, [number] {resolution}",
-    "returnType": "bigint[]",
-    "description": "Returns an array with all the H3 cell indexes for the given polygon or multipolygon including automatically handling the inner holes.",
-    "tags": [
-      "gis"
-    ],
-    "example": "H3_Polyfill(ST_GeomFromText('POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))',false), 1) -> [582059465512058900,582072659651592200,582068261605081100,582081455744614400,582855511930568700,582063863558570000,582077057698103300,582851113884057600]"
-  },
-  {
-    "name": "H3_Resolution",
-    "args": "([bigint] {h3Value})",
-    "returnType": "integer",
-    "description": "Returns the H3 cell resolution as an integer. It will throw an error if the {{h3Value}} is not valid as an H3 Value.",
-    "tags": [
-      "gis"
-    ],
-    "example": "H3_Resolution(H3_FromText('847b59dffffffff')) -> 4"
-  },
-  {
-    "name": "H3_ToCenterChild",
-    "args": "([bigint] {h3Value}, [number] {childResolution})",
-    "returnType": "bigint",
-    "description": "Returns the center child (finer) index for the given hexagon at the given resolution.",
-    "tags": [
-      "gis"
-    ],
-    "example": "H3_AsText(H3_ToCenterChild(H3_FromText('837b59fffffffff'), 4)) -> '847b591ffffffff'"
-  },
-  {
-    "name": "H3_ToChildren",
-    "args": "([bigint] {h3Value}, [number] {childResolution})",
-    "returnType": "bigint[]",
-    "description": "Returns an array with the indexes of the children/descendents of the given hexagon at the given resolution.",
-    "tags": [
-      "gis"
-    ],
-    "example": "WITH H3Children AS (SELECT FLATTEN(H3_ToChildren(H3_FromText('837b59fffffffff'), 4)) AS H3Values) SELECT H3_AsText(H3Values) FROM H3Children -> '847b591ffffffff' '847b593ffffffff' '847b595ffffffff' '847b597ffffffff' '847b599ffffffff' '847b59bffffffff' '847b59dffffffff'"
-  },
-  {
-    "name": "H3_ToParent",
-    "args": "([bigint] {h3Value}, [number] {resolution})",
-    "returnType": "bigint",
-    "description": "Returns the H3 cell index of the parent of the given hexagon at the given resolution.",
-    "tags": [
-      "gis"
-    ],
-    "example": "H3_AsText(H3_ToParent(H3_FromText('847b59dffffffff'), 3)) -> '837b59fffffffff'"
-  },
-  {
-    "name": "H3_Uncompact",
-    "args": "([bigint] {h3Value}[], [number] {resolution})",
-    "returnType": "bigint[]",
-    "description": "Returns an array with the indexes of a set of hexagons of the same {{resolution}} that represent the same area as the compacted input hexagons.",
-    "tags": [
-      "gis"
-    ],
-    "example": "H3_Uncompact(H3_Wrap(H3_FromText('847b59dffffffff')),5) -> [601148757970518000,601148759044259800,601148760118001700,601148761191743500,601148762265485300,601148763339227100,601148764412969000]"
-  },
-  {
-    "name": "H3_Wrap",
-    "args": "([bigint] {h3Value})",
-    "returnType": "bigint[]",
-    "description": "Takes a single H3 value and wraps it in a list",
-    "tags": [
-      "gis"
-    ],
-    "example": "H3_Wrap(H3_FromText('847b59dffffffff'))[0] -> 596645165859340287"
-  },
-  {
-    "name": "ST_AggrConvexHull",
-    "args": "([binary] {geometry})",
-    "returnType": "binary",
-    "description": "Creates a single geometry that is a convex hull of a geometry that resulted from a union of all aggregate input geometries.",
-    "tags": [
-      "gis"
-    ],
-    "example": "WITH GEOMLIST AS (SELECT ST_GeomFromText('polygon ((40 40, 40 60, 60 60, 60 40, 40 40))', true) AS GEOM1, ST_GeomFromText('polygon ((20 30, 30 30, 30 40, 20 40, 20 30))', true) AS GEOM2) SELECT ST_AsText(ST_AggrConvexHull(GEOM)) FROM GEOMLIST UNPIVOT (\"GEOM\" for \"COL\" in  (GEOM1, GEOM2)) -> 'POLYGON ((20 30, 30 30, 60 40, 60 60, 40 60, 20 40, 20 30))'"
-  },
-  {
-    "name": "ST_AggrIntersection",
-    "args": "([binary] {geometry})",
-    "returnType": "binary",
-    "description": "Returns a single geometry that is an intersection of all aggregate input geometries.",
-    "tags": [
-      "gis"
-    ],
-    "example": "WITH GEOMLIST AS (SELECT ST_GeomFromText('polygon ((5 5, 12 5, 12 10, 5 10, 5 5))', true) AS GEOM1, ST_GeomFromText('polygon ((10 8, 14 8, 14 15, 10 15, 10 8))', true) AS GEOM2, ST_GeomFromText('polygon ((6 8, 20 8, 20 20, 6 20, 6 8))', true) AS GEOM3) SELECT ST_AsText(ST_AggrIntersection(GEOM)) FROM GEOMLIST UNPIVOT (\"GEOM\" for \"COL\" in  (GEOM1, GEOM2, GEOM3)) -> 'POLYGON ((10 8, 12 8, 12 10, 10 10, 10 8))'"
-  },
-  {
-    "name": "ST_AggrUnion",
-    "args": "([binary] {geometry})",
-    "returnType": "binary",
-    "description": "Returns a single geometry that is the union of all aggregate input geometries.",
-    "tags": [
-      "gis"
-    ],
-    "example": "WITH GEOMLIST AS (SELECT ST_GeomFromText('polygon ((20 30, 30 30, 30 40, 20 40, 20 30))', true) AS GEOM1, ST_GeomFromText('polygon ((40 40, 40 60, 60 60, 60 40, 40 40))', true) AS GEOM2) SELECT ST_AsText(ST_AggrUnion(GEOM)) FROM GEOMLIST UNPIVOT (\"GEOM\" for \"COL\" in  (GEOM1, GEOM2)) -> 'MULTIPOLYGON (((20 30, 30 30, 30 40, 20 40, 20 30)), ((40 40, 60 40, 60 60, 40 60, 40 40)))'"
-  },
-  {
-    "name": "ST_Area",
-    "args": "([binary] {geometry})",
-    "returnType": "number",
-    "description": "Returns the area of polygon or multipolygon",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_Area(ST_GeomFromText('POLYGON ((0 0, 8 0, 0 8, 0 0), (1 1, 1 5, 5 1, 1 1))',true))  -> 24.0"
-  },
-  {
-    "name": "ST_AsGeoJSON",
-    "args": "([binary] {geometry})",
-    "returnType": "string",
-    "description": "Returns the GeoJSON representation of {{geometry}}.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_AsGeoJSON(ST_Point(1, 2)) -> '{\"type\":\"Point\",\"coordinates\":[1,2],\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}}}'"
-  },
-  {
-    "name": "ST_AsText",
-    "args": "([binary] {geometry})",
-    "returnType": "string",
-    "description": "Returns the Well-Known Text (WKT) representation of {{geometry}}.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_AsText(ST_Point(1, 2)) -> 'POINT (1 2)'"
-  },
-  {
-    "name": "ST_Boundary",
-    "args": "([binary] {geometry})",
-    "returnType": "binary",
-    "description": "Returns the closure of the combinatorial boundary of this Geometry.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_AsText(ST_Boundary(ST_GeomFromText('LINESTRING (0 1, 1 0)',true))) -> 'MULTIPOINT ((0 1), (1 0))'\nST_AsText(ST_Boundary(ST_GeomFromText('POLYGON ((1 1, 4 1, 1 4))',true))) -> 'MULTILINESTRING ((1 1, 4 1, 1 4, 1 1))'"
-  },
-  {
-    "name": "ST_Buffer",
-    "args": "([binary] {geometry}, [number] {distance})",
-    "returnType": "binary",
-    "description": "Returns geometry object that is the buffer surrounding source {{geometry}} at specified {{distance}}.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_Buffer(ST_Point(0, 0), 1) -> polygon approximating a unit circle"
-  },
-  {
-    "name": "ST_Centroid",
-    "args": "([binary] {geometry})",
-    "returnType": "binary",
-    "description": "Takes a polygon, multipolygon, or multilinestring and returns the point that is in the center of the geometry's envelope. That means that the centroid point is halfway between the geometry's minimum and maximum x and y extents.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_AsText(ST_Centroid(ST_GeomFromText('point (2 3)',true))) -> 'POINT(2 3)'\nST_AsText(ST_Centroid(ST_GeomFromText('MULTIPOINT ((0 0), (1 1), (1 -1), (6 0))',true))) -> 'POINT(2 0)'\nST_AsText(ST_Centroid(ST_GeomFromText('linestring (0 0, 6 0)',true))) -> 'POINT(3 0)'\nST_AsText(ST_Centroid(ST_GeomFromText('POLYGON ((0 0, 0 8, 8 8, 8 0, 0 0))',true))) -> 'POINT(4 4)'\nST_AsText(ST_Centroid(ST_GeomFromText('POLYGON ((1 1, 5 1, 3 4))',true))) -> 'POINT(3 2)'"
-  },
-  {
-    "name": "ST_Contains",
-    "args": "([binary] {geometry1}, [binary] {geometry2})",
-    "returnType": "boolean",
-    "description": "Returns true if {{geometry1}} contains {{geometry2}}.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_Contains(ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true), ST_Point(2, 3)) -> true \nST_Contains(ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true), ST_Point(8, 8)) -> false"
-  },
-  {
-    "name": "ST_ConvexHull",
-    "args": "([binary] {geometry})",
-    "returnType": "binary",
-    "description": "Computes the convex hull of {{geometry}}. The convex hull is the smallest convex geometry that encloses all geometries in the input. One can think of the convex hull as the geometry obtained by wrapping an rubber band around a set of geometries.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_AsText(ST_ConvexHull(ST_GeomFromText('polygon ((0 0, 8 0, 0 8, 0 0), (1 1, 1 5, 5 1, 1 1))',true))) -> 'POLYGON ((0 0, 8 0, 0 8, 0 0))'"
-  },
-  {
-    "name": "ST_CoordDim",
-    "args": "([binary] {geometry})",
-    "returnType": "number",
-    "description": "Returns count of coordinate components.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_CoordDim(ST_Point(1.5, 2.5)) -> 2\nST_CoordDim(ST_GeomFromText('POINTZ (1.5 2.5 3)',true)) -> 3"
-  },
-  {
-    "name": "ST_Crosses",
-    "args": "([binary] {geometry1}, [binary] {geometry2})",
-    "returnType": "boolean",
-    "description": "Returns true if {{geometry1}} crosses {{geometry2}}, otherwise false.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_Crosses(ST_GeomFromText('LINESTRING (0 0, 1 1)',true), ST_GeomFromText('LINESTRING (1 0, 0 1))',true)) -> true\nST_Crosses(ST_GeomFromText('LINESTRING (2 0, 2 3)',true), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true)) -> true\nST_Crosses(ST_GeomFromText('LINESTRING (0 2, 0 1)',true), ST_GeomFromText('LINESTRING (2 0, 1 0)',true)) -> false"
-  },
-  {
-    "name": "ST_Densify",
-    "args": "([binary] {geometry}, [number] {maxLength})",
-    "returnType": "binary",
-    "description": "Densifies a MultiPath (polygons and polylines) {{geometry}} by {{maxLength}} so that no segments are longer than given threshold value.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_AsText(ST_Densify(ST_GeomFromText('POLYGON ((0 0, 8 0, 0 8, 0 0))',true),4)) -> 'POLYGON ((0 0, 4 0, 8 0, 5.333 2.667, 2.667 5.333, 0 8, 0 4, 0 0))'"
-  },
-  {
-    "name": "ST_Difference",
-    "args": "([binary] {geometry1}, [binary] {geometry2})",
-    "returnType": "binary",
-    "description": "Returns a geometry object that is the difference of the source objects.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_AsText(ST_Difference(ST_GeomFromText('MULTIPOINT (1 1, 1.5 1.5, 2 2)',true), ST_Point(1.5, 1.5))) -> 'MULTIPOINT ((1 1), (2 2))'\nST_AsText(ST_Difference(ST_GeomFromText('POLYGON ((0 0, 0 10, 10 10, 10 0))',true), ST_GeomFromText('POLYGON ((0 0, 0 5, 5 5, 5 0))',true))) -> 'POLYGON ((5 0, 10 0, 10 10, 0 10, 0 5, 5 5, 5 0))'"
-  },
-  {
-    "name": "ST_Dimension",
-    "args": "([binary] {geometry})",
-    "returnType": "number",
-    "description": "Returns spatial dimension of geometry.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_Dimension(ST_Point(1.5, 2.5)) -> 0\nST_Dimension(ST_GeomFromText('LINESTRING (1.5 2.5, 3.0 2.2)',true)) -> 1\nST_Dimension(ST_GeomFromText('POLYGON ((2 0, 2 3, 3 0))',true)) -> 2"
-  },
-  {
-    "name": "ST_Disjoint",
-    "args": "([binary] {geometry1}, [binary] {geometry2})",
-    "returnType": "boolean",
-    "description": "Returns true if the intersection of the two geometries produces an empty set; otherwise, it returns false.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_Disjoint(ST_GeomFromText('LINESTRING (0 0, 0 1)',true), ST_GeomFromText('LINESTRING (1 1, 1 0)',true)) -> true\nST_Disjoint(ST_GeomFromText('LINESTRING (0 0, 1 1)',true), ST_GeomFromText('LINESTRING (1 0, 0 1)',true)) -> false"
-  },
-  {
-    "name": "ST_Distance",
-    "args": "([binary] {geometry1}, [binary] {geometry2})",
-    "returnType": "number",
-    "description": "Returns the distance between two geometry objects.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_Distance(ST_Point(0.0,0.0), ST_Point(3.0,4.0)) -> 5.0"
-  },
-  {
-    "name": "ST_DWithin",
-    "args": "([binary] {geometry1}, [binary] {geometry2}, [number] {distance})",
-    "returnType": "boolean",
-    "description": "Returns true if the two geometries are within the specified distance of one another; otherwise, it returns false.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_DWithin(ST_GeomFromText('POLYGON ((10.02 20.01, 11.92 35.64, 25.02 34.15, 19.15 33.94, 10.02 20.01))',true), ST_Point (1,2),100) -> true\nST_DWithin(ST_GeomFromText('POLYGON ((101.02 200.01, 111.92 350.64, 250.02 340.15, 190.15 330.94, 101.02 200.01))',true), ST_Point (10.02,20.01), 100) -> false"
-  },
-  {
-    "name": "ST_EndPoint",
-    "args": "([binary] {geometry})",
-    "returnType": "binary",
-    "description": "Returns the last point of a Linestring.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_AsText(ST_EndPoint(ST_GeomFromText('LINESTRING (1.5 2.5, 3.0 2.2)',true))) -> 'POINT(3.0 2.2)'"
-  },
-  {
-    "name": "ST_Envelope",
-    "args": "([binary] {geometry})",
-    "returnType": "binary",
-    "description": "Returns the minimum bounding box of the geometry object as a polygon",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_AsText(ST_Envelope(ST_GeomFromText('LINESTRING (0 0, 2 2))',true))) -> 'POLYGON ((0 0, 2 0, 2 2, 0 2, 0 0))'\nST_AsText(ST_Envelope(ST_GeomFromText('POLYGON ((2 0, 2 3, 3 0))',true))) -> 'POLYGON ((2 0, 3 0, 3 3, 2 3, 2 0))'"
-  },
-  {
-    "name": "ST_EnvIntersects",
-    "args": "([binary] {geometry1}, [binary] {geometry2})",
-    "returnType": "boolean",
-    "description": "Returns true if the envelopes of {{geometry1}} and {{geometry2}} intersect, otherwise returns false.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_EnvIntersects(ST_GeomFromText('LINESTRING (0 0, 1 1)',true), ST_GeomFromText('LINESTRING (1 3, 2 2)',true)) -> false\nST_EnvIntersects(ST_GeomFromText('LINESTRING (0 0, 2 2)',true), ST_GeomFromText('LINESTRING (1 0, 3 2)',true)) -> true"
-  },
-  {
-    "name": "ST_Equals",
-    "args": "([binary] {geometry1}, [binary] {geometry2})",
-    "returnType": "boolean",
-    "description": "Returns true if the two geometries occupy the same space even if they have a different number of vertices, otherwise it returns false.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_Equals(ST_GeomFromText('LINESTRING (0 0, 1 1)',true),ST_GeomFromText('LINESTRING (1 1, 0 0)',true)) -> true\nST_Equals(ST_GeomFromText('LINESTRING (0 0, 1 1)',true),ST_GeomFromText('LINESTRING (1 0, 0 1)',true)) -> false\nST_Equals(ST_GeomFromText('LINESTRING (0 0, 3 3)',true),ST_GeomFromText('LINESTRING (3 3, 2 2, 1 1, 0 0)',true)) -> true"
-  },
-  {
-    "name": "ST_ExteriorRing",
-    "args": "([binary] {geometry})",
-    "returnType": "binary",
-    "description": "Returns the exterior ring of a polygon as a linestring.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_AsText(ST_ExteriorRing(ST_GeomFromText('POLYGON ((1 1, 1 4, 4 1))',true))) -> 'LINESTRING (1 1, 4 1, 1 4, 1 1)'\nST_AsText(ST_ExteriorRing(ST_GeomFromText('POLYGON ((0 0, 8 0, 0 8, 0 0), (1 1, 1 5, 5 1, 1 1))',true))) -> 'LINESTRING (0 0, 8 0, 0 8, 0 0)'"
-  },
-  {
-    "name": "ST_Generalize",
-    "args": "([binary] {geometry}, [number] {maxDeviation}, [boolean] {removeDegenerateParts})",
-    "returnType": "binary",
-    "description": "Simplifies geometries using the Douglas-Peucker algorithm. {{maxDeviation}} is the maximum allowed deviation from the generalized geometry to the original geometry.  When {{removeDegenerateParts}} is true, the degenerate parts of the geometry will be removed from the output.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_AsText(ST_Generalize(ST_GeomFromText('POLYGON ((0 0, 1 1, 2 0, 3 2, 4 1, 5 0, 5 10, 0 10))',true), 2, true)) -> 'POLYGON ((0 0, 5 0, 5 10, 0 10, 0 0))'"
-  },
-  {
-    "name": "ST_GeodesicAreaWGS84",
-    "args": "([binary] {geometry})",
-    "returnType": "number",
-    "description": "Returns the area in square meters of a geometry on the Earth's surface using spherical model. Requires the geometry to be in the WGS84 spatial reference.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_GeodesicAreaWGS84(ST_GeomFromText('POLYGON ((-114.04702599994988 39.90609700007656, -114.0500520000997 37.0001909997149, -109.04517199998776 36.99897700038832, -109.05002599989996 41.000691000389395, -111.04681499981234 40.997875000031286, -111.04671399965133 42.00170200004732, -114.04147700036322 41.99387299963928, -114.04702599994988 39.90609700007656))',true))/4047 AS utah_acreage -> 5.416484897473004E7"
-  },
-  {
-    "name": "ST_GeodesicLengthWGS84",
-    "args": "([binary] {geometry})",
-    "returnType": "number",
-    "description": "Returns distance along line on WGS84 spheroid, in meters, for geographic coordinates. Requires the geometry to be in the WGS84 spatial reference.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_GeodesicLengthWGS84(ST_GeomFromText('MultiLineString((0.0 80.0, 0.3 80.4))', true, 4326)) -> 45026.96274781222"
-  },
-  {
-    "name": "ST_GeometryN",
-    "args": "([binary] {geometry}, [number] {index})",
-    "returnType": "binary",
-    "description": "Takes a geometry collection and an integer index (1-based index) and returns the nth geometry object in the collection.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_AsText(ST_GeometryN(ST_GeomFromText('MULTIPOINT (10 40, 40 30, 20 20, 30 10)',true), 3)) -> 'POINT (20 20)'\nST_AsText(ST_GeometryN(ST_GeomFromText('MULTILINESTRING ((2 4, 10 10), (20 20, 7 8))',true), 2)) -> 'LINESTRING (20 20, 7 8)'"
-  },
-  {
-    "name": "ST_GeometryType",
-    "args": "([binary] {geometry})",
-    "returnType": "string",
-    "description": "Takes a geometry object and returns its geometry type (for example, Point, Line, Polygon, MultiPoint) as a string.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_GeometryType(ST_Point(1.5, 2.5)) -> 'ST_POINT'\nST_GeometryType(ST_GeomFromText('LINESTRING (1.5 2.5, 3.0 2.2)',true)) -> 'ST_LINESTRING'\nST_GeometryType(ST_GeomFromText('POLYGON ((2 0, 2 3, 3 0))',true)) -> 'ST_POLYGON'"
-  },
-  {
-    "name": "ST_GeomFromEWKB",
-    "args": "([string] {hexEncodedGeometry})",
-    "returnType": "binary",
-    "description": "Converts a Hex encoded binary string from Postgres/PostGIS geometry to native geometry including embedded SRID.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_AsText(ST_GeomFromEWKB(the_geom)) FROM table(\"postgis\".external_query('SELECT ST_GeomFromText(''POINT(-71.064544 42.28787)'',4326) AS the_geom')) -> 'POINT (-71.064544 42.28787)'"
-  },
-  {
-    "name": "ST_GeomFromGeoJSON",
-    "args": "([string] {geoJsonString})",
-    "returnType": "binary",
-    "description": "Constructs a geometry from GeoJSON.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_AsText(ST_GeomFromGeoJSON('{\"type\":\"Point\", \"coordinates\":[1.2, 2.4]}')) -> 'POINT (1.2 2.4)'\nST_AsText(ST_GeomFromGeoJSON('{\"type\":\"LineString\", \"coordinates\":[[1,2], [3,4]]}')) -> 'LINESTRING (1 2, 3 4)'"
-  },
-  {
-    "name": "ST_GeomFromText",
-    "args": "([string] {wktString}, [boolean] {ignoreErrors})",
-    "returnType": "binary",
-    "tags": [
-      "gis"
-    ],
-    "description": "Takes a well-known text representation and returns a geometry object. Set {{ignoreErrors}} to {{true}} to ignore bad data or {{false}} to fail and show the bad WKT value."
-  },
-  {
-    "name": "ST_GeomFromText",
-    "args": "([string] {wktString}, [boolean] {ignoreErrors}, [number] {SRID})",
-    "returnType": "binary",
-    "tags": [
-      "gis"
-    ],
-    "description": "Takes a well-known text representation and a spatial reference ID and returns a geometry object. Set {{ignoreErrors}} to {{true}} to ignore bad data or {{false}} to fail and show the bad WKT value."
-  },
-  {
-    "name": "ST_GeomFromWKB",
-    "args": "([binary] {wkbValue})",
-    "returnType": "binary",
-    "tags": [
-      "gis"
-    ],
-    "description": "Takes a well-known binary (WKB) representation and returns a geometry object."
-  },
-  {
-    "name": "ST_GeomFromWKB",
-    "args": "([binary] {wkbValue}, [number] {SRID})",
-    "returnType": "binary",
-    "tags": [
-      "gis"
-    ],
-    "description": "Takes a well-known binary (WKB) representation and a spatial reference ID and returns a geometry object."
-  },
-  {
-    "name": "ST_GeoSize",
-    "args": "([binary] {geometry})",
-    "returnType": "number",
-    "description": "Takes a geometry object and returns its size in bytes.",
-    "tags": [
-      "gis"
-    ]
-  },
-  {
-    "name": "ST_InteriorRingN",
-    "args": "([binary] {geometry}, [number] {index})",
-    "returnType": "binary",
-    "description": "Returns a LineString which is the nth interior ring of the input Polygon (1-based index)",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_AsText(ST_InteriorRingN(ST_GeomFromText('polygon ((0 0, 8 0, 0 8, 0 0), (1 1, 1 5, 5 1, 1 1))',true), 1)) -> 'LINESTRING (1 1, 1 5, 5 1, 1 1)'"
-  },
-  {
-    "name": "ST_Intersection",
-    "args": "([binary] {geometry1}, [binary] {geometry2})",
-    "returnType": "binary",
-    "description": "Returns a geometry object that is the geometric intersection of the source objects.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_AsText(ST_Intersection(ST_Point(1,1), ST_Point(1,1))) -> 'POINT (1 1)'\nST_AsText(ST_Intersection(ST_GeomFromText('LINESTRING(0 2, 0 0, 2 0)',true), ST_GeomFromText('LINESTRING(0 3, 0 1, 1 0, 3 0)',true))) -> 'MULTILINESTRING ((1 0, 2 0), (0 2, 0 1))'\nST_AsText(ST_Intersection(ST_GeomFromText('POLYGON ((2 0, 2 3, 3 0))',true), ST_GeomFromText('POLYGON ((1 1, 4 1, 4 4, 1 4))',true))) -> 'POLYGON ((2 1, 2.666666666666667 1, 2 3, 2 1))'"
-  },
-  {
-    "name": "ST_Intersects",
-    "args": "([binary] {geometry1}, [binary] {geometry2})",
-    "returnType": "boolean",
-    "description": "Returns true if {{geometry1}} intersects with {{geometry2}}, otherwise returns false.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_Intersects(ST_GeomFromText('LINESTRING (2 0, 2 3)',true), ST_GeomFromText('POLYGON ((1 1, 4 1, 4 4, 1 4))',true)) -> true\nST_Intersects(ST_GeomFromText('LINESTRING (8 7, 7 8)',true), ST_GeomFromText('POLYGON ((1 1, 4 1, 4 4, 1 4))',true)) -> false"
-  },
-  {
-    "name": "ST_Is3D",
-    "args": "([binary] {geometry})",
-    "returnType": "boolean",
-    "description": "Returns true if the geometry object is three-dimensional including height 'Z', otherwise returns false.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_Is3D(ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true)) -> false\nST_Is3D(ST_GeomFromText('LINESTRING (0 0, 3 4, 0 4, 0 0)',true)) -> false\nST_Is3D(ST_Point(3, 4)) -> false\nST_Is3D(ST_PointZ(3, 4, 2)) -> true"
-  },
-  {
-    "name": "ST_IsClosed",
-    "args": "([binary] {geometry})",
-    "returnType": "boolean",
-    "description": "Return true if the linestring or multi-line has start and end points that are coincident.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_IsClosed(ST_GeomFromText('LINESTRING(0 0, 3 4, 0 4, 0 0)',true)) -> true\nST_IsClosed(ST_GeomFromText('LINESTRING(0 0, 3 4)',true)) -> false"
-  },
-  {
-    "name": "ST_IsEmpty",
-    "args": "([binary] {geometry})",
-    "returnType": "boolean",
-    "description": "Return true if the geometry object is empty of geometric information.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_IsEmpty(ST_Point(1.5, 2.5)) -> false\nST_IsEmpty(ST_GeomFromText('POINT EMPTY',true)) -> true"
-  },
-  {
-    "name": "ST_IsMeasured",
-    "args": "([binary] {geometry})",
-    "returnType": "boolean",
-    "description": "Returns true if the geometry object is measured including an additional dimension 'M', otherwise returns false.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_IsMeasured(ST_PointZ(3, 4, 2)) -> false\nST_IsMeasured(ST_GeomFromText('POINT M (1 1 80)',true)) -> true\nST_IsMeasured(ST_GeomFromText('POINT ZM (1 1 5 60)',true)) -> true"
-  },
-  {
-    "name": "ST_IsRing",
-    "args": "([binary] {geometry})",
-    "returnType": "boolean",
-    "description": "Returns true if the geometry is a linestring and the linestring is closed and simple.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_IsRing(ST_GeomFromText('LINESTRING (0 0, 3 4, 0 4, 0 0)',true)) -> true\nST_IsRing(ST_GeomFromText('LINESTRING (0 0, 1 1, 1 2, 2 1, 1 1, 0 0)',true)) -> false\nST_IsRing(ST_GeomFromText('LINESTRING (0 0, 3 4)',true)) -> false"
-  },
-  {
-    "name": "ST_IsSimple",
-    "args": "([binary] {geometry})",
-    "returnType": "boolean",
-    "description": "Returns true if the geometry object is simple as defined by the Open Geospatial Consortium (OGC), otherwise, it returns false",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_IsSimple(ST_Point(1.5, 2.5)) -> true\nST_IsSimple(ST_GeomFromText('LINESTRING (0 0, 1 1, 0 1, 1 0)',true)) -> false"
-  },
-  {
-    "name": "ST_JSONPath",
-    "args": "([string] jsonPath, [string] jsonData)",
-    "returnType": "string",
-    "description": "Extract a portion of {{jsonData}} as a string by following the specified path in the JSON Object from {{jsonPath}}.\n**Example JSON Path Syntax (similar to XPath for XML):**\n'/data[Array]'\n'/data[Array][1]/id[String]'\n'/data[Array][1]/likes[Object]'\n'/data[Array][1]/likes[Object]/summary[Object]/total_count[String]'\n'/data[Array][3]'\n'/data[Array][id=131272076894593_1420960724592382]/likes[Object]/summary[Object]/total_count'\n'/fbids[String]'\n'/quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/enterpriseValue[Object]/fmt[String]'\n'/quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/forwardPE[Object]/raw[Double]'\n'quoteSummary[6]/result[4][0]/defaultKeyStatistics[6]/sharesOutstanding[6]/raw[1]'\n'quoteSummary[6]/result[Array]'\n'quoteSummary[6]/result[Array][0]'\n'quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/lastSplitDate[Object]/raw1[Long]'\n'quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/sharesOutstanding[Object]/raw[Integer]'",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_JSONPath('/coordinates[Array][0]',ST_AsGeoJSON(ST_Envelope(ST_GeomFromText('POLYGON ((-114.04702599994988 39.90609700007656, -114.0500520000997 37.0001909997149, -109.04517199998776 36.99897700038832, -109.05002599989996 41.000691000389395, -111.04681499981234 40.997875000031286, -111.04671399965133 42.00170200004732, -114.04147700036322 41.99387299963928, -114.04702599994988 39.90609700007656))',true)))) -> '[[-114.0500520000997,36.99897700038832],[-109.04517199998776,36.99897700038832],[-109.04517199998776,42.00170200004732],[-114.0500520000997,42.00170200004732],[-114.0500520000997,36.99897700038832]]'"
-  },
-  {
-    "name": "ST_Length",
-    "args": "([binary] {geometry})",
-    "returnType": "number",
-    "description": "Returns the length of a line string or multiline string.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_Length(ST_GeomFromText('LINESTRING (0 0, 3 4)',true)) -> 5.0\nST_Length(ST_GeomFromText('MULTILINESTRING ((1 0, 2 0), (0 2, 0 1))',true)) -> 2.0"
-  },
-  {
-    "name": "ST_M",
-    "args": "([binary] {geometry})",
-    "returnType": "number",
-    "description": "Takes a Point as an input parameter and returns its measure m-coordinate.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_M(ST_GeomFromText('POINT M (1 1 80)',true)) -> 80.0\nST_M(ST_GeomFromText('POINT ZM (1 1 5 60)',true)) -> 60.0"
-  },
-  {
-    "name": "ST_MaxM",
-    "args": "([binary] {geometry})",
-    "returnType": "number",
-    "description": "Takes a geometry as an input parameter and returns its maximum measure m-coordinate.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_MaxM(ST_GeomFromText('LINESTRING M (1.5 2.5 2, 3.0 2.2 1)',true)) -> 2.0\nST_MaxM(ST_GeomFromText('POINT M (1.5 2.5 3)',true)) -> 3.0"
-  },
-  {
-    "name": "ST_MaxX",
-    "args": "([binary] {geometry})",
-    "returnType": "number",
-    "description": "Takes a geometry as an input parameter and returns its maximum x-coordinate.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_MaxX(ST_GeomFromText('LINESTRING M (1.5 2.5 2, 3.0 2.2 1)',true)) -> 3.0\nST_MaxX(ST_GeomFromText('POINT M (1.5 2.5 3)',true)) -> 1.5"
-  },
-  {
-    "name": "ST_MaxY",
-    "args": "([binary] {geometry})",
-    "returnType": "number",
-    "description": "Takes a geometry as an input parameter and returns its maximum y-coordinate.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_MaxY(ST_GeomFromText('LINESTRING M (1.5 2.5 2, 3.0 2.2 1)',true)) -> 2.5\nST_MaxY(ST_GeomFromText('POINT M (1.5 2.5 3)',true)) -> 2.5"
-  },
-  {
-    "name": "ST_MaxZ",
-    "args": "([binary] {geometry})",
-    "returnType": "number",
-    "description": "Takes a geometry as an input parameter and returns its maximum z-coordinate.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_MaxZ(ST_GeomFromText('LINESTRING ZM (1.5 2.5 2 60, 3.0 2.2 1 80)',true)) -> 2.0\nST_MaxZ(ST_GeomFromText('LINESTRING Z (1.5 2.5 3, 3.0 2.2 4)',true)) -> 4.0"
-  },
-  {
-    "name": "ST_MinM",
-    "args": "([binary] {geometry})",
-    "returnType": "number",
-    "description": "Takes a geometry as an input parameter and returns its minimum m-coordinate.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_MinM(ST_GeomFromText('LINESTRING M (1.5 2.5 2, 3.0 2.2 1)',true)) -> 1.0\nST_MinM(ST_GeomFromText('POINT M (1.5 2.5 3)',true)) -> 3.0"
-  },
-  {
-    "name": "ST_MinX",
-    "args": "([binary] {geometry})",
-    "returnType": "number",
-    "description": "Takes a geometry as an input parameter and returns its minimum x-coordinate.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_MinX(ST_GeomFromText('LINESTRING M (1.25 2.5 2, 3.0 2.2 1)',true)) -> 1.25\nST_MinX(ST_GeomFromText('POINT M (1.75 2.5 3)',true)) -> 1.75"
-  },
-  {
-    "name": "ST_MinY",
-    "args": "([binary] {geometry})",
-    "returnType": "number",
-    "description": "Takes a geometry as an input parameter and returns its minimum y-coordinate.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_MinY(ST_GeomFromText('LINESTRING M (1.5 2.5 2, 3.0 2.2 1)',true)) -> 2.2\nST_MinY(ST_GeomFromText('POINT M (1.5 2.25 3)',true)) -> 2.25"
-  },
-  {
-    "name": "ST_MinZ",
-    "args": "([binary] {geometry})",
-    "returnType": "number",
-    "description": "Takes a geometry as an input parameter and returns its minimum z-coordinate.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_MinZ(ST_GeomFromText('LINESTRING ZM (1.5 2.5 2 60, 3.0 2.2 1 80)',true)) -> 1.0\nST_MinZ(ST_GeomFromText('LINESTRING Z (1.5 2.5 3, 3.0 2.2 4)',true)) -> 3.0"
-  },
-  {
-    "name": "ST_NumGeometries",
-    "args": "([binary] {geometry})",
-    "returnType": "number",
-    "description": "Returns the number of geometries in the geometry collection.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_NumGeometries(ST_GeomFromText('MULTIPOINT ((10 40), (40 30), (20 20), (30 10))',true)) -> 4\nST_NumGeometries(ST_GeomFromText('MULTILINESTRING ((2 4, 10 10), (20 20, 7 8))',true)) -> 2"
-  },
-  {
-    "name": "ST_NumInteriorRing",
-    "args": "([binary] {geometry})",
-    "returnType": "number",
-    "description": "Returns the number of interior rings in the polygon geometry.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_NumInteriorRing(ST_GeomFromText('POLYGON ((0 0, 8 0, 0 8, 0 0), (1 1, 1 5, 5 1, 1 1))',true)) -> 1"
-  },
-  {
-    "name": "ST_NumPoints",
-    "args": "([binary] {geometry})",
-    "returnType": "number",
-    "description": "Returns the number of points (vertices) in the geometry. For polygons, both the starting and ending vertices are counted, even though they occupy the same location.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_NumPoints(ST_Point(1.5, 2.5)) -> 1\nST_NumPoints(ST_GeomFromText('LINESTRING (1.5 2.5, 3.0 2.2)',true)) -> 2\nST_NumPoints((ST_GeomFromText('POLYGON ((0 0, 10 0, 0 10, 0 0))',true))) -> 4"
-  },
-  {
-    "name": "ST_Overlaps",
-    "args": "([binary] {geometry1}, [binary] {geometry2})",
-    "returnType": "boolean",
-    "description": "Returns true if {{geometry1}} overlaps {{geometry2}}.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_Overlaps(ST_GeomFromText('POLYGON ((2 0, 2 3, 3 0))',true), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true)) -> true\nST_Overlaps(ST_GeomFromText('POLYGON ((2 0, 2 1, 3 1))',true), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true)) -> false"
-  },
-  {
-    "name": "ST_Point",
-    "args": "([number] {lon}, [number] {lat})",
-    "returnType": "binary",
-    "description": "Returns a 2D point geometry from the provided lon (x) and lat (y) values.",
-    "tags": [
-      "gis"
-    ]
-  },
-  {
-    "name": "ST_PointN",
-    "args": "([binary] {geometry}, [number] {index})",
-    "returnType": "binary",
-    "description": "Returns the point that is the nth vertex in an LineString or MultiPoint (1-based index)",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_AsText(ST_PointN(ST_GeomFromText('LINESTRING (1.5 2.5, 3.0 2.2)',true), 2)) -> 'POINT (3 2.2)'"
-  },
-  {
-    "name": "ST_PointZ",
-    "args": "[number] {lon}, [number] {lat}, [number] {elev}",
-    "returnType": "binary",
-    "description": "Returns a 3D point geometry from the provided lon (x), lat (y), and elev (z) values.",
-    "tags": [
-      "gis"
-    ]
-  },
-  {
-    "name": "ST_Relate",
-    "args": "([binary] {geometry1}, [binary] {geometry2}, [string] {relation})",
-    "returnType": "binary",
-    "description": "Compares the two geometries and returns true if the geometries meet the conditions specified by the DE-9IM pattern matrix string, otherwise, false is returned.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_Relate(ST_GeomFromText('POLYGON ((2 0, 2 1, 3 1))',true), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true), '****T****') -> true\nST_Relate(ST_GeomFromText('POLYGON ((2 0, 2 1, 3 1))',true), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true), 'T********') -> false\nST_Relate(ST_GeomFromText('LINESTRING (0 0, 3 3)',true), ST_GeomFromText('LINESTRING (1 1, 4 4)',true), 'T********') -> true\nST_Relate(ST_GeomFromText('LINESTRING (0 0, 3 3)',true), ST_GeomFromText('LINESTRING (1 1, 4 4)',true), '****T****') -> false"
-  },
-  {
-    "name": "ST_SetSRID",
-    "args": "([binary] {geometry}, [number] {SRID})",
-    "returnType": "binary",
-    "description": "Sets the Spatial Reference ID of {{SRID}} of the geometry.",
-    "tags": [
-      "gis"
-    ]
-  },
-  {
-    "name": "ST_Simplify",
-    "args": "([binary] {geometry})",
-    "returnType": "binary",
-    "description": "Simplifies the geometry or determines if the geometry is simple. The goal is to produce a geometry that is valid to store without additional processing.",
-    "tags": [
-      "gis"
-    ]
-  },
-  {
-    "name": "ST_StartPoint",
-    "args": "([binary] {geometry})",
-    "returnType": "binary",
-    "description": "Returns the first point of a Linestring.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_AsText(ST_StartPoint(ST_GeomFromText('LINESTRING (1.5 2.5, 3.0 2.2)',true))) -> 'POINT(1.5 2.5)'"
-  },
-  {
-    "name": "ST_SymmetricDiff",
-    "args": "([binary] {geometry1}, [binary] {geometry2})",
-    "returnType": "binary",
-    "description": "Returns a geometry object that is the symmetric difference of the source objects.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_AsText(ST_SymmetricDiff(ST_GeomFromText('LINESTRING (0 2, 2 2)',true), ST_GeomFromText('LINESTRING (1 2, 3 2)',true))) -> 'MULTILINESTRING ((0 2, 1 2), (2 2, 3 2))'\nST_AsText(ST_SymmetricDiff(ST_GeomFromText('POLYGON ((0 0, 2 0, 2 2, 0 2, 0 0))',true), ST_GeomFromText('POLYGON ((1 1, 3 1, 3 3, 1 3, 1 1))',true))) -> 'MULTIPOLYGON (((0 0, 2 0, 2 1, 1 1, 1 2, 0 2, 0 0)), ((2 1, 3 1, 3 3, 1 3, 1 2, 2 2, 2 1)))'"
-  },
-  {
-    "name": "ST_Touches",
-    "args": "([binary] {geometry1}, [binary] {geometry2})",
-    "returnType": "boolean",
-    "description": "Returns true if none of the points common to both geometries intersect the interiors of both geometries, otherwise, it returns false. At least one geometry must be a LineString, Polygon, MultiLineString, or MultiPolygon.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_Touches(ST_Point(1, 2), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true)) -> true\nST_Touches(ST_Point(8, 8), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true)) -> false"
-  },
-  {
-    "name": "ST_Transform",
-    "args": "([binary] {geometry}, [number] {sourceSRID}, [number] {targetSRID})",
-    "returnType": "binary",
-    "description": "Takes the two-dimensional geometry as input and returns values converted from the spatial source reference specified by {{sourceSRID}} to the one specified by {{targetSRID}}.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_AsText(ST_Transform(ST_GeomFromText('POLYGON ((-114.04702599994988 39.90609700007656, -114.0500520000997 37.0001909997149, -109.04517199998776 36.99897700038832, -109.05002599989996 41.000691000389395, -111.04681499981234 40.997875000031286, -111.04671399965133 42.00170200004732, -114.04147700036322 41.99387299963928, -114.04702599994988 39.90609700007656))', true), 4326, 3857)) -> 'POLYGON ((-12695656.860801652 4852305.919673687, -12695993.71359747 4439133.410181124, -12138853.020503571 4438964.195256694, -12139393.365302108 5012443.58678148, -12361674.899993964 5012028.231889712, -12361663.65670747 5161234.398812287, -12695039.148993252 5160061.69329091, -12695656.860801652 4852305.919673687))'"
-  },
-  {
-    "name": "ST_Union",
-    "args": "([binary] {geometry1}, [binary] {geometry2})",
-    "returnType": "binary",
-    "description": "Returns a geometry as the union of the two supplied geometries.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_AsText(ST_Union(ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true), ST_GeomFromText('POLYGON ((4 1, 4 4, 4 8, 8 1))',true))) -> 'POLYGON ((1 1, 4 1, 8 1, 4 8, 4 4, 1 4, 1 1))'"
-  },
-  {
-    "name": "ST_Union",
-    "args": "([binary] {geometry})",
-    "returnType": "binary",
-    "description": "Returns a geometry as the union of the supplied geometry.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_AsText(ST_Union(ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true), ST_GeomFromText('POLYGON ((4 1, 4 4, 4 8, 8 1))',true))) -> 'POLYGON ((1 1, 4 1, 8 1, 4 8, 4 4, 1 4, 1 1))'"
-  },
-  {
-    "name": "ST_Within",
-    "args": "([binary] {geometry1}, [binary] {geometry2})",
-    "returnType": "boolean",
-    "description": "Returns true if {{geometry1}} is completely inside {{geometry2}}.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_Within(ST_Point(2, 3), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true)) -> true\nST_Within(ST_Point(8, 8), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true)) -> false"
-  },
-  {
-    "name": "ST_X",
-    "args": "([binary] {geometry})",
-    "returnType": "number",
-    "description": "Takes a Point as an input parameter and returns its longitude (x) coordinate.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_X(ST_Point(5, 7)) -> 5.0"
-  },
-  {
-    "name": "ST_Y",
-    "args": "([binary] {geometry})",
-    "returnType": "number",
-    "description": "Takes a Point as an input parameter and returns its latitude (y) coordinate.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_Y(ST_GeomFromText('POINT (5 7)',true)) -> 7.0"
-  },
-  {
-    "name": "ST_Z",
-    "args": "([binary] {geometry})",
-    "returnType": "number",
-    "description": "Takes a Point as an input parameter and returns its elevation (z) coordinate.",
-    "tags": [
-      "gis"
-    ],
-    "example": "ST_Z(ST_GeomFromText('POINT Z (5 7 9)',true)) -> 9.0"
-  }
+    {
+      "name": "AVG",
+      "args": "([number] {x})",
+      "returnType": "number",
+      "tags": [
+        "aggregate"
+      ],
+      "description": "Aggregate function. Returns the average value of {{x}}."
+    },
+    {
+      "name": "COUNT",
+      "args": "(*)",
+      "returnType": "number",
+      "description": "Gives the total number of records."
+    },
+    {
+      "name": "COUNT",
+      "args": "(DISTINCT [field name] {givenfield})",
+      "returnType": "number",
+      "tags": [
+        "aggregate"
+      ],
+      "description": "Aggregate function. Gives the number of distinct values in the field named {{givenfield}}."
+    },
+    {
+      "name": "MAX",
+      "args": "([number] {x})",
+      "returnType": "number",
+      "tags": [
+        "aggregate"
+      ],
+      "description": "Aggregate function. Returns the maximum value of {{x}}."
+    },
+    {
+      "name": "MAX",
+      "args": "([timetype] {giventime})",
+      "returnType": "timetype",
+      "tags": [
+        "aggregate"
+      ],
+      "description": "Aggregate function. Returns the latest value of {{giventime}}."
+    },
+    {
+      "name": "MIN",
+      "args": "([number] {x})",
+      "returnType": "number",
+      "tags": [
+        "aggregate"
+      ],
+      "description": "Aggregate function. Returns the minimum value of {{x}}."
+    },
+    {
+      "name": "MIN",
+      "args": "([timetype] {giventime})",
+      "returnType": "timetype",
+      "tags": [
+        "aggregate"
+      ],
+      "description": "Aggregate function. Returns the earliest value of {{giventime}}."
+    },
+    {
+      "name": "SUM",
+      "args": "([timeinterval] {giveninterval})",
+      "returnType": "timeinterval",
+      "tags": [
+        "aggregate"
+      ],
+      "description": "Aggregate function. Returns the sum of values of {{giveninterval}}."
+    },
+    {
+      "name": "SUM",
+      "args": "([number] {x})",
+      "returnType": "number",
+      "tags": [
+        "aggregate"
+      ],
+      "description": "Aggregate function. Returns the sum of values of {{x}}."
+    },
+    {
+      "name": "STDDEV",
+      "args": "([number] {x})",
+      "returnType": "number",
+      "tags": [
+        "aggregate",
+        "STDDEV_SAMP"
+      ],
+      "description": "Aggregate function. Takes the sample standard deviation of values of {{x}}."
+    },
+    {
+      "name": "STDDEV_POP",
+      "args": "([number] {x})",
+      "returnType": "number",
+      "tags": [
+        "aggregate"
+      ],
+      "description": "Aggregate function. Takes the population standard deviation of values of {{x}}."
+    },
+    {
+      "name": "VARIANCE",
+      "args": "([number] {x})",
+      "returnType": "number",
+      "tags": [
+        "aggregate",
+        "VAR_SAMP"
+      ],
+      "description": "Aggregate function. Takes the sample variance of values of {{x}}."
+    },
+    {
+      "name": "VAR_POP",
+      "args": "([number] {x})",
+      "returnType": "number",
+      "tags": [
+        "aggregate"
+      ],
+      "description": "Aggregate function. Takes the population variance of values of {{x}}."
+    },
+    {
+      "name": "\"CORR\"",
+      "args": "([number] {x}, [number] {y})",
+      "returnType": "boolean",
+      "tags": [
+        "aggregate",
+        "CORRELATION"
+      ],
+      "description": "Aggregate function. Calculates the covariance of the values in {{x}} and {{y}}. Function name must be enclosed in double quotes."
+    },
+    {
+      "name": "CAST",
+      "args": "([any] {value} AS {<type>})",
+      "returnType": "<type>",
+      "description": "Converts {{value}} to a type specified by {{<type>}}.",
+      "example": "CAST(3.14159 AS INTEGER) -> 3\nCAST('0.3456' AS FLOAT) + 1 -> 1.3456"
+    },
+    {
+      "name": "CONVERT_TO",
+      "args": "({expression}, [literal string] {conv_type})",
+      "returnType": "bytes",
+      "description": "Converts {{expression}} to bytes, depending on the type specified in {{conv_type}}. {{expression}} can be a literal value (string, number, etc.) or a field name. Please consult Conversion Types in the Reference section of the Dremio documentation for more details."
+    },
+    {
+      "name": "CONVERT_FROM",
+      "args": "({expression}, [literal string] {conv_type})",
+      "returnType": "Depends on the conversion type specified.",
+      "description": "Converts the byte data in {{expression}} to the type specified in {{conv_type}}. {{expression}} can be a literal string or a field name. Please consult Conversion Types in the Reference section of the Dremio documentation for more details."
+    },
+    {
+      "name": "STRING_BINARY",
+      "args": "([binary] {data})",
+      "returnType": "string",
+      "description": "Returns the bytes in {{data}} as a string. Unprintable bytes are given in hexadecimal with a preceding '\\x'."
+    },
+    {
+      "name": "BINARY_STRING",
+      "args": "([string] {giventext})",
+      "returnType": "binary",
+      "description": "Converts {{giventext}} to binary."
+    },
+    {
+      "name": "TO_CHAR",
+      "args": "({expression}, [literal string] {format})",
+      "returnType": "string",
+      "description": "Converts {{expression}} to a string using the format specified in {{format}}. {{expression}} can be a literal value (string, number, etc.) or a field name.",
+      "example": "TO_CHAR(381928933.2398474,'#,###.##') -> '381,928,933.24'"
+    },
+    {
+      "name": "TO_DATE",
+      "args": "([string] {giventext}, [literal string] {format})",
+      "returnType": "timetype",
+      "description": "Converts {{giventext}} to a date using the format given in {{format}}."
+    },
+    {
+      "name": "TO_DATE",
+      "args": "([number] {epochms})",
+      "returnType": "timetype",
+      "description": "Converts {{epochms}}, the Unix time given in milliseconds, to a date."
+    },
+    {
+      "name": "TO_TIME",
+      "args": "([string] {giventext}, [literal string] {format})",
+      "returnType": "timetype",
+      "description": "Converts {{giventext}} to a time using the format given in {{format}}."
+    },
+    {
+      "name": "TO_TIME",
+      "args": "([number] {ms})",
+      "returnType": "timetype",
+      "description": "Converts {{ms}}, the number of milliseconds since midnight, to a time."
+    },
+    {
+      "name": "TO_TIMESTAMP",
+      "args": "([string] {giventext}, [literal string] {format})",
+      "returnType": "timetype",
+      "description": "Converts {{giventext}} to a timestamp (date & time) using the format given in {{format}}."
+    },
+    {
+      "name": "TO_TIMESTAMP",
+      "args": "([number] {epochsec})",
+      "returnType": "timetype",
+      "description": "Converts the Unix time {{epochsec}} to a timestamp (date & time)."
+    },
+    {
+      "name": "TIMESTAMPADD",
+      "args": "({<time unit>}, [number] {count}, [timetype] {giventime})",
+      "returnType": "timetype",
+      "description": "{{<time unit>}} has possible values YEAR, QUARTER, MONTH, WEEK, DAY, HOUR, MINUTE, SECOND, MICROSECOND. Adds {{count}} units of {{<time unit>}} to the {{giventime}}."
+    },
+    {
+      "name": "TIMESTAMPDIFF",
+      "args": "({<time unit>}, [timetype] {giventime1}, [timetype] {giventime2})",
+      "returnType": "number",
+      "description": "{{<time unit>}} has possible values YEAR, QUARTER, MONTH, WEEK, DAY, HOUR, MINUTE, SECOND. Returns the {{count}} units of time between {{giventime1}} and {{giventime2}}, by subtracting {{giventime1}} from {{giventime2}} (rounded down)."
+    },
+    {
+      "name": "TO_NUMBER",
+      "args": "([string] {giventext}, [literal string] {format})",
+      "returnType": "number",
+      "description": "Parses the string {{giventext}} into a number according to the format indicated in {{format}}.",
+      "example": "TO_NUMBER('12,374.0023','##,###.####') + 300 -> 12674.0023"
+    },
+    {
+      "name": "EXTRACT",
+      "args": "({<time unit>} FROM [timetype] {giventime})",
+      "returnType": "number",
+      "description": "{{<time unit>}} has possible values SECOND, MINUTE, HOUR, DAY, MONTH, YEAR. Returns the number in {{giventime}} corresponding to the specified unit."
+    },
+    {
+      "name": "CURRENT_DATE",
+      "args": null,
+      "returnType": "timetype",
+      "description": "Today's date."
+    },
+    {
+      "name": "CURRENT_TIME",
+      "args": null,
+      "returnType": "timetype",
+      "description": "The current time."
+    },
+    {
+      "name": "CURRENT_TIMESTAMP",
+      "args": null,
+      "returnType": "timetype",
+      "description": "The current date and time."
+    },
+    {
+      "name": "NOW",
+      "args": "()",
+      "returnType": "timetype",
+      "description": "Returns the current date and time."
+    },
+    {
+      "name": "LOCALTIME",
+      "args": null,
+      "returnType": "timetype",
+      "description": "The current time."
+    },
+    {
+      "name": "LOCALTIMESTAMP",
+      "args": null,
+      "returnType": "timetype",
+      "description": "The current date and time."
+    },
+    {
+      "name": "TIMEOFDAY",
+      "args": "()",
+      "returnType": "string",
+      "description": "Returns a string of the date and time as well as the name of the time zone.",
+      "example": "TIMEOFDAY() -> '18:17:43.056 America/Los_Angeles'"
+    },
+    {
+      "name": "DATE_ADD",
+      "args": "(DATE [literal string] {giventime}, [number] {x})",
+      "returnType": "timetype",
+      "description": "Adds {{x}} days to {{giventime}}.",
+      "example": "DATE_ADD(DATE '2016-06-20', 5) -> 2016-06-25"
+    },
+    {
+      "name": "DATE_ADD",
+      "args": "(DATE or TIME or TIMESTAMP [literal string] {giventime}, [timeinterval] {giveninterval})",
+      "returnType": "timetype",
+      "description": "Adds {{giveninterval}} to {{giventime}}.",
+      "example": "DATE_ADD(TIMESTAMP '2016-06-20 03:34:23', AGE('2016-06-01','2017-06-01')) -> 2015-06-15 03:34:23.0\nDATE_ADD(TIMESTAMP '2016-06-20 03:34:23', CAST(3 AS INTERVAL DAY)) -> 2016-06-23 03:34:23.0"
+    },
+    {
+      "name": "DATE_ADD",
+      "args": "(DATE [field name] {datefield}, [number] {x})",
+      "returnType": "timetype",
+      "description": "Adds {{x}} days to the values in the field named {{datefield}}.",
+      "example": "DATE_ADD(deliveryDate, 5) -> 2016-06-25"
+    },
+    {
+      "name": "DATE_ADD",
+      "args": "(DATE or TIME or TIMESTAMP [field name] {timetypefield}, [timeinterval] {giveninterval})",
+      "returnType": "timetype",
+      "description": "Adds {{giveninterval}} to the values in the field named {{timetypefield}}.",
+      "example": "DATE_ADD(deliveryDate, AGE('2016-06-01','2017-06-01')) -> 2015-06-15 03:34:23.0\nDATE_ADD(TIMESTAMP deliveryDate, CAST(3 AS INTERVAL DAY)) -> 2016-06-23 03:34:23.0"
+    },
+    {
+      "name": "DATE_SUB",
+      "args": "(DATE [literal string] {giventime}, [number] {x})",
+      "returnType": "timetype",
+      "description": "Subtracts {{x}} days from {{giventime}}.",
+      "example": "DATE_SUB(DATE '2016-06-20', 5) -> 2016-06-25"
+    },
+    {
+      "name": "DATE_SUB",
+      "args": "(DATE or TIME or TIMESTAMP [literal string] {giventime}, [timeinterval] {giveninterval})",
+      "returnType": "timetype",
+      "description": "Subtracts {{giveninterval}} from {{giventime}}.",
+      "example": "DATE_SUB(TIMESTAMP '2016-06-20 03:34:23', AGE('2016-06-01','2017-06-01')) -> 2015-06-15 03:34:23.0\nDATE_SUB(TIMESTAMP '2016-06-20 03:34:23', CAST(3 AS INTERVAL DAY)) -> 2016-06-23 03:34:23.0"
+    },
+    {
+      "name": "DATE_SUB",
+      "args": "(DATE [field name] {datefield}, [number] {x})",
+      "returnType": "timetype",
+      "description": "Subtracts {{x}} days from the values in the field named {{datefield}}.",
+      "example": "DATE_SUB(deliveryDate, 5) -> 2016-06-25"
+    },
+    {
+      "name": "DATE_SUB",
+      "args": "(DATE or TIME or TIMESTAMP [field name] {timetypefield}, [timeinterval] {giveninterval})",
+      "returnType": "timetype",
+      "description": "Subtracts {{giveninterval}} from the values in the field named {{timetypefield}}.",
+      "example": "DATE_SUB(deliveryDate, AGE('2016-06-01','2017-06-01')) -> 2015-06-15 03:34:23.0\nDATE_SUB(TIMESTAMP deliveryDate, CAST(3 AS INTERVAL DAY)) -> 2016-06-23 03:34:23.0"
+    },
+    {
+      "name": "DATE_PART",
+      "args": "([literal string] {timeunit}, [timetype] {giventime})",
+      "returnType": "number",
+      "description": "Returns the number in {{giventime}} corresponding to the unit specified by {{timeunit}}. {{timeunit}} has possible values 'second', 'minute', 'hour', 'day', 'month', 'year'."
+    },
+    {
+      "name": "UNIX_TIMESTAMP",
+      "args": "()",
+      "returnType": "number",
+      "description": "Gives the current Unix time in seconds."
+    },
+    {
+      "name": "UNIX_TIMESTAMP",
+      "args": "([string] {timestring})",
+      "returnType": "number",
+      "description": "Gives the Unix time for the date in {{timestring}} assuming a format of 'YYYY-MM-DD HH24:MI:SS'."
+    },
+    {
+      "name": "UNIX_TIMESTAMP",
+      "args": "([string] {timestring}, [string] {format})",
+      "returnType": "number",
+      "description": "Gives the Unix time for the date in {{timestring}} using the format specified in {{format}}.",
+      "example": "UNIX_TIMESTAMP('3/14/2015 09:00:00','MM/DD/YYYY HH:MI:SS') -> 1426348800"
+    },
+    {
+      "name": "ISDATE",
+      "args": "([string] {giventext})",
+      "returnType": "boolean",
+      "description": "Returns true if {{giventext}} is castable to a date of format 'YYYY-MM-DD'."
+    },
+    {
+      "name": "DATE_TRUNC",
+      "args": "([literal string] {timeunit}, [timetype] {giventime})",
+      "returnType": "timetype",
+      "description": "Truncates the precision of {{giventime}} to the unit given in {{timeunit}}. The more precise time units assume their lowest possible value. {{timeunit}} has possible values 'second', 'minute', 'hour', 'day', 'month', 'year'.",
+      "example": "DATE_TRUNC('month',CAST('2011-12-23 12:28:23' AS TIMESTAMP)) -> 2011-12-01 00:00:00.0"
+    },
+    {
+      "name": "SIN",
+      "args": "([number] {x})",
+      "returnType": "number",
+      "description": "Calculates the sine of {{x}}, where {{x}} is given in radians."
+    },
+    {
+      "name": "COS",
+      "args": "([number] {x})",
+      "returnType": "number",
+      "description": "Calculates the cosine of {{x}}, where {{x}} is given in radians."
+    },
+    {
+      "name": "TAN",
+      "args": "([number] {x})",
+      "returnType": "number",
+      "description": "Calculates the tangent of {{x}}, where {{x}} is given in radians."
+    },
+    {
+      "name": "ASIN",
+      "args": "([number] {x})",
+      "returnType": "number",
+      "description": "Calculates the arcsine of {{x}} in radians."
+    },
+    {
+      "name": "ACOS",
+      "args": "([number] {x})",
+      "returnType": "number",
+      "description": "Calculates the arccosine of {{x}} in radians."
+    },
+    {
+      "name": "ATAN",
+      "args": "([number] {x})",
+      "returnType": "number",
+      "description": "Calculates the arctangent of {{x}} in radians."
+    },
+    {
+      "name": "DEGREES",
+      "args": "([number] {x})",
+      "returnType": "number",
+      "description": "Converts the value in radians given by {{x}} to degrees."
+    },
+    {
+      "name": "RADIANS",
+      "args": "([number] {x})",
+      "returnType": "number",
+      "description": "Converts the value in degrees given by {{x}} to radians."
+    },
+    {
+      "name": "PI",
+      "args": null,
+      "returnType": "number",
+      "description": "Returns the value of the mathematical constant pi."
+    },
+    {
+      "name": "FLOOR",
+      "args": "([number] {x})",
+      "returnType": "number",
+      "description": "Returns the nearest whole number less than {{x}}."
+    },
+    {
+      "name": "CEILING",
+      "args": "([number] {x})",
+      "returnType": "number",
+      "description": "Returns the nearest whole number greater than {{x}}.",
+      "tags": [
+        "CEIL"
+      ]
+    },
+    {
+      "name": "ROUND",
+      "args": "([number] {x})",
+      "returnType": "number",
+      "description": "Returns the whole number nearest the value {{x}}."
+    },
+    {
+      "name": "SQRT",
+      "args": "([number] {x})",
+      "returnType": "number",
+      "description": "Calculates the square root of {{x}}."
+    },
+    {
+      "name": "CBRT",
+      "args": "([number] {x})",
+      "returnType": "number",
+      "description": "Calculates the cube root of {{x}}."
+    },
+    {
+      "name": "LOG",
+      "args": "([number] {x})",
+      "returnType": "number",
+      "description": "Calculates the natural logarithm of {{x}}."
+    },
+    {
+      "name": "LOG10",
+      "args": "([number] {x})",
+      "returnType": "number",
+      "description": "Calculates the log base 10 of {{x}}."
+    },
+    {
+      "name": "LOG",
+      "args": "([number] {x}, [number] {y})",
+      "returnType": "number",
+      "description": "Calculates the log base {{x}} of {{y}}."
+    },
+    {
+      "name": "POW",
+      "args": "([number] {x}, [number] {y})",
+      "returnType": "number",
+      "description": "Calculates the {{x}} to the power of {{y}}."
+    },
+    {
+      "name": "EXP",
+      "args": "([number] {x})",
+      "returnType": "number",
+      "description": "Calculates the value of the constant e raised to the power of {{x}}."
+    },
+    {
+      "name": "E",
+      "args": "()",
+      "returnType": "number",
+      "description": "Returns the mathematical constant e."
+    },
+    {
+      "name": "SINH",
+      "args": "([number] {x})",
+      "returnType": "number",
+      "description": "Calculates the hyperbolic sine of {{x}}."
+    },
+    {
+      "name": "COSH",
+      "args": "([number] {x})",
+      "returnType": "number",
+      "description": "Calculates the hyperbolic cosine of {{x}}."
+    },
+    {
+      "name": "TANH",
+      "args": "([number] {x})",
+      "returnType": "number",
+      "description": "Calculates the hyperbolic tangent of {{x}}."
+    },
+    {
+      "name": "MOD",
+      "args": "([number] {x}, [number] {y})",
+      "returnType": "number",
+      "description": "Calculates the modulus of {{x}} and {{y}} (e.g. {{x % y}})."
+    },
+    {
+      "name": "LSHIFT",
+      "args": "([number] {x}, [number] {y})",
+      "returnType": "number",
+      "description": "Returns the binary representation of {{x}} shifted to the left by {{y}} digits."
+    },
+    {
+      "name": "RSHIFT",
+      "args": "([number] {x}, [number] {y})",
+      "returnType": "number",
+      "description": "Returns the binary representation of {{x}} shifted to the right by {{y}} digits."
+    },
+    {
+      "name": "SIGN",
+      "args": "([number] {x})",
+      "returnType": "number",
+      "description": "Returns the sign of {{x}} (e.g. either -1 or +1)."
+    },
+    {
+      "name": "ABS",
+      "args": "([number] {x})",
+      "returnType": "number",
+      "description": "Returns the absolute value of {{x}}."
+    },
+    {
+      "name": "TRUNC",
+      "args": "([number] {x}, [optional number] {y})",
+      "returnType": "number",
+      "description": "Keeps the first {{y}} digits to right of {{x}}'s decimal point. If the second argument is omitted then {{y = 1}}."
+    },
+    {
+      "name": "COT",
+      "args": "([number] {x})",
+      "returnType": "number",
+      "description": "Calculates the cotangent of {{x}}, where {{x}} is given in radians."
+    },
+    {
+      "name": "RAND",
+      "args": "()",
+      "returnType": "number",
+      "description": "Generates a random number greater than or equal to 0 and less than 1. This random number will be the same for each entry."
+    },
+    {
+      "name": "RANDOM",
+      "args": "()",
+      "returnType": "number",
+      "description": "Generates a random number greater than or equal to 0 and less than 1. A new random number will made for each entry."
+    },
+    {
+      "name": "FLATTEN",
+      "args": "([JSON array] {givenarray})",
+      "returnType": null,
+      "description": "Creates a new entry in the dataset for each element in {{givenarray}}. Same as 'Unnest' on arrays."
+    },
+    {
+      "name": "BIT_LENGTH",
+      "args": "([string] {giventext})",
+      "returnType": "number",
+      "description": "Returns the length in bits of the string {{giventext}}."
+    },
+    {
+      "name": "TYPEOF",
+      "args": "([field name] {givenfield})",
+      "returnType": "string",
+      "description": "Returns the type(s) of values in {{givenfield}}."
+    },
+    {
+      "name": "ISNULL",
+      "args": "({<expression>})",
+      "returnType": "boolean",
+      "description": "Returns true if {{<expression>}} is NULL, and false otherwise."
+    },
+    {
+      "name": "ISNOTNULL",
+      "args": "({<expression>})",
+      "returnType": "boolean",
+      "description": "Returns false if {{<expression>}} is NULL, and true otherwise."
+    },
+    {
+      "name": "TRIM",
+      "args": "(LEADING or TRAILING or BOTH [string] {trimtext} FROM [string] {basetext})",
+      "returnType": "string",
+      "description": "Trims {{trimtext}} from the left side, the right side, or both sides of {{basetext}}.",
+      "example": "TRIM(TRAILING 'derful stuff' FROM 'We have wonderful stuff') -> 'We have won'"
+    },
+    {
+      "name": "LTRIM",
+      "args": "([string] {basetext}, [optional string] {trimtext})",
+      "returnType": "string",
+      "description": "Trims {{trimtext}} from the left of {{basetext}}. If {{trimtext}} is omitted then spaces are trimmed.",
+      "example": "LTRIM('pancake','pan') -> 'cake'"
+    },
+    {
+      "name": "RTRIM",
+      "args": "([string] {basetext}, [optional string] {trimtext})",
+      "returnType": "string",
+      "description": "Trims {{trimtext}} from the right of {{basetext}}. If {{trimtext}} is omitted then spaces are trimmed.",
+      "example": "RTRIM('ice cream',' cream') -> 'ice'"
+    },
+    {
+      "name": "BTRIM",
+      "args": "([string] {basetext}, [optional string] {trimtext})",
+      "returnType": "string",
+      "description": "Trims {{trimtext}} from both sides of {{basetext}}. If {{trimtext}} is omitted then spaces are trimmed.",
+      "example": "BTRIM('~~CoolScreenName~~','~') -> 'CoolScreenName'"
+    },
+    {
+      "name": "LPAD",
+      "args": "([string] {basetext}, [number] {x}, [optional string] {padtext})",
+      "returnType": "string",
+      "description": "Prepends {{padtext}} to {{basetext}} in a way that allows as many characters as possible from {{padtext}} given an output string length of {{x}}. When {{x}} is less than or equal to the length of {{basetext}}, only characters from {{basetext}} are printed in the output. If {{padtext}} is omitted then spaces are prepended.",
+      "example": "LPAD(' hugs and kisses',20,'XO') -> 'XOXO hugs and kisses'"
+    },
+    {
+      "name": "RPAD",
+      "args": "([string] {basetext}, [number] {x}, [optional string] {padtext})",
+      "returnType": "string",
+      "description": "Appends {{padtext}} to {{basetext}} in a way that allows as many characters as possible from {{padtext}} given an output string length of {{x}}. When {{x}} is less than or equal to the length of {{basetext}}, only characters from {{basetext}} are printed in the output. If {{padtext}} is omitted then spaces are appended.",
+      "example": "RPAD('hugs and kisses ',21,'XO') -> 'hugs and kisses XOXOX'"
+    },
+    {
+      "name": "LOWER",
+      "args": "([string] {giventext})",
+      "returnType": "string",
+      "description": "Converts the string {{giventext}} to all lowercase letters."
+    },
+    {
+      "name": "UPPER",
+      "args": "([string] {giventext})",
+      "returnType": "string",
+      "description": "Converts the string {{giventext}} to all uppercase letters."
+    },
+    {
+      "name": "INITCAP",
+      "args": "([string] {giventext})",
+      "returnType": "string",
+      "description": "Capitalizes the first letter in each word of {{giventext}}.",
+      "example": "INITCAP('a guide to big data') -> 'A Guide To Big Data'"
+    },
+    {
+      "name": "POSITION",
+      "args": "([string] {sometext} IN [string] {giventext})",
+      "returnType": "number",
+      "description": "Gives the location of the string {{sometext}} in {{giventext}}.",
+      "example": "POSITION('and' IN 'beans and rice') -> 7"
+    },
+    {
+      "name": "STRPOS",
+      "args": "([string] {giventext}, [string] {sometext})",
+      "returnType": "number",
+      "description": "Gives the location of the string {{sometext}} in {{giventext}}.",
+      "example": "STRPOS('beans and rice','and') -> 7"
+    },
+    {
+      "name": "BYTE_SUBSTR",
+      "args": "([string] {giventext}, [number] {x}, [number] {y})",
+      "returnType": "binary",
+      "description": "Produces the binary representation of a string {{y}} characters long derived by starting at position {{x}} in the string {{giventext}}. {{y}} may also be given by the expression {{LENGTH(giventext)}}, which indicates that you wish to convert every remaining character in {{giventext}}."
+    },
+    {
+      "name": "SUBSTR",
+      "args": "([string] {giventext}, [number] {x}, [optional number] {y})",
+      "returnType": "string",
+      "description": "Returns a {{y}} character string derived from {{giventext}} that begins at position {{x}}. If the number {{y}} is omitted then rest of the characters in {{giventext}} past position {{x}} are returned.",
+      "tags": [
+        "SUBSTRING"
+      ],
+      "example": "SUBSTR('gastronomy',2,5) -> 'astro'"
+    },
+    {
+      "name": "CHAR_LENGTH",
+      "args": "([string] {giventext})",
+      "returnType": "number",
+      "description": "Calculates the length of the string {{giventext}}.",
+      "tags": [
+        "CHARACTER_LENGTH",
+        "LENGTH"
+      ]
+    },
+    {
+      "name": "LENGTH",
+      "args": "([string] {giventext}, [optional literal string] {character_encoding}",
+      "returnType": "number",
+      "description": "Gives the length of string {{giventext}} in the encoding scheme designated by the string {{character_encoding}}. If {{character_encoding}} is not specified then 'UTF8' is assumed."
+    },
+    {
+      "name": "ILIKE",
+      "args": "([string] {text1}, [string] {text2})",
+      "returnType": "boolean",
+      "description": "Returns true if {{text1}} and {{text2}} are the same, and false otherwise."
+    },
+    {
+      "name": "REGEXP_REPLACE",
+      "args": "([string] {basetext}. [string] {matching}, [string] {{newtext}})",
+      "returnType": "string",
+      "description": "Replaces the patterns in {{basetext}} described by the regular expression {{matching}} with the string {{newtext}}.",
+      "example": "SELECT REGEXP_REPLACE('The cat was catatonic.','cat\\b','dog') -> 'The dog was catatonic.'"
+    },
+    {
+      "name": "CONCAT",
+      "args": "([string] {text1}, [optional string] {text2}, [optional string] {text3}, ...)",
+      "returnType": "string",
+      "description": "Combines strings.",
+      "example": "CONCAT('un','sports','man','like') -> 'unsportsmanlike'"
+    },
+    {
+      "name": "SPLIT_PART",
+      "args": "([string] {basetext}, [string] {splitter}, [number] {index})",
+      "returnType": "string",
+      "description": "Splits {{basetext}} wherever {{splitter}} occurs, and returns the Nth element in this list, where N is given by {{index}}. The first element is retrieved by setting {{index = 1}}.",
+      "example": "SPLIT_PART('two words',' ',2) -> 'words'"
+    },
+    {
+      "name": "REGEXP_LIKE",
+      "args": "([string] {giventext}, [string literal] {matching})",
+      "returnType": "boolean",
+      "description": "Returns true if the regular expression in {{matching}} matches the string in {{giventext}}.",
+      "example": "REGEXP_LIKE('catatonic','cat\\S+') -> true"
+    },
+    {
+      "name": "REGEXP_MATCHES",
+      "args": "([string] {giventext}, [string literal] {matching})",
+      "returnType": "boolean",
+      "description": "Returns true if the regular expression in {{matching}} matches the string in {{giventext}}.",
+      "example": "REGEXP_MATCHES('catatonic','cat\\S+') -> true"
+    },
+    {
+      "name": "REVERSE",
+      "args": "([string] {giventext})",
+      "returnType": "string",
+      "description": "Reverses {{giventext}}.",
+      "example": "REVERSE('palindrome') -> 'emordnilap'"
+    },
+    {
+      "name": "\"LEFT\"",
+      "args": "([string] {giventext}, [number] {x})",
+      "returnType": "string",
+      "description": "Returns the {{x}} leftmost characters of {{giventext}}. Function name must be enclosed in double quotes.",
+      "example": "\"LEFT\"('stuff',3) -> 'stu'"
+    },
+    {
+      "name": "\"RIGHT\"",
+      "args": "([string] {giventext}, [number] {x})",
+      "returnType": "string",
+      "description": "Returns the {{x}} rightmost characters of {{giventext}}. Function name must be enclosed in double quotes.",
+      "example": "\"RIGHT\"('stuff',2) -> 'ff'"
+    },
+    {
+      "name": "REPLACE",
+      "args": "([string] {basetext}, [string] {text1}, [string] {text2})",
+      "returnType": "string",
+      "description": "Replaces {{text1}} with {{text2}} in {{basetext}}.",
+      "example": "REPLACE('the catatonic cat','cat','dog') -> 'the dogatonic dog'"
+    },
+    {
+      "name": "H3_AsText",
+      "args": "([bigint] {h3Value})",
+      "returnType": "string",
+      "description": "Returns a Hex representation of the H3 value as a string.",
+      "tags": [
+        "gis"
+      ],
+      "example": "H3_AsText(H3_FromGeomPoint(ST_Point(40.4168, -3.7038), 4)) -> '847b59dffffffff'"
+    },
+    {
+      "name": "H3_Boundary",
+      "args": "([bigint] {h3Value})",
+      "returnType": "binary",
+      "description": "Returns a polygon geography representing the H3 cell.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_AsText(H3_Boundary(H3_FromLongLat(40.4168, -3.7038, 15))) -> 'POLYGON ((-3.703802360352346 40.41680913267208, -3.7038075007518416 40.41680558484906, -3.703806130063667 40.41680018598506, -3.7037996189769617 40.41679833494421, -3.7037944785779335 40.41680188276699, -3.7037958492651386 40.416807281630845, -3.703802360352346 40.41680913267208))'"
+    },
+    {
+      "name": "H3_Center",
+      "args": "([bigint] {h3Value})",
+      "returnType": "binary",
+      "description": "Returns the center of the H3 cell as a point.  It will throw an error if the {{h3Value}} is not valid as an H3 Value.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_AsText(H3_Center(H3_FromText('847b59dffffffff'))) -> 'POINT (40.305476423174326 -3.743203325561687)'"
+    },
+    {
+      "name": "H3_Compact",
+      "args": "([bigint] {h3Value}[])",
+      "returnType": "bigint[]",
+      "description": "Returns an array with the indexes of a set of hexagons across multiple resolutions that represent the same area as the input set of hexagons.",
+      "tags": [
+        "gis"
+      ],
+      "example": "H3_Compact(H3_Uncompact(H3_Wrap(H3_FromText('847b59dffffffff')),5)) -> [596645165859340300]"
+    },
+    {
+      "name": "H3_Distance",
+      "args": "([bigint] {h3Value1}, [bigint] {h3Value2})",
+      "returnType": "numeric",
+      "description": "Returns the grid distance between two hexagon indexes. This function may fail to find the distance between two indexes if they are very far apart or on opposite sides of a pentagon.",
+      "tags": [
+        "gis"
+      ],
+      "example": "H3_Distance(H3_FromText('847b591ffffffff'), H3_FromText('847b59bffffffff')) -> 1"
+    },
+    {
+      "name": "H3_FromGeomPoint",
+      "args": "([binary] {pointGeom}, [number] {resolution})",
+      "returnType": "bigint",
+      "description": "Returns the H3 cell index that the point belongs to in the required {{resolution}}. It will return `null` for non-point geometry and throw an error for resolution outside the valid range [0,15].",
+      "tags": [
+        "gis"
+      ],
+      "example": "H3_AsText(H3_FromGeomPoint(ST_Point(40.4168, -3.7038), 4)) -> '847b59dffffffff'"
+    },
+    {
+      "name": "H3_FromGeomPoly",
+      "args": "([binary] {polyGeom})",
+      "returnType": "bigint",
+      "description": "Returns the smallest H3 cell that completely encloses the polygon with a dynamic resolution. It will return `null` if there isn't a value to fit the polygon and throw an error if a non-polygon geometry is supplied.",
+      "tags": [
+        "gis"
+      ],
+      "example": "H3_FromGeomPoly(ST_GeomFromText('POLYGON ((-111.69808887205492 40.238737891364416, -111.69837535651395 40.23873740478143, -111.6983745544178 40.2384602506758, -111.69808807598443 40.23846160818078, -111.69808887205492 40.238737891364416))',true)) -> 622175171754917887"
+    },
+    {
+      "name": "H3_FromLongLat",
+      "args": "([number] {lon}, [number] {lat}, [number] {resolution})",
+      "returnType": "bigint",
+      "description": "Returns the H3 cell index specified by {{lon}} and {{lat}} at the specified {{resolution}}.  It will throw an error for resolution outside the valid range [0,15].",
+      "tags": [
+        "gis"
+      ],
+      "example": "H3_AsText(H3_FromLongLat(40.4168, -3.7038, 4)) -> '84390cbffffffff'"
+    },
+    {
+      "name": "H3_FromText",
+      "args": "([string] {h3Text})",
+      "returnType": "bigint",
+      "description": "Converts from String representation of H3 cell value to the bigint representation. It will throw an error if the hex representation is not valid as an H3 Value.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_AsText(H3_Center(H3_FromText('847b59dffffffff'))) -> 'POINT (40.305476423174326 -3.743203325561687)'"
+    },
+    {
+      "name": "H3_HexRing",
+      "args": "([bigint] h3Origin, [int] ringSize)",
+      "returnType": "bigint[]",
+      "description": "Returns all cell indexes in a hollow hexagonal ring centered at the origin in no particular order. Unlike H3_Kring, this function will throw an exception if there is a pentagon anywhere in the ring.",
+      "tags": [
+        "gis"
+      ],
+      "example": "H3_Hexring(H3_FromText('837b59fffffffff'), 1) -> [592141849699811300,592141506102427600,592141712260857900,592124875989057500,592124738550104000,592140544029753300]"
+    },
+    {
+      "name": "H3_IsPentagon",
+      "args": "([bigint] h3Value)",
+      "returnType": "boolean",
+      "description": "Returns {{true}} if given H3 index is a pentagon. Returns {{false}} otherwise, even on invalid input.",
+      "tags": [
+        "gis"
+      ],
+      "example": "H3_IsPentagon(H3_FromText('837b59fffffffff')) -> false\nH3_IsPentagon(H3_FromText('8075fffffffffff')) -> true"
+    },
+    {
+      "name": "H3_IsValid",
+      "args": "([bigint] h3Value)",
+      "returnType": "boolean",
+      "description": "Returns {{true}} when the given index is valid, {{false}} otherwise.",
+      "tags": [
+        "gis"
+      ],
+      "example": "H3_IsValid(8675309) -> false\nH3_IsValid(H3_FromText('837b59fffffffff')) -> true"
+    },
+    {
+      "name": "H3_KRing",
+      "args": "([bigint] h3Origin, [int] ringSize)",
+      "returnType": "bigint[]",
+      "description": "Returns all cell indexes in a filled hexagonal k-ring centered at the origin in no particular order.",
+      "tags": [
+        "gis"
+      ],
+      "example": "H3_KRing(H3_FromText('837b59fffffffff'), 1) -> [592141574821904400,592141506102427600,592141712260857900,592124875989057500,592124738550104000,592140544029753300,592141849699811300]"
+    },
+    {
+      "name": "H3_KRing_Distances",
+      "args": "([bigint] h3Origin, [int] ringSize)",
+      "returnType": "struct{index, distance}",
+      "description": "Returns all cell indexes and their distances in a filled hexagonal k-ring centered at the origin in no particular order.",
+      "tags": [
+        "gis"
+      ],
+      "example": "H3_KRingDistances(H3_FromText('837b59fffffffff'), 1) -> [{\"index\":592141574821904383,\"distance\":0},{\"index\":592141506102427647,\"distance\":1},{\"index\":592141712260857855,\"distance\":1},{\"index\":592124875989057535,\"distance\":1},{\"index\":592124738550104063,\"distance\":1},{\"index\":592140544029753343,\"distance\":1},{\"index\":592141849699811327,\"distance\":1}]"
+    },
+    {
+      "name": "H3_Polyfill",
+      "args": "[binary] {geometry}, [number] {resolution}",
+      "returnType": "bigint[]",
+      "description": "Returns an array with all the H3 cell indexes for the given polygon or multipolygon including automatically handling the inner holes.",
+      "tags": [
+        "gis"
+      ],
+      "example": "H3_Polyfill(ST_GeomFromText('POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))',false), 1) -> [582059465512058900,582072659651592200,582068261605081100,582081455744614400,582855511930568700,582063863558570000,582077057698103300,582851113884057600]"
+    },
+    {
+      "name": "H3_Resolution",
+      "args": "([bigint] {h3Value})",
+      "returnType": "integer",
+      "description": "Returns the H3 cell resolution as an integer. It will throw an error if the {{h3Value}} is not valid as an H3 Value.",
+      "tags": [
+        "gis"
+      ],
+      "example": "H3_Resolution(H3_FromText('847b59dffffffff')) -> 4"
+    },
+    {
+      "name": "H3_ToCenterChild",
+      "args": "([bigint] {h3Value}, [number] {childResolution})",
+      "returnType": "bigint",
+      "description": "Returns the center child (finer) index for the given hexagon at the given resolution.",
+      "tags": [
+        "gis"
+      ],
+      "example": "H3_AsText(H3_ToCenterChild(H3_FromText('837b59fffffffff'), 4)) -> '847b591ffffffff'"
+    },
+    {
+      "name": "H3_ToChildren",
+      "args": "([bigint] {h3Value}, [number] {childResolution})",
+      "returnType": "bigint[]",
+      "description": "Returns an array with the indexes of the children/descendents of the given hexagon at the given resolution.",
+      "tags": [
+        "gis"
+      ],
+      "example": "WITH H3Children AS (SELECT FLATTEN(H3_ToChildren(H3_FromText('837b59fffffffff'), 4)) AS H3Values) SELECT H3_AsText(H3Values) FROM H3Children -> '847b591ffffffff' '847b593ffffffff' '847b595ffffffff' '847b597ffffffff' '847b599ffffffff' '847b59bffffffff' '847b59dffffffff'"
+    },
+    {
+      "name": "H3_ToParent",
+      "args": "([bigint] {h3Value}, [number] {resolution})",
+      "returnType": "bigint",
+      "description": "Returns the H3 cell index of the parent of the given hexagon at the given resolution.",
+      "tags": [
+        "gis"
+      ],
+      "example": "H3_AsText(H3_ToParent(H3_FromText('847b59dffffffff'), 3)) -> '837b59fffffffff'"
+    },
+    {
+      "name": "H3_Uncompact",
+      "args": "([bigint] {h3Value}[], [number] {resolution})",
+      "returnType": "bigint[]",
+      "description": "Returns an array with the indexes of a set of hexagons of the same {{resolution}} that represent the same area as the compacted input hexagons.",
+      "tags": [
+        "gis"
+      ],
+      "example": "H3_Uncompact(H3_Wrap(H3_FromText('847b59dffffffff')),5) -> [601148757970518000,601148759044259800,601148760118001700,601148761191743500,601148762265485300,601148763339227100,601148764412969000]"
+    },
+    {
+      "name": "H3_Wrap",
+      "args": "([bigint] {h3Value})",
+      "returnType": "bigint[]",
+      "description": "Takes a single H3 value and wraps it in a list",
+      "tags": [
+        "gis"
+      ],
+      "example": "H3_Wrap(H3_FromText('847b59dffffffff'))[0] -> 596645165859340287"
+    },
+    {
+      "name": "ST_AggrConvexHull",
+      "args": "([binary] {geometry})",
+      "returnType": "binary",
+      "description": "Creates a single geometry that is a convex hull of a geometry that resulted from a union of all aggregate input geometries.",
+      "tags": [
+        "gis"
+      ],
+      "example": "WITH GEOMLIST AS (SELECT ST_GeomFromText('polygon ((40 40, 40 60, 60 60, 60 40, 40 40))', true) AS GEOM1, ST_GeomFromText('polygon ((20 30, 30 30, 30 40, 20 40, 20 30))', true) AS GEOM2) SELECT ST_AsText(ST_AggrConvexHull(GEOM)) FROM GEOMLIST UNPIVOT (\"GEOM\" for \"COL\" in  (GEOM1, GEOM2)) -> 'POLYGON ((20 30, 30 30, 60 40, 60 60, 40 60, 20 40, 20 30))'"
+    },
+    {
+      "name": "ST_AggrIntersection",
+      "args": "([binary] {geometry})",
+      "returnType": "binary",
+      "description": "Returns a single geometry that is an intersection of all aggregate input geometries.",
+      "tags": [
+        "gis"
+      ],
+      "example": "WITH GEOMLIST AS (SELECT ST_GeomFromText('polygon ((5 5, 12 5, 12 10, 5 10, 5 5))', true) AS GEOM1, ST_GeomFromText('polygon ((10 8, 14 8, 14 15, 10 15, 10 8))', true) AS GEOM2, ST_GeomFromText('polygon ((6 8, 20 8, 20 20, 6 20, 6 8))', true) AS GEOM3) SELECT ST_AsText(ST_AggrIntersection(GEOM)) FROM GEOMLIST UNPIVOT (\"GEOM\" for \"COL\" in  (GEOM1, GEOM2, GEOM3)) -> 'POLYGON ((10 8, 12 8, 12 10, 10 10, 10 8))'"
+    },
+    {
+      "name": "ST_AggrUnion",
+      "args": "([binary] {geometry})",
+      "returnType": "binary",
+      "description": "Returns a single geometry that is the union of all aggregate input geometries.",
+      "tags": [
+        "gis"
+      ],
+      "example": "WITH GEOMLIST AS (SELECT ST_GeomFromText('polygon ((20 30, 30 30, 30 40, 20 40, 20 30))', true) AS GEOM1, ST_GeomFromText('polygon ((40 40, 40 60, 60 60, 60 40, 40 40))', true) AS GEOM2) SELECT ST_AsText(ST_AggrUnion(GEOM)) FROM GEOMLIST UNPIVOT (\"GEOM\" for \"COL\" in  (GEOM1, GEOM2)) -> 'MULTIPOLYGON (((20 30, 30 30, 30 40, 20 40, 20 30)), ((40 40, 60 40, 60 60, 40 60, 40 40)))'"
+    },
+    {
+      "name": "ST_Area",
+      "args": "([binary] {geometry})",
+      "returnType": "number",
+      "description": "Returns the area of polygon or multipolygon",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_Area(ST_GeomFromText('POLYGON ((0 0, 8 0, 0 8, 0 0), (1 1, 1 5, 5 1, 1 1))',true))  -> 24.0"
+    },
+    {
+      "name": "ST_AsGeoJSON",
+      "args": "([binary] {geometry})",
+      "returnType": "string",
+      "description": "Returns the GeoJSON representation of {{geometry}}.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_AsGeoJSON(ST_Point(1, 2)) -> '{\"type\":\"Point\",\"coordinates\":[1,2],\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}}}'"
+    },
+    {
+      "name": "ST_AsText",
+      "args": "([binary] {geometry})",
+      "returnType": "string",
+      "description": "Returns the Well-Known Text (WKT) representation of {{geometry}}.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_AsText(ST_Point(1, 2)) -> 'POINT (1 2)'"
+    },
+    {
+      "name": "ST_Boundary",
+      "args": "([binary] {geometry})",
+      "returnType": "binary",
+      "description": "Returns the closure of the combinatorial boundary of this Geometry.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_AsText(ST_Boundary(ST_GeomFromText('LINESTRING (0 1, 1 0)',true))) -> 'MULTIPOINT ((0 1), (1 0))'\nST_AsText(ST_Boundary(ST_GeomFromText('POLYGON ((1 1, 4 1, 1 4))',true))) -> 'MULTILINESTRING ((1 1, 4 1, 1 4, 1 1))'"
+    },
+    {
+      "name": "ST_Buffer",
+      "args": "([binary] {geometry}, [number] {distance})",
+      "returnType": "binary",
+      "description": "Returns geometry object that is the buffer surrounding source {{geometry}} at specified {{distance}}.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_Buffer(ST_Point(0, 0), 1) -> polygon approximating a unit circle"
+    },
+    {
+      "name": "ST_Centroid",
+      "args": "([binary] {geometry})",
+      "returnType": "binary",
+      "description": "Takes a polygon, multipolygon, or multilinestring and returns the point that is in the center of the geometry's envelope. That means that the centroid point is halfway between the geometry's minimum and maximum x and y extents.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_AsText(ST_Centroid(ST_GeomFromText('point (2 3)',true))) -> 'POINT(2 3)'\nST_AsText(ST_Centroid(ST_GeomFromText('MULTIPOINT ((0 0), (1 1), (1 -1), (6 0))',true))) -> 'POINT(2 0)'\nST_AsText(ST_Centroid(ST_GeomFromText('linestring (0 0, 6 0)',true))) -> 'POINT(3 0)'\nST_AsText(ST_Centroid(ST_GeomFromText('POLYGON ((0 0, 0 8, 8 8, 8 0, 0 0))',true))) -> 'POINT(4 4)'\nST_AsText(ST_Centroid(ST_GeomFromText('POLYGON ((1 1, 5 1, 3 4))',true))) -> 'POINT(3 2)'"
+    },
+    {
+      "name": "ST_Contains",
+      "args": "([binary] {geometry1}, [binary] {geometry2})",
+      "returnType": "boolean",
+      "description": "Returns true if {{geometry1}} contains {{geometry2}}.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_Contains(ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true), ST_Point(2, 3)) -> true \nST_Contains(ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true), ST_Point(8, 8)) -> false"
+    },
+    {
+      "name": "ST_ConvexHull",
+      "args": "([binary] {geometry})",
+      "returnType": "binary",
+      "description": "Computes the convex hull of {{geometry}}. The convex hull is the smallest convex geometry that encloses all geometries in the input. One can think of the convex hull as the geometry obtained by wrapping an rubber band around a set of geometries.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_AsText(ST_ConvexHull(ST_GeomFromText('polygon ((0 0, 8 0, 0 8, 0 0), (1 1, 1 5, 5 1, 1 1))',true))) -> 'POLYGON ((0 0, 8 0, 0 8, 0 0))'"
+    },
+    {
+      "name": "ST_CoordDim",
+      "args": "([binary] {geometry})",
+      "returnType": "number",
+      "description": "Returns count of coordinate components.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_CoordDim(ST_Point(1.5, 2.5)) -> 2\nST_CoordDim(ST_GeomFromText('POINTZ (1.5 2.5 3)',true)) -> 3"
+    },
+    {
+      "name": "ST_Crosses",
+      "args": "([binary] {geometry1}, [binary] {geometry2})",
+      "returnType": "boolean",
+      "description": "Returns true if {{geometry1}} crosses {{geometry2}}, otherwise false.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_Crosses(ST_GeomFromText('LINESTRING (0 0, 1 1)',true), ST_GeomFromText('LINESTRING (1 0, 0 1))',true)) -> true\nST_Crosses(ST_GeomFromText('LINESTRING (2 0, 2 3)',true), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true)) -> true\nST_Crosses(ST_GeomFromText('LINESTRING (0 2, 0 1)',true), ST_GeomFromText('LINESTRING (2 0, 1 0)',true)) -> false"
+    },
+    {
+      "name": "ST_Densify",
+      "args": "([binary] {geometry}, [number] {maxLength})",
+      "returnType": "binary",
+      "description": "Densifies a MultiPath (polygons and polylines) {{geometry}} by {{maxLength}} so that no segments are longer than given threshold value.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_AsText(ST_Densify(ST_GeomFromText('POLYGON ((0 0, 8 0, 0 8, 0 0))',true),4)) -> 'POLYGON ((0 0, 4 0, 8 0, 5.333 2.667, 2.667 5.333, 0 8, 0 4, 0 0))'"
+    },
+    {
+      "name": "ST_Difference",
+      "args": "([binary] {geometry1}, [binary] {geometry2})",
+      "returnType": "binary",
+      "description": "Returns a geometry object that is the difference of the source objects.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_AsText(ST_Difference(ST_GeomFromText('MULTIPOINT (1 1, 1.5 1.5, 2 2)',true), ST_Point(1.5, 1.5))) -> 'MULTIPOINT ((1 1), (2 2))'\nST_AsText(ST_Difference(ST_GeomFromText('POLYGON ((0 0, 0 10, 10 10, 10 0))',true), ST_GeomFromText('POLYGON ((0 0, 0 5, 5 5, 5 0))',true))) -> 'POLYGON ((5 0, 10 0, 10 10, 0 10, 0 5, 5 5, 5 0))'"
+    },
+    {
+      "name": "ST_Dimension",
+      "args": "([binary] {geometry})",
+      "returnType": "number",
+      "description": "Returns spatial dimension of geometry.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_Dimension(ST_Point(1.5, 2.5)) -> 0\nST_Dimension(ST_GeomFromText('LINESTRING (1.5 2.5, 3.0 2.2)',true)) -> 1\nST_Dimension(ST_GeomFromText('POLYGON ((2 0, 2 3, 3 0))',true)) -> 2"
+    },
+    {
+      "name": "ST_Disjoint",
+      "args": "([binary] {geometry1}, [binary] {geometry2})",
+      "returnType": "boolean",
+      "description": "Returns true if the intersection of the two geometries produces an empty set; otherwise, it returns false.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_Disjoint(ST_GeomFromText('LINESTRING (0 0, 0 1)',true), ST_GeomFromText('LINESTRING (1 1, 1 0)',true)) -> true\nST_Disjoint(ST_GeomFromText('LINESTRING (0 0, 1 1)',true), ST_GeomFromText('LINESTRING (1 0, 0 1)',true)) -> false"
+    },
+    {
+      "name": "ST_Distance",
+      "args": "([binary] {geometry1}, [binary] {geometry2})",
+      "returnType": "number",
+      "description": "Returns the distance between two geometry objects.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_Distance(ST_Point(0.0,0.0), ST_Point(3.0,4.0)) -> 5.0"
+    },
+    {
+      "name": "ST_DWithin",
+      "args": "([binary] {geometry1}, [binary] {geometry2}, [number] {distance})",
+      "returnType": "boolean",
+      "description": "Returns true if the two geometries are within the specified distance of one another; otherwise, it returns false.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_DWithin(ST_GeomFromText('POLYGON ((10.02 20.01, 11.92 35.64, 25.02 34.15, 19.15 33.94, 10.02 20.01))',true), ST_Point (1,2),100) -> true\nST_DWithin(ST_GeomFromText('POLYGON ((101.02 200.01, 111.92 350.64, 250.02 340.15, 190.15 330.94, 101.02 200.01))',true), ST_Point (10.02,20.01), 100) -> false"
+    },
+    {
+      "name": "ST_EndPoint",
+      "args": "([binary] {geometry})",
+      "returnType": "binary",
+      "description": "Returns the last point of a Linestring.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_AsText(ST_EndPoint(ST_GeomFromText('LINESTRING (1.5 2.5, 3.0 2.2)',true))) -> 'POINT(3.0 2.2)'"
+    },
+    {
+      "name": "ST_Envelope",
+      "args": "([binary] {geometry})",
+      "returnType": "binary",
+      "description": "Returns the minimum bounding box of the geometry object as a polygon",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_AsText(ST_Envelope(ST_GeomFromText('LINESTRING (0 0, 2 2))',true))) -> 'POLYGON ((0 0, 2 0, 2 2, 0 2, 0 0))'\nST_AsText(ST_Envelope(ST_GeomFromText('POLYGON ((2 0, 2 3, 3 0))',true))) -> 'POLYGON ((2 0, 3 0, 3 3, 2 3, 2 0))'"
+    },
+    {
+      "name": "ST_EnvIntersects",
+      "args": "([binary] {geometry1}, [binary] {geometry2})",
+      "returnType": "boolean",
+      "description": "Returns true if the envelopes of {{geometry1}} and {{geometry2}} intersect, otherwise returns false.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_EnvIntersects(ST_GeomFromText('LINESTRING (0 0, 1 1)',true), ST_GeomFromText('LINESTRING (1 3, 2 2)',true)) -> false\nST_EnvIntersects(ST_GeomFromText('LINESTRING (0 0, 2 2)',true), ST_GeomFromText('LINESTRING (1 0, 3 2)',true)) -> true"
+    },
+    {
+      "name": "ST_Equals",
+      "args": "([binary] {geometry1}, [binary] {geometry2})",
+      "returnType": "boolean",
+      "description": "Returns true if the two geometries occupy the same space even if they have a different number of vertices, otherwise it returns false.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_Equals(ST_GeomFromText('LINESTRING (0 0, 1 1)',true),ST_GeomFromText('LINESTRING (1 1, 0 0)',true)) -> true\nST_Equals(ST_GeomFromText('LINESTRING (0 0, 1 1)',true),ST_GeomFromText('LINESTRING (1 0, 0 1)',true)) -> false\nST_Equals(ST_GeomFromText('LINESTRING (0 0, 3 3)',true),ST_GeomFromText('LINESTRING (3 3, 2 2, 1 1, 0 0)',true)) -> true"
+    },
+    {
+      "name": "ST_ExteriorRing",
+      "args": "([binary] {geometry})",
+      "returnType": "binary",
+      "description": "Returns the exterior ring of a polygon as a linestring.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_AsText(ST_ExteriorRing(ST_GeomFromText('POLYGON ((1 1, 1 4, 4 1))',true))) -> 'LINESTRING (1 1, 4 1, 1 4, 1 1)'\nST_AsText(ST_ExteriorRing(ST_GeomFromText('POLYGON ((0 0, 8 0, 0 8, 0 0), (1 1, 1 5, 5 1, 1 1))',true))) -> 'LINESTRING (0 0, 8 0, 0 8, 0 0)'"
+    },
+    {
+      "name": "ST_Generalize",
+      "args": "([binary] {geometry}, [number] {maxDeviation}, [boolean] {removeDegenerateParts})",
+      "returnType": "binary",
+      "description": "Simplifies geometries using the Douglas-Peucker algorithm. {{maxDeviation}} is the maximum allowed deviation from the generalized geometry to the original geometry.  When {{removeDegenerateParts}} is true, the degenerate parts of the geometry will be removed from the output.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_AsText(ST_Generalize(ST_GeomFromText('POLYGON ((0 0, 1 1, 2 0, 3 2, 4 1, 5 0, 5 10, 0 10))',true), 2, true)) -> 'POLYGON ((0 0, 5 0, 5 10, 0 10, 0 0))'"
+    },
+    {
+      "name": "ST_GeodesicAreaWGS84",
+      "args": "([binary] {geometry})",
+      "returnType": "number",
+      "description": "Returns the area in square meters of a geometry on the Earth's surface using spherical model. Requires the geometry to be in the WGS84 spatial reference.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_GeodesicAreaWGS84(ST_GeomFromText('POLYGON ((-114.04702599994988 39.90609700007656, -114.0500520000997 37.0001909997149, -109.04517199998776 36.99897700038832, -109.05002599989996 41.000691000389395, -111.04681499981234 40.997875000031286, -111.04671399965133 42.00170200004732, -114.04147700036322 41.99387299963928, -114.04702599994988 39.90609700007656))',true))/4047 AS utah_acreage -> 5.416484897473004E7"
+    },
+    {
+      "name": "ST_GeodesicLengthWGS84",
+      "args": "([binary] {geometry})",
+      "returnType": "number",
+      "description": "Returns distance along line on WGS84 spheroid, in meters, for geographic coordinates. Requires the geometry to be in the WGS84 spatial reference.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_GeodesicLengthWGS84(ST_GeomFromText('MultiLineString((0.0 80.0, 0.3 80.4))', true, 4326)) -> 45026.96274781222"
+    },
+    {
+      "name": "ST_GeometryN",
+      "args": "([binary] {geometry}, [number] {index})",
+      "returnType": "binary",
+      "description": "Takes a geometry collection and an integer index (1-based index) and returns the nth geometry object in the collection.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_AsText(ST_GeometryN(ST_GeomFromText('MULTIPOINT (10 40, 40 30, 20 20, 30 10)',true), 3)) -> 'POINT (20 20)'\nST_AsText(ST_GeometryN(ST_GeomFromText('MULTILINESTRING ((2 4, 10 10), (20 20, 7 8))',true), 2)) -> 'LINESTRING (20 20, 7 8)'"
+    },
+    {
+      "name": "ST_GeometryType",
+      "args": "([binary] {geometry})",
+      "returnType": "string",
+      "description": "Takes a geometry object and returns its geometry type (for example, Point, Line, Polygon, MultiPoint) as a string.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_GeometryType(ST_Point(1.5, 2.5)) -> 'ST_POINT'\nST_GeometryType(ST_GeomFromText('LINESTRING (1.5 2.5, 3.0 2.2)',true)) -> 'ST_LINESTRING'\nST_GeometryType(ST_GeomFromText('POLYGON ((2 0, 2 3, 3 0))',true)) -> 'ST_POLYGON'"
+    },
+    {
+      "name": "ST_GeomFromEWKB",
+      "args": "([string] {hexEncodedGeometry})",
+      "returnType": "binary",
+      "description": "Converts a Hex encoded binary string from Postgres/PostGIS geometry to native geometry including embedded SRID.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_AsText(ST_GeomFromEWKB(the_geom)) FROM table(\"postgis\".external_query('SELECT ST_GeomFromText(''POINT(-71.064544 42.28787)'',4326) AS the_geom')) -> 'POINT (-71.064544 42.28787)'"
+    },
+    {
+      "name": "ST_GeomFromGeoJSON",
+      "args": "([string] {geoJsonString})",
+      "returnType": "binary",
+      "description": "Constructs a geometry from GeoJSON.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_AsText(ST_GeomFromGeoJSON('{\"type\":\"Point\", \"coordinates\":[1.2, 2.4]}')) -> 'POINT (1.2 2.4)'\nST_AsText(ST_GeomFromGeoJSON('{\"type\":\"LineString\", \"coordinates\":[[1,2], [3,4]]}')) -> 'LINESTRING (1 2, 3 4)'"
+    },
+    {
+      "name": "ST_GeomFromText",
+      "args": "([string] {wktString}, [boolean] {ignoreErrors})",
+      "returnType": "binary",
+      "tags": [
+        "gis"
+      ],
+      "description": "Takes a well-known text representation and returns a geometry object. Set {{ignoreErrors}} to {{true}} to ignore bad data or {{false}} to fail and show the bad WKT value."
+    },
+    {
+      "name": "ST_GeomFromText",
+      "args": "([string] {wktString}, [boolean] {ignoreErrors}, [number] {SRID})",
+      "returnType": "binary",
+      "tags": [
+        "gis"
+      ],
+      "description": "Takes a well-known text representation and a spatial reference ID and returns a geometry object. Set {{ignoreErrors}} to {{true}} to ignore bad data or {{false}} to fail and show the bad WKT value."
+    },
+    {
+      "name": "ST_GeomFromWKB",
+      "args": "([binary] {wkbValue})",
+      "returnType": "binary",
+      "tags": [
+        "gis"
+      ],
+      "description": "Takes a well-known binary (WKB) representation and returns a geometry object."
+    },
+    {
+      "name": "ST_GeomFromWKB",
+      "args": "([binary] {wkbValue}, [number] {SRID})",
+      "returnType": "binary",
+      "tags": [
+        "gis"
+      ],
+      "description": "Takes a well-known binary (WKB) representation and a spatial reference ID and returns a geometry object."
+    },
+    {
+      "name": "ST_GeoSize",
+      "args": "([binary] {geometry})",
+      "returnType": "number",
+      "description": "Takes a geometry object and returns its size in bytes.",
+      "tags": [
+        "gis"
+      ]
+    },
+    {
+      "name": "ST_InteriorRingN",
+      "args": "([binary] {geometry}, [number] {index})",
+      "returnType": "binary",
+      "description": "Returns a LineString which is the nth interior ring of the input Polygon (1-based index)",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_AsText(ST_InteriorRingN(ST_GeomFromText('polygon ((0 0, 8 0, 0 8, 0 0), (1 1, 1 5, 5 1, 1 1))',true), 1)) -> 'LINESTRING (1 1, 1 5, 5 1, 1 1)'"
+    },
+    {
+      "name": "ST_Intersection",
+      "args": "([binary] {geometry1}, [binary] {geometry2})",
+      "returnType": "binary",
+      "description": "Returns a geometry object that is the geometric intersection of the source objects.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_AsText(ST_Intersection(ST_Point(1,1), ST_Point(1,1))) -> 'POINT (1 1)'\nST_AsText(ST_Intersection(ST_GeomFromText('LINESTRING(0 2, 0 0, 2 0)',true), ST_GeomFromText('LINESTRING(0 3, 0 1, 1 0, 3 0)',true))) -> 'MULTILINESTRING ((1 0, 2 0), (0 2, 0 1))'\nST_AsText(ST_Intersection(ST_GeomFromText('POLYGON ((2 0, 2 3, 3 0))',true), ST_GeomFromText('POLYGON ((1 1, 4 1, 4 4, 1 4))',true))) -> 'POLYGON ((2 1, 2.666666666666667 1, 2 3, 2 1))'"
+    },
+    {
+      "name": "ST_Intersects",
+      "args": "([binary] {geometry1}, [binary] {geometry2})",
+      "returnType": "boolean",
+      "description": "Returns true if {{geometry1}} intersects with {{geometry2}}, otherwise returns false.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_Intersects(ST_GeomFromText('LINESTRING (2 0, 2 3)',true), ST_GeomFromText('POLYGON ((1 1, 4 1, 4 4, 1 4))',true)) -> true\nST_Intersects(ST_GeomFromText('LINESTRING (8 7, 7 8)',true), ST_GeomFromText('POLYGON ((1 1, 4 1, 4 4, 1 4))',true)) -> false"
+    },
+    {
+      "name": "ST_Is3D",
+      "args": "([binary] {geometry})",
+      "returnType": "boolean",
+      "description": "Returns true if the geometry object is three-dimensional including height 'Z', otherwise returns false.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_Is3D(ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true)) -> false\nST_Is3D(ST_GeomFromText('LINESTRING (0 0, 3 4, 0 4, 0 0)',true)) -> false\nST_Is3D(ST_Point(3, 4)) -> false\nST_Is3D(ST_PointZ(3, 4, 2)) -> true"
+    },
+    {
+      "name": "ST_IsClosed",
+      "args": "([binary] {geometry})",
+      "returnType": "boolean",
+      "description": "Return true if the linestring or multi-line has start and end points that are coincident.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_IsClosed(ST_GeomFromText('LINESTRING(0 0, 3 4, 0 4, 0 0)',true)) -> true\nST_IsClosed(ST_GeomFromText('LINESTRING(0 0, 3 4)',true)) -> false"
+    },
+    {
+      "name": "ST_IsEmpty",
+      "args": "([binary] {geometry})",
+      "returnType": "boolean",
+      "description": "Return true if the geometry object is empty of geometric information.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_IsEmpty(ST_Point(1.5, 2.5)) -> false\nST_IsEmpty(ST_GeomFromText('POINT EMPTY',true)) -> true"
+    },
+    {
+      "name": "ST_IsMeasured",
+      "args": "([binary] {geometry})",
+      "returnType": "boolean",
+      "description": "Returns true if the geometry object is measured including an additional dimension 'M', otherwise returns false.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_IsMeasured(ST_PointZ(3, 4, 2)) -> false\nST_IsMeasured(ST_GeomFromText('POINT M (1 1 80)',true)) -> true\nST_IsMeasured(ST_GeomFromText('POINT ZM (1 1 5 60)',true)) -> true"
+    },
+    {
+      "name": "ST_IsRing",
+      "args": "([binary] {geometry})",
+      "returnType": "boolean",
+      "description": "Returns true if the geometry is a linestring and the linestring is closed and simple.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_IsRing(ST_GeomFromText('LINESTRING (0 0, 3 4, 0 4, 0 0)',true)) -> true\nST_IsRing(ST_GeomFromText('LINESTRING (0 0, 1 1, 1 2, 2 1, 1 1, 0 0)',true)) -> false\nST_IsRing(ST_GeomFromText('LINESTRING (0 0, 3 4)',true)) -> false"
+    },
+    {
+      "name": "ST_IsSimple",
+      "args": "([binary] {geometry})",
+      "returnType": "boolean",
+      "description": "Returns true if the geometry object is simple as defined by the Open Geospatial Consortium (OGC), otherwise, it returns false",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_IsSimple(ST_Point(1.5, 2.5)) -> true\nST_IsSimple(ST_GeomFromText('LINESTRING (0 0, 1 1, 0 1, 1 0)',true)) -> false"
+    },
+    {
+      "name": "ST_JSONPath",
+      "args": "([string] jsonPath, [string] jsonData)",
+      "returnType": "string",
+      "description": "Extract a portion of {{jsonData}} as a string by following the specified path in the JSON Object from {{jsonPath}}.\n**Example JSON Path Syntax (similar to XPath for XML):**\n'/data[Array]'\n'/data[Array][1]/id[String]'\n'/data[Array][1]/likes[Object]'\n'/data[Array][1]/likes[Object]/summary[Object]/total_count[String]'\n'/data[Array][3]'\n'/data[Array][id=131272076894593_1420960724592382]/likes[Object]/summary[Object]/total_count'\n'/fbids[String]'\n'/quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/enterpriseValue[Object]/fmt[String]'\n'/quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/forwardPE[Object]/raw[Double]'\n'quoteSummary[6]/result[4][0]/defaultKeyStatistics[6]/sharesOutstanding[6]/raw[1]'\n'quoteSummary[6]/result[Array]'\n'quoteSummary[6]/result[Array][0]'\n'quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/lastSplitDate[Object]/raw1[Long]'\n'quoteSummary[Object]/result[Array][0]/defaultKeyStatistics[Object]/sharesOutstanding[Object]/raw[Integer]'",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_JSONPath('/coordinates[Array][0]',ST_AsGeoJSON(ST_Envelope(ST_GeomFromText('POLYGON ((-114.04702599994988 39.90609700007656, -114.0500520000997 37.0001909997149, -109.04517199998776 36.99897700038832, -109.05002599989996 41.000691000389395, -111.04681499981234 40.997875000031286, -111.04671399965133 42.00170200004732, -114.04147700036322 41.99387299963928, -114.04702599994988 39.90609700007656))',true)))) -> '[[-114.0500520000997,36.99897700038832],[-109.04517199998776,36.99897700038832],[-109.04517199998776,42.00170200004732],[-114.0500520000997,42.00170200004732],[-114.0500520000997,36.99897700038832]]'"
+    },
+    {
+      "name": "ST_Length",
+      "args": "([binary] {geometry})",
+      "returnType": "number",
+      "description": "Returns the length of a line string or multiline string.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_Length(ST_GeomFromText('LINESTRING (0 0, 3 4)',true)) -> 5.0\nST_Length(ST_GeomFromText('MULTILINESTRING ((1 0, 2 0), (0 2, 0 1))',true)) -> 2.0"
+    },
+    {
+      "name": "ST_M",
+      "args": "([binary] {geometry})",
+      "returnType": "number",
+      "description": "Takes a Point as an input parameter and returns its measure m-coordinate.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_M(ST_GeomFromText('POINT M (1 1 80)',true)) -> 80.0\nST_M(ST_GeomFromText('POINT ZM (1 1 5 60)',true)) -> 60.0"
+    },
+    {
+      "name": "ST_MaxM",
+      "args": "([binary] {geometry})",
+      "returnType": "number",
+      "description": "Takes a geometry as an input parameter and returns its maximum measure m-coordinate.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_MaxM(ST_GeomFromText('LINESTRING M (1.5 2.5 2, 3.0 2.2 1)',true)) -> 2.0\nST_MaxM(ST_GeomFromText('POINT M (1.5 2.5 3)',true)) -> 3.0"
+    },
+    {
+      "name": "ST_MaxX",
+      "args": "([binary] {geometry})",
+      "returnType": "number",
+      "description": "Takes a geometry as an input parameter and returns its maximum x-coordinate.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_MaxX(ST_GeomFromText('LINESTRING M (1.5 2.5 2, 3.0 2.2 1)',true)) -> 3.0\nST_MaxX(ST_GeomFromText('POINT M (1.5 2.5 3)',true)) -> 1.5"
+    },
+    {
+      "name": "ST_MaxY",
+      "args": "([binary] {geometry})",
+      "returnType": "number",
+      "description": "Takes a geometry as an input parameter and returns its maximum y-coordinate.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_MaxY(ST_GeomFromText('LINESTRING M (1.5 2.5 2, 3.0 2.2 1)',true)) -> 2.5\nST_MaxY(ST_GeomFromText('POINT M (1.5 2.5 3)',true)) -> 2.5"
+    },
+    {
+      "name": "ST_MaxZ",
+      "args": "([binary] {geometry})",
+      "returnType": "number",
+      "description": "Takes a geometry as an input parameter and returns its maximum z-coordinate.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_MaxZ(ST_GeomFromText('LINESTRING ZM (1.5 2.5 2 60, 3.0 2.2 1 80)',true)) -> 2.0\nST_MaxZ(ST_GeomFromText('LINESTRING Z (1.5 2.5 3, 3.0 2.2 4)',true)) -> 4.0"
+    },
+    {
+      "name": "ST_MinM",
+      "args": "([binary] {geometry})",
+      "returnType": "number",
+      "description": "Takes a geometry as an input parameter and returns its minimum m-coordinate.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_MinM(ST_GeomFromText('LINESTRING M (1.5 2.5 2, 3.0 2.2 1)',true)) -> 1.0\nST_MinM(ST_GeomFromText('POINT M (1.5 2.5 3)',true)) -> 3.0"
+    },
+    {
+      "name": "ST_MinX",
+      "args": "([binary] {geometry})",
+      "returnType": "number",
+      "description": "Takes a geometry as an input parameter and returns its minimum x-coordinate.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_MinX(ST_GeomFromText('LINESTRING M (1.25 2.5 2, 3.0 2.2 1)',true)) -> 1.25\nST_MinX(ST_GeomFromText('POINT M (1.75 2.5 3)',true)) -> 1.75"
+    },
+    {
+      "name": "ST_MinY",
+      "args": "([binary] {geometry})",
+      "returnType": "number",
+      "description": "Takes a geometry as an input parameter and returns its minimum y-coordinate.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_MinY(ST_GeomFromText('LINESTRING M (1.5 2.5 2, 3.0 2.2 1)',true)) -> 2.2\nST_MinY(ST_GeomFromText('POINT M (1.5 2.25 3)',true)) -> 2.25"
+    },
+    {
+      "name": "ST_MinZ",
+      "args": "([binary] {geometry})",
+      "returnType": "number",
+      "description": "Takes a geometry as an input parameter and returns its minimum z-coordinate.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_MinZ(ST_GeomFromText('LINESTRING ZM (1.5 2.5 2 60, 3.0 2.2 1 80)',true)) -> 1.0\nST_MinZ(ST_GeomFromText('LINESTRING Z (1.5 2.5 3, 3.0 2.2 4)',true)) -> 3.0"
+    },
+    {
+      "name": "ST_NumGeometries",
+      "args": "([binary] {geometry})",
+      "returnType": "number",
+      "description": "Returns the number of geometries in the geometry collection.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_NumGeometries(ST_GeomFromText('MULTIPOINT ((10 40), (40 30), (20 20), (30 10))',true)) -> 4\nST_NumGeometries(ST_GeomFromText('MULTILINESTRING ((2 4, 10 10), (20 20, 7 8))',true)) -> 2"
+    },
+    {
+      "name": "ST_NumInteriorRing",
+      "args": "([binary] {geometry})",
+      "returnType": "number",
+      "description": "Returns the number of interior rings in the polygon geometry.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_NumInteriorRing(ST_GeomFromText('POLYGON ((0 0, 8 0, 0 8, 0 0), (1 1, 1 5, 5 1, 1 1))',true)) -> 1"
+    },
+    {
+      "name": "ST_NumPoints",
+      "args": "([binary] {geometry})",
+      "returnType": "number",
+      "description": "Returns the number of points (vertices) in the geometry. For polygons, both the starting and ending vertices are counted, even though they occupy the same location.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_NumPoints(ST_Point(1.5, 2.5)) -> 1\nST_NumPoints(ST_GeomFromText('LINESTRING (1.5 2.5, 3.0 2.2)',true)) -> 2\nST_NumPoints((ST_GeomFromText('POLYGON ((0 0, 10 0, 0 10, 0 0))',true))) -> 4"
+    },
+    {
+      "name": "ST_Overlaps",
+      "args": "([binary] {geometry1}, [binary] {geometry2})",
+      "returnType": "boolean",
+      "description": "Returns true if {{geometry1}} overlaps {{geometry2}}.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_Overlaps(ST_GeomFromText('POLYGON ((2 0, 2 3, 3 0))',true), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true)) -> true\nST_Overlaps(ST_GeomFromText('POLYGON ((2 0, 2 1, 3 1))',true), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true)) -> false"
+    },
+    {
+      "name": "ST_Point",
+      "args": "([number] {lon}, [number] {lat})",
+      "returnType": "binary",
+      "description": "Returns a 2D point geometry from the provided lon (x) and lat (y) values.",
+      "tags": [
+        "gis"
+      ]
+    },
+    {
+      "name": "ST_PointN",
+      "args": "([binary] {geometry}, [number] {index})",
+      "returnType": "binary",
+      "description": "Returns the point that is the nth vertex in an LineString or MultiPoint (1-based index)",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_AsText(ST_PointN(ST_GeomFromText('LINESTRING (1.5 2.5, 3.0 2.2)',true), 2)) -> 'POINT (3 2.2)'"
+    },
+    {
+      "name": "ST_PointZ",
+      "args": "[number] {lon}, [number] {lat}, [number] {elev}",
+      "returnType": "binary",
+      "description": "Returns a 3D point geometry from the provided lon (x), lat (y), and elev (z) values.",
+      "tags": [
+        "gis"
+      ]
+    },
+    {
+      "name": "ST_Relate",
+      "args": "([binary] {geometry1}, [binary] {geometry2}, [string] {relation})",
+      "returnType": "binary",
+      "description": "Compares the two geometries and returns true if the geometries meet the conditions specified by the DE-9IM pattern matrix string, otherwise, false is returned.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_Relate(ST_GeomFromText('POLYGON ((2 0, 2 1, 3 1))',true), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true), '****T****') -> true\nST_Relate(ST_GeomFromText('POLYGON ((2 0, 2 1, 3 1))',true), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true), 'T********') -> false\nST_Relate(ST_GeomFromText('LINESTRING (0 0, 3 3)',true), ST_GeomFromText('LINESTRING (1 1, 4 4)',true), 'T********') -> true\nST_Relate(ST_GeomFromText('LINESTRING (0 0, 3 3)',true), ST_GeomFromText('LINESTRING (1 1, 4 4)',true), '****T****') -> false"
+    },
+    {
+      "name": "ST_SetSRID",
+      "args": "([binary] {geometry}, [number] {SRID})",
+      "returnType": "binary",
+      "description": "Sets the Spatial Reference ID of {{SRID}} of the geometry.",
+      "tags": [
+        "gis"
+      ]
+    },
+    {
+      "name": "ST_Simplify",
+      "args": "([binary] {geometry})",
+      "returnType": "binary",
+      "description": "Simplifies the geometry or determines if the geometry is simple. The goal is to produce a geometry that is valid to store without additional processing.",
+      "tags": [
+        "gis"
+      ]
+    },
+    {
+      "name": "ST_StartPoint",
+      "args": "([binary] {geometry})",
+      "returnType": "binary",
+      "description": "Returns the first point of a Linestring.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_AsText(ST_StartPoint(ST_GeomFromText('LINESTRING (1.5 2.5, 3.0 2.2)',true))) -> 'POINT(1.5 2.5)'"
+    },
+    {
+      "name": "ST_SymmetricDiff",
+      "args": "([binary] {geometry1}, [binary] {geometry2})",
+      "returnType": "binary",
+      "description": "Returns a geometry object that is the symmetric difference of the source objects.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_AsText(ST_SymmetricDiff(ST_GeomFromText('LINESTRING (0 2, 2 2)',true), ST_GeomFromText('LINESTRING (1 2, 3 2)',true))) -> 'MULTILINESTRING ((0 2, 1 2), (2 2, 3 2))'\nST_AsText(ST_SymmetricDiff(ST_GeomFromText('POLYGON ((0 0, 2 0, 2 2, 0 2, 0 0))',true), ST_GeomFromText('POLYGON ((1 1, 3 1, 3 3, 1 3, 1 1))',true))) -> 'MULTIPOLYGON (((0 0, 2 0, 2 1, 1 1, 1 2, 0 2, 0 0)), ((2 1, 3 1, 3 3, 1 3, 1 2, 2 2, 2 1)))'"
+    },
+    {
+      "name": "ST_Touches",
+      "args": "([binary] {geometry1}, [binary] {geometry2})",
+      "returnType": "boolean",
+      "description": "Returns true if none of the points common to both geometries intersect the interiors of both geometries, otherwise, it returns false. At least one geometry must be a LineString, Polygon, MultiLineString, or MultiPolygon.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_Touches(ST_Point(1, 2), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true)) -> true\nST_Touches(ST_Point(8, 8), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true)) -> false"
+    },
+    {
+      "name": "ST_Transform",
+      "args": "([binary] {geometry}, [number] {sourceSRID}, [number] {targetSRID})",
+      "returnType": "binary",
+      "description": "Takes the two-dimensional geometry as input and returns values converted from the spatial source reference specified by {{sourceSRID}} to the one specified by {{targetSRID}}.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_AsText(ST_Transform(ST_GeomFromText('POLYGON ((-114.04702599994988 39.90609700007656, -114.0500520000997 37.0001909997149, -109.04517199998776 36.99897700038832, -109.05002599989996 41.000691000389395, -111.04681499981234 40.997875000031286, -111.04671399965133 42.00170200004732, -114.04147700036322 41.99387299963928, -114.04702599994988 39.90609700007656))', true), 4326, 3857)) -> 'POLYGON ((-12695656.860801652 4852305.919673687, -12695993.71359747 4439133.410181124, -12138853.020503571 4438964.195256694, -12139393.365302108 5012443.58678148, -12361674.899993964 5012028.231889712, -12361663.65670747 5161234.398812287, -12695039.148993252 5160061.69329091, -12695656.860801652 4852305.919673687))'"
+    },
+    {
+      "name": "ST_Union",
+      "args": "([binary] {geometry1}, [binary] {geometry2})",
+      "returnType": "binary",
+      "description": "Returns a geometry as the union of the two supplied geometries.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_AsText(ST_Union(ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true), ST_GeomFromText('POLYGON ((4 1, 4 4, 4 8, 8 1))',true))) -> 'POLYGON ((1 1, 4 1, 8 1, 4 8, 4 4, 1 4, 1 1))'"
+    },
+    {
+      "name": "ST_Union",
+      "args": "([binary] {geometry})",
+      "returnType": "binary",
+      "description": "Returns a geometry as the union of the supplied geometry.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_AsText(ST_Union(ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true), ST_GeomFromText('POLYGON ((4 1, 4 4, 4 8, 8 1))',true))) -> 'POLYGON ((1 1, 4 1, 8 1, 4 8, 4 4, 1 4, 1 1))'"
+    },
+    {
+      "name": "ST_Within",
+      "args": "([binary] {geometry1}, [binary] {geometry2})",
+      "returnType": "boolean",
+      "description": "Returns true if {{geometry1}} is completely inside {{geometry2}}.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_Within(ST_Point(2, 3), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true)) -> true\nST_Within(ST_Point(8, 8), ST_GeomFromText('POLYGON ((1 1, 1 4, 4 4, 4 1))',true)) -> false"
+    },
+    {
+      "name": "ST_X",
+      "args": "([binary] {geometry})",
+      "returnType": "number",
+      "description": "Takes a Point as an input parameter and returns its longitude (x) coordinate.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_X(ST_Point(5, 7)) -> 5.0"
+    },
+    {
+      "name": "ST_Y",
+      "args": "([binary] {geometry})",
+      "returnType": "number",
+      "description": "Takes a Point as an input parameter and returns its latitude (y) coordinate.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_Y(ST_GeomFromText('POINT (5 7)',true)) -> 7.0"
+    },
+    {
+      "name": "ST_Z",
+      "args": "([binary] {geometry})",
+      "returnType": "number",
+      "description": "Takes a Point as an input parameter and returns its elevation (z) coordinate.",
+      "tags": [
+        "gis"
+      ],
+      "example": "ST_Z(ST_GeomFromText('POINT Z (5 7 9)',true)) -> 9.0"
+    }
 ]

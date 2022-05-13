@@ -11,12 +11,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-FROM dezota/dremio-oss-with-ext-thin:20.1.0-10
+FROM dezota/dremio-oss-with-ext-thin:21.1.1-1
 
 # who's your boss?
 MAINTAINER "Brian Holman" <bholman@dezota.com>
 
 USER root
-COPY ./dremio-gis-extensions-20.1.0-202202061055110045-36733c65.jar /opt/dremio/jars
+COPY ./dremio-gis-extensions-21.1.1-202204292111390812-57b1832f.jar /opt/dremio/jars
 RUN chown -R dremio:dremio /opt/dremio
 USER dremio
