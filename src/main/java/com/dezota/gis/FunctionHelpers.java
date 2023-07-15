@@ -176,4 +176,53 @@ public class FunctionHelpers {
 
         return sphericalExcess;
     }
+
+    private static com.esri.core.geometry.ogc.OGCGeometry generalizeGeometry(com.esri.core.geometry.ogc.OGCGeometry geom1, float maxDeviation)
+    {
+        com.esri.core.geometry.SpatialReference geomSR = geom1.getEsriSpatialReference();
+        com.esri.core.geometry.GeometryCursor geom1cur = geom1.getEsriGeometryCursor();
+        com.esri.core.geometry.GeometryCursor generalizedGeomCur =
+                com.esri.core.geometry.OperatorGeneralize.local().execute(geom1cur, maxDeviation, true, null);
+        return (com.esri.core.geometry.ogc.OGCGeometry.createFromEsriCursor(generalizedGeomCur, geomSR));
+    }
+
+    /*
+        We start from the least generalized value and use an algorithm inspired by binary search that approximates
+        and refines the closest value through multiple passes through a narrower range
+     */
+
+    public static com.esri.core.geometry.ogc.OGCGeometry reduceGeometryMaxVarBinary(com.esri.core.geometry.ogc.OGCGeometry originalGeom, int numPasses)
+    {
+        /* These values are derived from empirical usage with US Census Place Polygons generalized with the Douglas-Peucker algorithm */
+        final float deviationDivisor  = 10000000000.0F;
+        long low                      = 1L;
+        long high                     = 10000000000L;
+        long step                     = high / 1000L;
+        final long stepReducer        = 10L;
+        /* Dremio Parquet Files have a max varbinary size of 65536 - in tests with 3 loops yields 19 iterations yields a favorable balance */
+        final int maxBinarySize       = 65536;
+        /* Three passes given a sufficiently close value to the maxBinarySize */
+
+        com.esri.core.geometry.ogc.OGCGeometry currentGeom = originalGeom;
+        int currentBinarySize = originalGeom.asBinary().remaining();
+
+        int loops = 0;
+        if (currentBinarySize > maxBinarySize) {
+            while (numPasses > loops && step > 0) {
+                for (long i = low; i <= high; i = i + step) {
+                    currentGeom = generalizeGeometry(originalGeom, i / deviationDivisor);
+                    currentBinarySize = currentGeom.asBinary().remaining();
+
+                    if (currentBinarySize <= maxBinarySize) {
+                        high = i;
+                        low = i - step;
+                        break;
+                    }
+                }
+                loops++;
+                step = step / stepReducer;
+            }
+        }
+        return currentGeom;
+    }
 }
