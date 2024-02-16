@@ -11,7 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-FROM dezota/dremio-oss-with-ext-thin:24.3.0-1
+FROM dezota/dremio-oss-with-ext-thin:24.3.2-1
 
 # who's your boss?
 MAINTAINER "Brian Holman" <bholman@dezota.com>
