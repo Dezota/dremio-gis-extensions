@@ -2,8 +2,8 @@
 
 | Tested Dremio Versions | Author                            |
 |------------------------|-----------------------------------|
-| 19.1.0 to 25.0.0       | Brian Holman <bholman@dezota.com> |
-]()
+| 19.1.0 to 25.1.0       | Brian Holman <bholman@dezota.com> |
+
 *This independent project is not affiliated with, sponsored, or endorsed by Dremio Corporation. Dremio is a registered trademark of Dremio Corporation and they retain all trademark and other intellectual property rights.  Dremio is used here by reference to integrating with their published [User-Defined Functions Specification](https://www.dremio.com/hub-additional/) for advanced users to develop their own custom functions for use in SQL queries.*
 
 ![DAC with GIS extensions](./docs/dremio_dac_with_gis.jpg)
