@@ -1,4 +1,4 @@
-[# GIS Extensions for Dremio
+# GIS Extensions for Dremio
 
 | Tested Dremio Versions | Author                            |
 |------------------------|-----------------------------------|
