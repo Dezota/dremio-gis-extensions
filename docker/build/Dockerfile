@@ -17,6 +17,6 @@ FROM dezota/dremio-oss-with-ext-thin:25.0.0-1
 MAINTAINER "Brian Holman" <bholman@dezota.com>
 
 USER root
-COPY ./dremio-gis-extensions-25.1.0-202409042012430619-15cc6471.jar /opt/dremio/jars
+COPY ./dremio-gis-extensions-25.1.1-202409260159070462-716c0676.jar /opt/dremio/jars
 RUN chown -R dremio:dremio /opt/dremio
 USER dremio
